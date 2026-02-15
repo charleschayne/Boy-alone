@@ -44,27 +44,27 @@ const collections = [
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white text-black font-mono">
+    <main className="min-h-screen bg-white text-black">
       <Navbar />
       <Hero />
 
       {/* Featured Collection Section */}
-      <section className="py-24 px-6 md:px-12 bg-white">
+      <section className="py-24 px-6 md:px-12 bg-black">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-2xl font-bold tracking-[0.2em] uppercase mb-12 text-center text-black">
+          <h2 className="text-2xl font-bold tracking-[0.2em] uppercase mb-12 text-center text-white">
             Latest Collections
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
             {collections.map((item) => (
               <div key={item.id} className="group cursor-pointer">
-                <div className="w-full h-[500px] md:h-[600px] bg-gray-100 mb-6 relative overflow-hidden">
+                <div className="w-full h-[500px] md:h-[600px] bg-neutral-900 mb-6 relative overflow-hidden">
                   {/* First Image (Default) */}
                   <Image
                     src={item.images[0]}
                     alt={item.name}
                     fill
-                    className="object-cover transition-opacity duration-700 ease-in-out group-hover:opacity-0"
+                    className="object-cover transition-opacity duration-700 ease-in-out group-hover:opacity-0 opacity-90"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                   {/* Second Image (Hover) */}
@@ -79,10 +79,10 @@ export default function Home() {
                 </div>
                 <div className="flex justify-between items-start">
                   <div>
-                    <h3 className="text-sm font-bold uppercase tracking-widest text-black">{item.name}</h3>
-                    <p className="text-xs text-gray-500 mt-2 uppercase tracking-wide">Available Now</p>
+                    <h3 className="text-sm font-bold uppercase tracking-widest text-white">{item.name}</h3>
+                    <p className="text-xs text-gray-400 mt-2 uppercase tracking-wide">Available Now</p>
                   </div>
-                  <p className="text-sm font-medium text-black">{item.price}</p>
+                  <p className="text-sm font-medium text-white">{item.price}</p>
                 </div>
               </div>
             ))}

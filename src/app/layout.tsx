@@ -1,8 +1,12 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Chelsea_Market } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const chelseaMarket = Chelsea_Market({
+  weight: ['400'],
+  subsets: ['latin'],
+  variable: '--font-chelsea'
+})
 
 export const metadata: Metadata = {
   title: 'Boy Alone',
@@ -19,7 +23,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${chelseaMarket.variable} ${chelseaMarket.className} antialiased`}>{children}</body>
     </html>
   )
 }

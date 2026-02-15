@@ -31,7 +31,7 @@ const AboutPage = () => {
     }, []);
 
     return (
-        <main className="min-h-screen bg-white text-black font-mono flex flex-col">
+        <main className="min-h-screen bg-black text-white flex flex-col">
             <Navbar />
 
             <div className="flex-grow flex flex-col items-center justify-center px-8 md:px-24 py-24">

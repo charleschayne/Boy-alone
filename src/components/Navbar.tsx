@@ -23,11 +23,11 @@ const Navbar = () => {
     return (
         <>
             <nav className={`fixed top-0 left-0 right-0 z-50 grid grid-cols-[1fr_auto_1fr] items-center px-6 py-6 md:px-12 transition-all duration-300 ${isMenuOpen
-                ? 'bg-white text-black'
+                ? 'bg-black text-white'
                 : isScrolled
                     ? 'bg-black/90 backdrop-blur-md shadow-sm border-b border-white/10 text-white'
-                    : 'bg-transparent text-white mix-blend-difference'
-                } font-sans text-[10px] md:text-xs tracking-widest uppercase font-light`}>
+                    : 'bg-transparent text-white'
+                } text-[10px] md:text-xs tracking-widest uppercase font-light`}>
 
                 {/* Left Links (Desktop) */}
                 <div className="hidden md:flex justify-start">
@@ -66,11 +66,11 @@ const Navbar = () => {
             </nav>
 
             {/* Mobile Menu Overlay */}
-            <div className={`fixed inset-0 bg-white z-40 transition-transform duration-500 ease-in-out transform ${isMenuOpen ? 'translate-y-0' : '-translate-y-full'} md:hidden flex flex-col items-center justify-center space-y-8 font-mono text-xl text-black`}>
-                <Link href="/collections/all" className="hover:text-gray-500 transition-colors" onClick={() => setIsMenuOpen(false)}>
+            <div className={`fixed inset-0 bg-black z-40 transition-transform duration-500 ease-in-out transform ${isMenuOpen ? 'translate-y-0' : '-translate-y-full'} md:hidden flex flex-col items-center justify-center space-y-8 text-xl text-white`}>
+                <Link href="/collections/all" className="hover:text-gray-400 transition-colors" onClick={() => setIsMenuOpen(false)}>
                     Collections
                 </Link>
-                <Link href="/about" className="hover:text-gray-500 transition-colors" onClick={() => setIsMenuOpen(false)}>
+                <Link href="/about" className="hover:text-gray-400 transition-colors" onClick={() => setIsMenuOpen(false)}>
                     Our Story
                 </Link>
             </div>
