@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
+import CountdownTimer from './CountdownTimer';
 
 const Hero = () => {
     const [activeHotspot, setActiveHotspot] = useState<string | null>(null);
@@ -67,9 +68,9 @@ const Hero = () => {
 
 
             {/* Main Header Text */}
-            <div className="absolute top-[18%] md:top-[20%] left-0 right-0 text-center z-20 px-4 pointer-events-none">
-                <h1 className="text-sm md:text-xl font-bold uppercase tracking-[0.3em] text-white/90 drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]">
-                    It's you against the world
+            <div className="absolute inset-0 flex flex-col items-center justify-center z-20 px-4 pointer-events-none">
+                <h1 className="text-sm md:text-xl font-bold uppercase tracking-[0.4em] text-white/90 drop-shadow-[0_2px_4px_rgba(0,0,0,1)] text-center max-w-2xl px-4 italic leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-1000">
+                    "It's you against the world"
                 </h1>
             </div>
 

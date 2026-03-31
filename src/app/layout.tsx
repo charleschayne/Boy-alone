@@ -16,6 +16,8 @@ export const metadata: Metadata = {
   },
 }
 
+import PasswordGate from '@/components/PasswordGate'
+
 export default function RootLayout({
   children,
 }: {
@@ -23,7 +25,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${chelseaMarket.variable} ${chelseaMarket.className} antialiased`}>{children}</body>
+      <body className={`${chelseaMarket.variable} ${chelseaMarket.className} antialiased`}>
+        <PasswordGate>
+          {children}
+        </PasswordGate>
+      </body>
     </html>
   )
 }

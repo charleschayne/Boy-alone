@@ -16,8 +16,7 @@ const Footer = () => {
 
                 {/* Links */}
                 <div className="flex space-x-8 text-[10px] font-medium tracking-[0.2em] uppercase text-gray-400">
-                    <Link href="#" className="hover:text-white transition-colors">Instagram</Link>
-                    <Link href="#" className="hover:text-white transition-colors">Twitter</Link>
+                    <Link href="https://www.instagram.com/myre_kayy/" target="_blank" className="hover:text-white transition-colors">Instagram</Link>
                     <Link href="#" className="hover:text-white transition-colors">Contact</Link>
                 </div>
             </div>

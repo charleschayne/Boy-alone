@@ -2,45 +2,8 @@ import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Footer from '@/components/Footer';
-
-const collections = [
-  {
-    id: 1,
-    name: "Collection 01",
-    price: "$195",
-    images: ["/assets/col1IMG_4588.JPEG", "/assets/col1IMG_4589.JPEG"]
-  },
-  {
-    id: 2,
-    name: "Collection 02",
-    price: "$225",
-    images: ["/assets/col2IMG_3341.JPEG", "/assets/col2IMG_3365.JPEG"]
-  },
-  {
-    id: 3,
-    name: "Collection 03",
-    price: "$180",
-    images: ["/assets/col3IMG_3129.JPEG", "/assets/col3IMG_3135.JPEG"]
-  },
-  {
-    id: 4,
-    name: "Collection 04",
-    price: "$250",
-    images: ["/assets/col4IMG_3243.JPEG", "/assets/col4IMG_3250.JPEG"]
-  },
-  {
-    id: 5,
-    name: "Collection 05",
-    price: "$210",
-    images: ["/assets/col5IMG_3406.JPEG", "/assets/col5IMG_3443.JPEG"]
-  },
-  {
-    id: 6,
-    name: "Collection 06",
-    price: "$195",
-    images: ["/assets/col6IMG_2015.JPEG", "/assets/col6IMG_2068.JPEG"]
-  },
-];
+import Link from 'next/link';
+import { collections } from '@/data/products';
 
 export default function Home() {
   return (
@@ -56,36 +19,52 @@ export default function Home() {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
-            {collections.map((item) => (
-              <div key={item.id} className="group cursor-pointer">
-                <div className="w-full h-[500px] md:h-[600px] bg-neutral-900 mb-6 relative overflow-hidden">
-                  {/* First Image (Default) */}
-                  <Image
-                    src={item.images[0]}
-                    alt={item.name}
-                    fill
-                    className="object-cover transition-opacity duration-700 ease-in-out group-hover:opacity-0 opacity-90"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
-                  {/* Second Image (Hover) */}
-                  <Image
-                    src={item.images[1]}
-                    alt={`${item.name} Detail`}
-                    fill
-                    className="absolute inset-0 object-cover opacity-0 transition-opacity duration-700 ease-in-out group-hover:opacity-100"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300 pointer-events-none" />
-                </div>
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h3 className="text-sm font-bold uppercase tracking-widest text-white">{item.name}</h3>
-                    <p className="text-xs text-gray-400 mt-2 uppercase tracking-wide">Available Now</p>
+            {collections.map((collection) => {
+              const product = collection.products[0];
+              const displayHoverImage = collection.hoverImage || (product?.images && product.images.length > 1 ? product.images[1] : null);
+              const price = product?.price || '';
+
+              return (
+                <Link href={`/collections/${collection.slug}`} key={collection.id} className="group cursor-pointer">
+                  <div className="w-full aspect-[3/4] bg-neutral-100 mb-6 relative overflow-hidden">
+                    {/* First Image (Default) */}
+                    <Image
+                      src={collection.featuredImage}
+                      alt={collection.name}
+                      fill
+                      className={`object-cover transition-opacity duration-700 ease-in-out ${displayHoverImage ? 'group-hover:opacity-0' : ''}`}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                    {/* Second Image (Hover) */}
+                    {displayHoverImage && (
+                      <Image
+                        src={displayHoverImage}
+                        alt={`${collection.name} Detail`}
+                        fill
+                        className="absolute inset-0 object-cover opacity-0 transition-opacity duration-700 ease-in-out group-hover:opacity-100"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                    )}
                   </div>
-                  <p className="text-sm font-medium text-white">{item.price}</p>
-                </div>
-              </div>
-            ))}
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <h3 className="text-sm font-bold uppercase tracking-widest text-white group-hover:opacity-70 transition-opacity">
+                        {collection.name}
+                      </h3>
+                      <div className="flex items-center gap-4 mt-2">
+                        <p className="text-xs text-gray-400 uppercase tracking-wide">
+                          {collection.products.length > 0 ? `${collection.products.length} Items` : 'Available'}
+                        </p>
+                        {price && (
+                          <p className="text-xs text-white font-bold tracking-widest">{price}</p>
+                        )}
+                      </div>
+                    </div>
+                    <p className="text-sm font-medium text-white border-b border-white/0 group-hover:border-white/100 transition-all">Explore</p>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>

@@ -2,6 +2,9 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Image from 'next/image';
 import Link from 'next/link';
+import { collections, getCollectionBySlug } from '@/data/products';
+import ProductSelector from '@/components/ProductSelector';
+import ProductGallery from '@/components/ProductGallery';
 
 export default async function CollectionPage({
     params,
@@ -9,15 +12,6 @@ export default async function CollectionPage({
     params: Promise<{ slug: string }>;
 }) {
     const { slug } = await params;
-
-    const collections = [
-        { id: 1, name: 'Collection 001', slug: 'collection-001', image: '/assets/col1IMG_4588.JPEG' },
-        { id: 2, name: 'Collection 002', slug: 'collection-002', image: '/assets/col2IMG_3341.JPEG' },
-        { id: 3, name: 'Collection 003', slug: 'collection-003', image: '/assets/col3IMG_3129.JPEG' },
-        { id: 4, name: 'Collection 004', slug: 'collection-004', image: '/assets/col4IMG_3243.JPEG' },
-        { id: 5, name: 'Collection 005', slug: 'collection-005', image: '/assets/col5IMG_3406.JPEG' },
-        { id: 6, name: 'Collection 006', slug: 'collection-006', image: '/assets/col6IMG_2015.JPEG' },
-    ];
 
     if (slug === 'all') {
         return (
@@ -34,7 +28,7 @@ export default async function CollectionPage({
                             <Link href={`/collections/${collection.slug}`} key={collection.id} className="group block">
                                 <div className="relative w-full aspect-[3/4] overflow-hidden bg-neutral-900 mb-6">
                                     <Image
-                                        src={collection.image}
+                                        src={collection.featuredImage}
                                         alt={collection.name}
                                         fill
                                         className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
@@ -59,42 +53,81 @@ export default async function CollectionPage({
         );
     }
 
-    // Individual Collection Page (Generic for now)
+    const collection = getCollectionBySlug(slug);
+
+    if (!collection) {
+        return (
+            <main className="min-h-screen bg-white text-black pt-24 md:pt-32 flex flex-col items-center justify-center">
+                <Navbar />
+                <h1 className="text-2xl font-bold uppercase tracking-widest">Collection Not Found</h1>
+                <Link href="/collections/all" className="mt-8 text-xs uppercase tracking-widest underline">Back to All Collections</Link>
+                <Footer />
+            </main>
+        );
+    }
+
     return (
         <main className="min-h-screen bg-white text-black pt-24 md:pt-32">
             <Navbar />
 
             <div className="max-w-7xl mx-auto px-6 md:px-12 py-12">
-                <h1 className="text-4xl font-bold tracking-[0.2em] uppercase mb-8 text-center">
-                    {slug.replace('-', ' ')}
-                </h1>
-
-                <p className="text-center text-sm tracking-widest uppercase text-gray-500 mb-16">
-                    Coming Soon
-                </p>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {[1, 2, 3, 4, 5, 6].map((item) => (
-                        <div key={item} className="group cursor-pointer">
-                            <div className="w-full h-[500px] bg-gray-100 mb-4 relative overflow-hidden">
-                                <div className="absolute inset-0 bg-gray-200 flex items-center justify-center text-gray-400 text-xs tracking-widest uppercase">
-                                    Product {item}
-                                </div>
-                            </div>
-                            <div className="flex justify-between items-start">
-                                <div>
-                                    <h3 className="text-sm font-medium uppercase tracking-wide text-black">
-                                        Essential Item {item}
-                                    </h3>
-                                    <p className="text-xs text-gray-500 mt-1 uppercase tracking-wide">
-                                        Cotton Blend
-                                    </p>
-                                </div>
-                                <p className="text-sm font-medium text-black">$195</p>
-                            </div>
-                        </div>
-                    ))}
+                <div className="mb-20 text-center">
+                    <h1 className="text-4xl md:text-6xl font-bold tracking-[0.3em] uppercase mb-6">
+                        {collection.name}
+                    </h1>
+                    <div className="w-24 h-px bg-black mx-auto"></div>
                 </div>
+
+                {collection.products.length === 0 ? (
+                    <div className="text-center py-20">
+                        <p className="text-sm tracking-[0.3em] uppercase text-gray-400 italic">Coming Soon</p>
+                    </div>
+                ) : (
+                    <div className="space-y-32">
+                        {collection.products.map((product) => (
+                            <div key={product.id} className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
+                                {/* Product Gallery Slideshow */}
+                                <ProductGallery images={product.images} productName={product.name} />
+
+                                {/* Product Info & Selector */}
+                                <div className="flex flex-col h-full">
+                                    <div className="border-b border-gray-100 pb-8 mb-8">
+                                        <div className="flex justify-between items-baseline mb-4">
+                                            <h2 className="text-2xl md:text-3xl font-bold uppercase tracking-widest">
+                                                {product.name}
+                                            </h2>
+                                            <span className="text-xl font-medium">{product.price}</span>
+                                        </div>
+                                        <p className="text-xs text-gray-500 uppercase tracking-[0.2em]">Premium Quality Apparel</p>
+                                    </div>
+                                    
+                                    <ProductSelector product={product} />
+
+                                    <div className="mt-auto pt-12">
+                                        <details className="group border-t border-gray-100 py-4">
+                                            <summary className="list-none flex justify-between items-center cursor-pointer text-[10px] uppercase tracking-widest font-bold">
+                                                Product Details
+                                                <span className="transform group-open:rotate-180 transition-transform">↓</span>
+                                            </summary>
+                                            <div className="pt-4 text-xs leading-relaxed text-gray-600 tracking-wide uppercase">
+                                                Handcrafted with premium materials. This piece represents the core philosophy of BOY ALONE – minimal design with maximal impact.
+                                            </div>
+                                        </details>
+                                        <details className="group border-t border-b border-gray-100 py-4">
+                                            <summary className="list-none flex justify-between items-center cursor-pointer text-[10px] uppercase tracking-widest font-bold">
+                                                Shipping & Returns
+                                                <span className="transform group-open:rotate-180 transition-transform">↓</span>
+                                            </summary>
+                                            <div className="pt-4 text-xs leading-relaxed text-gray-600 tracking-wide uppercase">
+                                                Worldwide shipping available. Returns accepted within 14 days of delivery.
+                                            </div>
+                                        </details>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
 
             <Footer />
