@@ -79,16 +79,49 @@ export async function POST(req: NextRequest) {
     });
 
     const ownerEmailPromise = transporter.sendMail({
-      from: process.env.GMAIL_USER,
+      from: `"BOY ALONE Admin" <${process.env.GMAIL_USER}>`,
       to: 'charleschayne11@gmail.com',
-      subject: `🔥 NEW SALE: $${total_amount}`,
+      subject: `🔥 NEW SALE: $${total_amount} [${product_name}]`,
       html: `
-        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 2px solid #000;">
-            <h2 style="text-transform: uppercase;">New Order Received</h2>
-            <p><strong>Customer:</strong> ${name} (${email})</p>
-            <p><strong>Shipping:</strong> ${address}, ${city}, ${zip}</p>
-            <p><strong>Details:</strong> ${product_name} - ${color} / ${size}</p>
-            <p><strong>Total:</strong> $${total_amount}</p>
+        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 30px; border: 5px solid #000; line-height: 1.6;">
+            <h1 style="text-transform: uppercase; letter-spacing: 5px; text-align: center; margin-bottom: 30px; font-style: italic;">NEW ORDER RECEIVED</h1>
+            
+            <div style="background: #f9f9f9; padding: 20px; margin-bottom: 30px; border: 1px solid #eee;">
+                <h3 style="text-transform: uppercase; font-size: 10px; letter-spacing: 2px; color: #888; margin-bottom: 10px;">CUSTOMER INFO</h3>
+                <p style="margin: 0;"><strong>Name:</strong> ${name}</p>
+                <p style="margin: 0;"><strong>Email:</strong> ${email}</p>
+                <p style="margin: 0;"><strong>Address:</strong> ${address}, ${city}, ${zip}</p>
+            </div>
+
+            <div style="margin-bottom: 30px;">
+                <h3 style="text-transform: uppercase; font-size: 10px; letter-spacing: 2px; color: #888; margin-bottom: 10px;">ORDER DETAILS</h3>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr style="border-bottom: 1px solid #eee; text-align: left;">
+                        <th style="padding: 10px 0; font-size: 12px; text-transform: uppercase;">Product</th>
+                        <th style="padding: 10px 0; font-size: 12px; text-transform: uppercase; text-align: center;">Qty</th>
+                        <th style="padding: 10px 0; font-size: 12px; text-transform: uppercase; text-align: right;">Total</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 20px 0;">
+                            <p style="margin: 0; font-weight: bold; text-transform: uppercase;">${product_name}</p>
+                            <p style="margin: 0; font-size: 10px; color: #777; text-transform: uppercase; letter-spacing: 1px;">
+                                ${color} / ${size || 'Standard'}
+                            </p>
+                        </td>
+                        <td style="padding: 20px 0; text-align: center; font-weight: bold;">${quantity}</td>
+                        <td style="padding: 20px 0; text-align: right; font-weight: bold;">$${total_amount}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="border-top: 2px solid #000; pt: 20px;">
+                <p style="margin: 0; font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: 1px;">Reference ID</p>
+                <p style="margin: 0; font-family: monospace; font-weight: bold;">${order.id}</p>
+            </div>
+
+            <div style="margin-top: 40px; text-align: center;">
+                <a href="${process.env.NEXT_PUBLIC_SUPABASE_URL}" style="display: inline-block; background: #000; color: #fff; text-decoration: none; padding: 15px 30px; font-size: 10px; font-weight: bold; letter-spacing: 3px; text-transform: uppercase;">VIEW ON SUPABASE</a>
+            </div>
         </div>
       `
     });
