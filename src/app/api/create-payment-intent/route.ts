@@ -10,9 +10,7 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: 'Stripe configuration missing' }, { status: 500 });
         }
 
-        const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-            apiVersion: '2025-01-27',
-        });
+        const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
         // Create a PaymentIntent with the specified amount and currency
         const paymentIntent = await stripe.paymentIntents.create({
