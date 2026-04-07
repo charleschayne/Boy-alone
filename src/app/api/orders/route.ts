@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
     // 2. Send email notification via Resend
     const { data: emailData, error: emailError } = await resend.emails.send({
       from: 'Boy Alone Store <orders@resend.dev>', // Replace with your verified domain in production
-      to: 'kayodejosh30@gmail.com',
+      to: 'charleschayne11@gmail.com',
       subject: `New Order: ${product_name}`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee;">
