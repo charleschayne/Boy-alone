@@ -24,27 +24,53 @@ export default async function CollectionPage({
                     </h1>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
-                        {collections.map((collection) => (
-                            <Link href={`/collections/${collection.slug}`} key={collection.id} className="group block">
-                                <div className="relative w-full aspect-[3/4] overflow-hidden bg-neutral-900 mb-6">
-                                    <Image
-                                        src={collection.featuredImage}
-                                        alt={collection.name}
-                                        fill
-                                        className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
-                                    />
-                                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
-                                </div>
-                                <div className="text-center">
-                                    <h2 className="text-lg md:text-xl font-bold uppercase tracking-widest text-white group-hover:opacity-70 transition-opacity">
-                                        {collection.name}
-                                    </h2>
-                                    <p className="text-xs text-gray-400 mt-2 uppercase tracking-wide">
-                                        View Collection
-                                    </p>
-                                </div>
-                            </Link>
-                        ))}
+                        {collections.map((collection) => {
+                            const product = collection.products[0];
+                            const displayHoverImage = collection.hoverImage || (product?.images && product.images.length > 1 ? product.images[1] : null);
+                            const price = product?.price || '';
+
+                            return (
+                                <Link href={`/collections/${collection.slug}`} key={collection.id} className="group cursor-pointer">
+                                    <div className="w-full aspect-[3/4] bg-neutral-900 mb-6 relative overflow-hidden">
+                                        {/* First Image (Default) */}
+                                        <Image
+                                            src={collection.featuredImage}
+                                            alt={collection.name}
+                                            fill
+                                            className={`object-cover transition-opacity duration-700 ease-in-out ${displayHoverImage ? 'group-hover:opacity-0' : ''}`}
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                        />
+                                        {/* Second Image (Hover) */}
+                                        {displayHoverImage && (
+                                            <Image
+                                                src={displayHoverImage}
+                                                alt={`${collection.name} Detail`}
+                                                fill
+                                                className="absolute inset-0 object-cover opacity-0 transition-opacity duration-700 ease-in-out group-hover:opacity-100"
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                            />
+                                        )}
+                                        <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
+                                    </div>
+                                    <div className="flex justify-between items-start">
+                                        <div>
+                                            <h3 className="text-sm font-bold uppercase tracking-widest text-white group-hover:opacity-70 transition-opacity">
+                                                {collection.name}
+                                            </h3>
+                                            <div className="flex items-center gap-4 mt-2">
+                                                <p className="text-xs text-gray-400 uppercase tracking-wide">
+                                                    {collection.products.length > 0 ? `${collection.products.length} Items` : 'Available'}
+                                                </p>
+                                                {price && (
+                                                    <p className="text-xs text-white font-bold tracking-widest">{price}</p>
+                                                )}
+                                            </div>
+                                        </div>
+                                        <p className="text-sm font-medium text-white border-b border-white/0 group-hover:border-white/100 transition-all uppercase tracking-widest">Explore</p>
+                                    </div>
+                                </Link>
+                            );
+                        })}
                     </div>
                 </div>
 

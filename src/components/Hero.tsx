@@ -9,7 +9,7 @@ const Hero = () => {
     const [typedText, setTypedText] = useState('');
 
     // The story content for the jacket
-    const jacketStory = "Hand-distressed 14oz Japanese selvedge denim. Each abrasion is executed by hand in our Okayama workshop. Finished with custom hardware and a vintage wash process that takes 4 days to complete.";
+    const jacketStory = "This isn’t just denim; it’s you against everything. Every thread is intentional—the embroidery is stitched, built to last. The eye represents awareness: seeing and feeling everything. Tears first, then rage. Heavyweight denim carrying pain and power. This journey was never soft.";
 
     // The story content for the hat
     const hatStory = "Vintage 6-panel construction. Washed canvas for a lived-in feel from day one. Embroidered with our signature logo in a tonal thread.";

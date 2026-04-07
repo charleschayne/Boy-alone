@@ -26,21 +26,20 @@ export interface Collection {
 
 export const collections: Collection[] = [
     {
-        id: 'jackets',
-        name: 'Jackets',
-        slug: 'jackets',
-        featuredImage: '/assets/col1IMG_4588.JPEG',
+        id: 'girl-jacket',
+        name: 'Girl Jacket',
+        slug: 'girl-jacket',
+        featuredImage: '/assets/girljacketcol2IMG_3341.JPEG',
         products: [
             {
-                id: 'girl-jackets',
-                name: 'Jackets',
-                slug: 'jackets',
+                id: 'girl-jacket-product',
+                name: 'Girl Jacket',
+                slug: 'girl-jacket',
                 price: '$100',
                 images: [
-                    '/assets/col1IMG_4588.JPEG',
-                    '/assets/col1IMG_4589.JPEG',
-                    '/assets/col1IMG_4595.JPEG',
-                    '/assets/col1IMG_4598.JPEG'
+                    '/assets/girljacketcol2IMG_3341.JPEG',
+                    '/assets/girljacketcol2IMG_3365.JPEG',
+                    '/assets/girljacketcol2IMG_3377.JPEG'
                 ],
                 colors: [
                     { name: 'Red', sizes: ['Small', 'Medium', 'Large', 'XL'] },
@@ -53,7 +52,7 @@ export const collections: Collection[] = [
         id: 'crop-top',
         name: 'Crop Top',
         slug: 'crop-top',
-        featuredImage: '/assets/col2IMG_3341.JPEG',
+        featuredImage: '/assets/croptopcol5IMG_3406.JPEG',
         products: [
             {
                 id: 'girl-crop-top',
@@ -61,9 +60,10 @@ export const collections: Collection[] = [
                 slug: 'crop-top',
                 price: '$40',
                 images: [
-                    '/assets/col2IMG_3341.JPEG',
-                    '/assets/col2IMG_3365.JPEG',
-                    '/assets/col2IMG_3377.JPEG'
+                    '/assets/croptopcol4IMG_3243.JPEG',
+                    '/assets/croptopcol4IMG_3250.JPEG',
+                    '/assets/croptopcol5IMG_3406.JPEG',
+                    '/assets/croptopcol5IMG_3443.JPEG'
                 ],
                 colors: [
                     { name: 'White', sizes: ['Small', 'Medium', 'Large', 'XL'] },
@@ -144,7 +144,10 @@ export const collections: Collection[] = [
                     '/assets/TracksuitKayMarch14th_2ndTiff%20Images-5.JPEG',
                     '/assets/TracksuitKayMarch14th_2ndTiff%20Images-6.JPEG',
                     '/assets/TracksuitKayMarch14th_2ndTiff%20Images-7.JPEG',
-                    '/assets/TracksuitKayMarch14th_2ndTiff%20Images-8.JPEG'
+                    '/assets/TracksuitKayMarch14th_2ndTiff%20Images-8.JPEG',
+                    '/assets/redtwotoneKay%20March%2021st%20Final%20Images.JPEG',
+                    '/assets/redtwotoneKay%20March%2021st%20Final%20Images-2.JPEG',
+                    '/assets/redtwotoneKay%20March%2021st%20Final%20Images-3.JPEG'
                 ],
                 colors: [
                     { name: 'Red', sizes: ['Small', 'Medium', 'Large', 'XL'] },
@@ -190,17 +193,16 @@ export const collections: Collection[] = [
         id: 'hoodie',
         name: 'Sun-dried Hoodie',
         slug: 'hoodie',
-        featuredImage: '/assets/col4IMG_3243.JPEG',
+        featuredImage: '/assets/SundriedhoodieKay%20March%2021st%20Final%20Images-6.JPEG',
         products: [
             {
                 id: 'men-hoodie',
                 name: 'Sun-dried Hoodie',
                 slug: 'hoodie',
-                price: '$80',
+                price: '$75',
                 images: [
-                    '/assets/col4IMG_3243.JPEG',
-                    '/assets/col4IMG_3250.JPEG',
-                    '/assets/col4IMG_3264.JPEG'
+                    '/assets/SundriedhoodieKay%20March%2021st%20Final%20Images-6.JPEG',
+                    '/assets/SundriedhoodieKay%20March%2021st%20Final%20Images-7.JPEG'
                 ],
                 colors: [
                     { name: 'Black', sizes: ['Small', 'Medium', 'Large', 'XL', '2XL'] },
@@ -213,16 +215,17 @@ export const collections: Collection[] = [
         id: 'crewneck',
         name: 'Sun-dried Crewneck',
         slug: 'crewneck',
-        featuredImage: '/assets/col5IMG_3406.JPEG',
+        featuredImage: '/assets/sundriedblacksweatshirtKay%20March%2021st%20Final%20Images-8.JPEG',
         products: [
             {
                 id: 'men-crewneck',
                 name: 'Sun-dried Crewneck',
                 slug: 'crewneck',
-                price: '$80',
+                price: '$70',
                 images: [
-                    '/assets/col5IMG_3406.JPEG',
-                    '/assets/col5IMG_3443.JPEG'
+                    '/assets/sundriedblacksweatshirtKay%20March%2021st%20Final%20Images-8.JPEG',
+                    '/assets/sundriedblacksweatshirtKay%20March%2021st%20Final%20Images-9.JPEG',
+                    '/assets/sundriedblacksweatshirtKay%20March%2021st%20Final%20Images-10.JPEG'
                 ],
                 colors: [
                     { name: 'Black', sizes: ['Small', 'Medium', 'Large', 'XL'] },
@@ -231,38 +234,6 @@ export const collections: Collection[] = [
             }
         ]
     },
-    {
-        id: '2',
-        name: 'Collection 002',
-        slug: 'collection-002',
-        featuredImage: '/assets/col2IMG_3341.JPEG',
-        hoverImage: '/assets/col2IMG_3365.JPEG',
-        products: []
-    },
-    {
-        id: '4',
-        name: 'Collection 004',
-        slug: 'collection-004',
-        featuredImage: '/assets/col4IMG_3243.JPEG',
-        hoverImage: '/assets/col4IMG_3250.JPEG',
-        products: []
-    },
-    {
-        id: '5',
-        name: 'Collection 005',
-        slug: 'collection-005',
-        featuredImage: '/assets/col5IMG_3406.JPEG',
-        hoverImage: '/assets/col5IMG_3443.JPEG',
-        products: []
-    },
-    {
-        id: '6',
-        name: 'Collection 006',
-        slug: 'collection-006',
-        featuredImage: '/assets/col6IMG_2015.JPEG',
-        hoverImage: '/assets/col6IMG_2068.JPEG',
-        products: []
-    }
 ];
 
 export const getAllProducts = () => {
