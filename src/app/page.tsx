@@ -21,6 +21,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
             {collections.map((collection) => {
               const product = collection.products[0];
+              const isSoldOut = product?.isSoldOut;
               const displayHoverImage = collection.hoverImage || (product?.images && product.images.length > 1 ? product.images[1] : null);
               const price = product?.price || '';
 
@@ -32,7 +33,7 @@ export default function Home() {
                       src={collection.featuredImage}
                       alt={collection.name}
                       fill
-                      className={`object-cover transition-opacity duration-700 ease-in-out ${displayHoverImage ? 'group-hover:opacity-0' : ''}`}
+                      className={`object-cover transition-opacity duration-700 ease-in-out ${displayHoverImage ? 'group-hover:opacity-0' : ''} ${isSoldOut ? 'grayscale contrast-125' : ''}`}
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                     {/* Second Image (Hover) */}
@@ -41,9 +42,14 @@ export default function Home() {
                         src={displayHoverImage}
                         alt={`${collection.name} Detail`}
                         fill
-                        className="absolute inset-0 object-cover opacity-0 transition-opacity duration-700 ease-in-out group-hover:opacity-100"
+                        className={`absolute inset-0 object-cover opacity-0 transition-opacity duration-700 ease-in-out group-hover:opacity-100 ${isSoldOut ? 'grayscale contrast-125' : ''}`}
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
+                    )}
+                    {isSoldOut && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/40 z-10">
+                            <span className="text-[10px] bg-white text-black px-6 py-2 font-bold uppercase tracking-[0.5em] italic">SOLD OUT</span>
+                        </div>
                     )}
                   </div>
                   <div className="flex justify-between items-start">
@@ -60,7 +66,9 @@ export default function Home() {
                         )}
                       </div>
                     </div>
-                    <p className="text-sm font-medium text-white border-b border-white/0 group-hover:border-white/100 transition-all">Explore</p>
+                    <p className={`text-sm font-medium border-b transition-all uppercase tracking-widest ${isSoldOut ? 'text-gray-500 border-transparent italic line-through' : 'text-white border-white/0 group-hover:border-white/100'}`}>
+                        {isSoldOut ? 'SOLD OUT' : 'Explore'}
+                    </p>
                   </div>
                 </Link>
               );

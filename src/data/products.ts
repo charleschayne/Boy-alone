@@ -12,6 +12,7 @@ export interface Product {
     images: string[];
     description?: string;
     colors: ProductColor[];
+    isSoldOut?: boolean;
 }
 
 export interface Collection {
@@ -121,7 +122,8 @@ export const collections: Collection[] = [
                 colors: [
                     { name: 'Black', sizes: ['30', '32', '34', '38'] },
                     { name: 'Blue', sizes: ['30', '32', '34', '38'] }
-                ]
+                ],
+                isSoldOut: true
             }
         ]
     },

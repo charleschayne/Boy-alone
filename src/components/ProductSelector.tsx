@@ -34,7 +34,7 @@ const ProductSelector = ({ product }: ProductSelectorProps) => {
     return (
         <div className="flex flex-col space-y-6 py-6 font-light">
             {/* Color Selection */}
-            <div>
+            <div className={product.isSoldOut ? 'opacity-30 pointer-events-none' : ''}>
                 <h4 className="text-[10px] uppercase tracking-widest text-gray-500 mb-3">Color: {selectedColor.name}</h4>
                 <div className="flex flex-wrap gap-2">
                     {product.colors.map((color) => (
@@ -54,7 +54,7 @@ const ProductSelector = ({ product }: ProductSelectorProps) => {
             </div>
 
             {/* Size Selection */}
-            <div>
+            <div className={product.isSoldOut ? 'opacity-30 pointer-events-none' : ''}>
                 <h4 className="text-[10px] uppercase tracking-widest text-gray-500 mb-3">Size: {selectedSize || 'Select Size'}</h4>
                 <div className="flex flex-wrap gap-2">
                     {selectedColor.sizes.map((size) => (
@@ -74,7 +74,7 @@ const ProductSelector = ({ product }: ProductSelectorProps) => {
             </div>
 
             {/* Quantity Selection */}
-            <div>
+            <div className={product.isSoldOut ? 'opacity-30 pointer-events-none' : ''}>
                 <h4 className="text-[10px] uppercase tracking-widest text-gray-500 mb-3">Quantity: {quantity}</h4>
                 <div className="flex items-center space-x-4">
                     <button 
@@ -95,10 +95,15 @@ const ProductSelector = ({ product }: ProductSelectorProps) => {
 
             {/* Buy Now Button */}
             <button 
+                disabled={product.isSoldOut}
                 onClick={() => setIsModalOpen(true)}
-                className="w-full bg-black text-white py-4 text-[10px] uppercase tracking-[0.3em] font-bold mt-4 hover:bg-neutral-800 transition-colors shadow-2xl"
+                className={`w-full py-4 text-[10px] uppercase tracking-[0.3em] font-bold mt-4 transition-all shadow-2xl ${
+                    product.isSoldOut 
+                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200 italic' 
+                        : 'bg-black text-white hover:bg-neutral-800'
+                }`}
             >
-                BUY NOW
+                {product.isSoldOut ? 'SOLD OUT' : 'BUY NOW'}
             </button>
 
             {/* Checkout Modal */}
