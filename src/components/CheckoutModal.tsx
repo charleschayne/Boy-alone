@@ -115,6 +115,13 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [clientSecret, setClientSecret] = useState<string | null>(null);
     const [initError, setInitError] = useState<string | null>(null);
+    const [showReceipt, setShowReceipt] = useState(false);
+    const [orderDate] = useState(new Date().toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+    }));
+    const [orderId] = useState(`BA-${Math.floor(Math.random() * 90000) + 10000}`);
     
     // Shipping State
     const [shippingData, setShippingData] = useState({
@@ -178,19 +185,155 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
 
     if (isSubmitted) {
         return (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-xl animate-in fade-in duration-500">
-                <div className="text-center space-y-6 max-w-md px-6">
-                    <h2 className="text-4xl font-bold uppercase tracking-[0.3em] text-white italic">THANK YOU</h2>
-                    <p className="text-xs uppercase tracking-widest text-gray-400 leading-loose">
-                        Your order has been placed successfully. A confirmation email will be sent shortly to <span className="text-white">{shippingData.email}</span>.
-                    </p>
-                    <button 
-                        onClick={onClose}
-                        className="mt-8 text-[10px] uppercase tracking-widest text-white border-b border-white py-2 hover:opacity-70 transition-opacity"
-                    >
-                        Return to Store
-                    </button>
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-2xl animate-in fade-in duration-700 overflow-y-auto py-12">
+                <div className="w-full max-w-xl px-6 space-y-12">
+                    {!showReceipt ? (
+                        <div className="text-center space-y-8 animate-in fade-in zoom-in duration-1000">
+                            <div className="space-y-4">
+                                <h2 className="text-5xl font-bold uppercase tracking-[0.3em] text-white italic">THANK YOU</h2>
+                                <div className="h-px w-24 bg-white/20 mx-auto" />
+                            </div>
+                            <p className="text-xs uppercase tracking-[0.3em] text-gray-400 leading-loose max-w-sm mx-auto">
+                                Your order has been placed successfully. A confirmation email will be sent shortly to <span className="text-white border-b border-white/50">{shippingData.email}</span>.
+                            </p>
+                            <div className="flex flex-col items-center gap-6 pt-8">
+                                <button 
+                                    onClick={() => setShowReceipt(true)}
+                                    className="text-[10px] bbg-white text-black bg-white px-8 py-4 font-bold uppercase tracking-[0.4em] hover:bg-gray-200 transition-all hover:scale-105 active:scale-95"
+                                >
+                                    VIEW DIGITAL RECEIPT
+                                </button>
+                                <button 
+                                    onClick={onClose}
+                                    className="text-[10px] uppercase tracking-[0.4em] text-gray-500 hover:text-white border-b border-transparent hover:border-white py-2 transition-all"
+                                >
+                                    Return to Store
+                                </button>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="bg-white text-black p-8 md:p-12 shadow-2xl animate-in slide-in-from-bottom duration-700 print:shadow-none print:p-0">
+                            {/* Receipt Header */}
+                            <div className="flex justify-between items-start border-b border-black/10 pb-8 mb-12">
+                                <div className="space-y-2">
+                                    <h3 className="text-2xl font-bold tracking-[0.2em] italic">BOY ALONE</h3>
+                                    <p className="text-[10px] uppercase tracking-widest text-gray-400">Order Confirmation</p>
+                                </div>
+                                <div className="text-right space-y-1 text-[10px] uppercase tracking-widest">
+                                    <p className="font-bold">Order {orderId}</p>
+                                    <p className="text-gray-400">{orderDate}</p>
+                                </div>
+                            </div>
+
+                            {/* Shipping & Billing */}
+                            <div className="grid grid-cols-2 gap-12 mb-12">
+                                <div className="space-y-4">
+                                    <h4 className="text-[10px] font-bold uppercase tracking-widest text-gray-400">SHIPPING TO</h4>
+                                    <div className="text-[10px] uppercase tracking-widest leading-loose">
+                                        <p className="font-bold text-xs mb-1">{shippingData.name}</p>
+                                        <p>{shippingData.address}</p>
+                                        <p>{shippingData.city}, {shippingData.zip}</p>
+                                    </div>
+                                </div>
+                                <div className="space-y-4">
+                                    <h4 className="text-[10px] font-bold uppercase tracking-widest text-gray-400">PAYMENT</h4>
+                                    <div className="text-[10px] uppercase tracking-widest leading-loose">
+                                        <p>Visa / Mastercard</p>
+                                        <p>Status: <span className="font-bold italic text-green-600">CONFIRMED</span></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Items List */}
+                            <div className="space-y-8 mb-12 pt-8 border-t border-black/5">
+                                <div className="flex items-center gap-6">
+                                    <div className="relative w-20 aspect-[3/4] bg-neutral-100 flex-shrink-0">
+                                        <Image src={product.images[0]} alt={product.name} fill className="object-cover" />
+                                    </div>
+                                    <div className="flex-1 space-y-2">
+                                        <div className="flex justify-between items-start">
+                                            <h5 className="text-sm font-bold uppercase tracking-widest">{product.name}</h5>
+                                            <p className="text-xs font-bold">{product.price}</p>
+                                        </div>
+                                        <div className="text-[9px] uppercase tracking-[0.2em] text-gray-400 space-y-1">
+                                            <p>Color: {selectedColor.name}</p>
+                                            <p>Size: {selectedSize || 'Standard'}</p>
+                                            <p>Qty: {quantity}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Totals */}
+                            <div className="border-t-2 border-black pt-8 space-y-4">
+                                <div className="flex justify-between text-[10px] uppercase tracking-[0.3em]">
+                                    <span>Subtotal</span>
+                                    <span>${priceValue * quantity}</span>
+                                </div>
+                                <div className="flex justify-between text-[10px] uppercase tracking-[0.3em]">
+                                    <span>Shipping</span>
+                                    <span>$0.00</span>
+                                </div>
+                                <div className="flex justify-between text-xl font-bold uppercase tracking-[0.2em] pt-4 border-t border-black/10">
+                                    <span>Total</span>
+                                    <span>${total}</span>
+                                </div>
+                            </div>
+
+                            {/* Receipt Footer Controls */}
+                            <div className="mt-16 flex justify-between items-center print:hidden">
+                                <button 
+                                    onClick={() => setShowReceipt(false)}
+                                    className="text-[10px] uppercase tracking-widest text-gray-500 hover:text-black transition-colors"
+                                >
+                                    &larr; BACK
+                                </button>
+                                <div className="flex gap-8">
+                                    <button 
+                                        onClick={() => window.print()}
+                                        className="text-[10px] uppercase tracking-widest font-bold border-b-2 border-black pb-1 hover:opacity-50 transition-opacity"
+                                    >
+                                        DOWNLOAD PDF
+                                    </button>
+                                    <button 
+                                        onClick={onClose}
+                                        className="text-[10px] uppercase tracking-widest font-bold border-b-2 border-black pb-1 hover:opacity-50 transition-opacity"
+                                    >
+                                        EXIT
+                                    </button>
+                                </div>
+                            </div>
+
+                            <p className="mt-12 text-[8px] uppercase tracking-[0.5em] text-gray-300 text-center hidden print:block">
+                                Thank you for shopping with Boy Alone.
+                            </p>
+                        </div>
+                    )}
                 </div>
+                
+                <style jsx global>{`
+                    @media print {
+                        body * {
+                            visibility: hidden;
+                        }
+                        .print\\:block, .print\\:block * {
+                            visibility: visible;
+                        }
+                        .bg-white {
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            width: 100%;
+                            visibility: visible !important;
+                            height: auto;
+                            color: black !important;
+                            background: white !important;
+                        }
+                        .bg-white * {
+                            visibility: visible !important;
+                        }
+                    }
+                `}</style>
             </div>
         );
     }
