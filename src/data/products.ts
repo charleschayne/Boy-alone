@@ -29,7 +29,7 @@ export const collections: Collection[] = [
         id: 'girl-jacket',
         name: 'Girl Jacket',
         slug: 'girl-jacket',
-        featuredImage: '/assets/girljacketcol2IMG_3341.JPEG',
+        featuredImage: '/assets/girljacketcol2IMG_3365.JPEG',
         products: [
             {
                 id: 'girl-jacket-product',
@@ -37,8 +37,8 @@ export const collections: Collection[] = [
                 slug: 'girl-jacket',
                 price: '$100',
                 images: [
-                    '/assets/girljacketcol2IMG_3341.JPEG',
                     '/assets/girljacketcol2IMG_3365.JPEG',
+                    '/assets/girljacketcol2IMG_3341.JPEG',
                     '/assets/girljacketcol2IMG_3377.JPEG'
                 ],
                 colors: [
@@ -58,7 +58,7 @@ export const collections: Collection[] = [
                 id: 'girl-crop-top',
                 name: 'Crop Top',
                 slug: 'crop-top',
-                price: '$40',
+                price: '$60',
                 images: [
                     '/assets/croptopcol4IMG_3243.JPEG',
                     '/assets/croptopcol4IMG_3250.JPEG',
@@ -82,7 +82,7 @@ export const collections: Collection[] = [
                 id: 'men-jean-jacket',
                 name: 'Jean Jacket',
                 slug: 'jean-jacket',
-                price: '$150',
+                price: '$200',
                 images: [
                     '/assets/JeanjacketKayMarch14th_Tiff%20Images.JPEG',
                     '/assets/JeanjacketKayMarch14th_Tiff%20Images-2.JPEG',
@@ -135,7 +135,7 @@ export const collections: Collection[] = [
                 id: 'men-track-suit',
                 name: 'Two Tone Track Suit',
                 slug: 'track-suit',
-                price: '$80',
+                price: '$130',
                 images: [
                     '/assets/TracksuitKayMarch14th_2ndTiff%20Images.JPEG',
                     '/assets/TracksuitKayMarch14th_2ndTiff%20Images-2.JPEG',
@@ -167,7 +167,7 @@ export const collections: Collection[] = [
                 id: 'men-sweatshirt',
                 name: 'Sweatshirt',
                 slug: 'sweatshirt',
-                price: '$50',
+                price: '$60',
                 images: [
                     '/assets/SweatshirtKayMarch14th_2ndTiff%20Images-13.JPEG',
                     '/assets/SweatshirtKayMarch14th_2ndTiff%20Images-14.JPEG',
@@ -199,7 +199,7 @@ export const collections: Collection[] = [
                 id: 'men-hoodie',
                 name: 'Sun-dried Hoodie',
                 slug: 'hoodie',
-                price: '$75',
+                price: '$100',
                 images: [
                     '/assets/SundriedhoodieKay%20March%2021st%20Final%20Images-6.JPEG',
                     '/assets/SundriedhoodieKay%20March%2021st%20Final%20Images-7.JPEG'
@@ -221,7 +221,7 @@ export const collections: Collection[] = [
                 id: 'men-crewneck',
                 name: 'Sun-dried Crewneck',
                 slug: 'crewneck',
-                price: '$70',
+                price: '$100',
                 images: [
                     '/assets/sundriedblacksweatshirtKay%20March%2021st%20Final%20Images-8.JPEG',
                     '/assets/sundriedblacksweatshirtKay%20March%2021st%20Final%20Images-9.JPEG',
