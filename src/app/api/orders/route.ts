@@ -81,7 +81,10 @@ export async function POST(req: NextRequest) {
 
     if (emailError) {
       console.error('Resend Error:', emailError);
-      // We don't return an error here because the order was already saved
+      return NextResponse.json({ 
+        error: 'Order saved, but email notification failed.', 
+        details: emailError.message 
+      }, { status: 500 });
     }
 
     return NextResponse.json({ success: true, order });
