@@ -99,7 +99,8 @@ export const collections: Collection[] = [
                 colors: [
                     { name: 'Black', sizes: ['Medium', 'Large', 'XL'] },
                     { name: 'Light Blue', sizes: ['Medium', 'Large', 'XL'] }
-                ]
+                ],
+                isSoldOut: true
             }
         ]
     },
