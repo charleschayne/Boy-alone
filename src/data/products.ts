@@ -77,7 +77,7 @@ export const collections: Collection[] = [
         id: 'jean-jacket',
         name: 'Jean Jacket',
         slug: 'jean-jacket',
-        featuredImage: '/assets/JeanjacketKayMarch14th_Tiff%20Images.JPEG',
+        featuredImage: '/assets/JeanjacketKayMarch14th_Tiff%20Images-4.JPEG',
         products: [
             {
                 id: 'men-jean-jacket',
@@ -85,10 +85,10 @@ export const collections: Collection[] = [
                 slug: 'jean-jacket',
                 price: '$200',
                 images: [
+                    '/assets/JeanjacketKayMarch14th_Tiff%20Images-4.JPEG',
                     '/assets/JeanjacketKayMarch14th_Tiff%20Images.JPEG',
                     '/assets/JeanjacketKayMarch14th_Tiff%20Images-2.JPEG',
                     '/assets/JeanjacketKayMarch14th_Tiff%20Images-3.JPEG',
-                    '/assets/JeanjacketKayMarch14th_Tiff%20Images-4.JPEG',
                     '/assets/JeanjacketKayMarch14th_Tiff%20Images-5.JPEG',
                     '/assets/JeanjacketKayMarch14th_Tiff%20Images-6.JPEG',
                     '/assets/JeanjacketKayMarch14th_Tiff%20Images-7.JPEG',
