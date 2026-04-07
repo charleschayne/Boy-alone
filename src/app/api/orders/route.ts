@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 import { supabase } from '@/lib/supabase';
 
 export async function POST(req: NextRequest) {
@@ -18,12 +18,10 @@ export async function POST(req: NextRequest) {
       size 
     } = await req.json();
 
-    if (!process.env.RESEND_API_KEY) {
-      console.error('RESEND_API_KEY is not defined');
+    if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASS) {
+      console.error('Gmail configuration missing');
       return NextResponse.json({ error: 'Mail service configuration missing' }, { status: 500 });
     }
-
-    const resend = new Resend(process.env.RESEND_API_KEY);
 
     if (!supabase) {
       console.error('Supabase client failed to initialize. Check environment variables.');
@@ -55,37 +53,47 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Failed to store order in database' }, { status: 500 });
     }
 
-    // 2. Send email notification via Resend
-    const { data: emailData, error: emailError } = await resend.emails.send({
-      from: 'Boy Alone Store <onboarding@resend.dev>', // Use onboarding@resend.dev for sandbox
-      to: 'charleschayne11@gmail.com',
-      subject: `New Order: ${product_name}`,
+    // 2. Transporter for Gmail
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_APP_PASS,
+      },
+    });
+
+    // 3. Send emails to BOTH Buyer and Owner
+    const buyerEmailPromise = transporter.sendMail({
+      from: `"Boy Alone Store" <${process.env.GMAIL_USER}>`,
+      to: email, // The customer's email
+      subject: `Order Confirmed: ${product_name}`,
       html: `
-        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee;">
-          <h2 style="text-transform: uppercase; letter-spacing: 2px;">New Order Received</h2>
+        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+          <h2 style="text-transform: uppercase; letter-spacing: 2px;">Thank you for your order</h2>
+          <p>We've received your order for the <strong>${product_name}</strong> and are preparing it now.</p>
           <hr />
-          <p><strong>Customer:</strong> ${name} (${email})</p>
-          <p><strong>Shipping Address:</strong> ${address}, ${city}, ${zip}</p>
-          <hr />
-          <h3>Order Details:</h3>
-          <p><strong>Product:</strong> ${product_name}</p>
-          <p><strong>Quantity:</strong> ${quantity}</p>
-          <p><strong>Color:</strong> ${color}</p>
-          <p><strong>Size:</strong> ${size}</p>
-          <p><strong>Total:</strong> $${total_amount}</p>
-          <hr />
-          <p style="font-size: 12px; color: #666;">This order was processed via Stripe and is ready for fulfillment.</p>
+          <p>Order Reference: <strong>${order.id.slice(0, 8).toUpperCase()}</strong></p>
+          <p>Address: ${address}, ${city}, ${zip}</p>
         </div>
       `
     });
 
-    if (emailError) {
-      console.error('Resend Error:', emailError);
-      return NextResponse.json({ 
-        error: 'Order saved, but email notification failed.', 
-        details: emailError.message 
-      }, { status: 500 });
-    }
+    const ownerEmailPromise = transporter.sendMail({
+      from: process.env.GMAIL_USER,
+      to: 'charleschayne11@gmail.com',
+      subject: `🔥 NEW SALE: $${total_amount}`,
+      html: `
+        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 2px solid #000;">
+            <h2 style="text-transform: uppercase;">New Order Received</h2>
+            <p><strong>Customer:</strong> ${name} (${email})</p>
+            <p><strong>Shipping:</strong> ${address}, ${city}, ${zip}</p>
+            <p><strong>Details:</strong> ${product_name} - ${color} / ${size}</p>
+            <p><strong>Total:</strong> $${total_amount}</p>
+        </div>
+      `
+    });
+
+    await Promise.all([buyerEmailPromise, ownerEmailPromise]);
 
     return NextResponse.json({ success: true, order });
 
