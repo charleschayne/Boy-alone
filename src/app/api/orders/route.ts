@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
 
     // 2. Send email notification via Resend
     const { data: emailData, error: emailError } = await resend.emails.send({
-      from: 'Boy Alone Store <orders@resend.dev>', // Replace with your verified domain in production
+      from: 'Boy Alone Store <onboarding@resend.dev>', // Use onboarding@resend.dev for sandbox
       to: 'charleschayne11@gmail.com',
       subject: `New Order: ${product_name}`,
       html: `
