@@ -114,6 +114,7 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
     const [step, setStep] = useState<'shipping' | 'payment'>('shipping');
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [clientSecret, setClientSecret] = useState<string | null>(null);
+    const [initError, setInitError] = useState<string | null>(null);
     
     // Shipping State
     const [shippingData, setShippingData] = useState({
@@ -133,18 +134,40 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
         setShippingData(prev => ({ ...prev, [field]: value }));
     };
 
-    useEffect(() => {
-        if (isOpen && step === 'payment') {
+    const initializePayment = async () => {
+        setInitError(null);
+        setClientSecret(null);
+
+        try {
             const priceValue = parseInt(product.price.replace('$', ''));
             const amount = priceValue * quantity * 100; // Stripe expects cents
 
-            fetch('/api/create-payment-intent', {
+            const res = await fetch('/api/create-payment-intent', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ amount }),
-            })
-            .then((res) => res.json())
-            .then((data) => setClientSecret(data.clientSecret));
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                throw new Error(data.error || 'Failed to initialize session');
+            }
+
+            if (data.clientSecret) {
+                setClientSecret(data.clientSecret);
+            } else {
+                throw new Error('No client secret returned');
+            }
+        } catch (err: any) {
+            console.error('Initialization Error:', err);
+            setInitError(err.message || 'An unexpected error occurred.');
+        }
+    };
+
+    useEffect(() => {
+        if (isOpen && step === 'payment') {
+            initializePayment();
         }
     }, [isOpen, step, product.price, quantity]);
 
@@ -299,6 +322,24 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
                                         selectedSize={selectedSize}
                                     />
                                 </Elements>
+                            ) : initError ? (
+                                <div className="flex flex-col items-center justify-center space-y-6 pt-12 animate-in fade-in duration-500 text-center">
+                                    <div className="w-12 h-12 bg-red-500/10 rounded-full flex items-center justify-center">
+                                        <svg className="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                        </svg>
+                                    </div>
+                                    <div className="space-y-4">
+                                        <h3 className="text-[10px] uppercase tracking-[0.4em] text-white">Initialization Failed</h3>
+                                        <p className="text-[10px] uppercase tracking-widest text-gray-500 leading-loose max-w-[200px]">{initError}</p>
+                                    </div>
+                                    <button 
+                                        onClick={initializePayment}
+                                        className="text-[10px] uppercase tracking-[0.4em] text-white border-b border-white py-2 hover:opacity-70 transition-opacity"
+                                    >
+                                        RETRY CONNECTION
+                                    </button>
+                                </div>
                             ) : (
                                 <div className="flex flex-col items-center justify-center space-y-4 pt-12">
                                     <div className="w-8 h-8 border-2 border-white/20 border-t-white rounded-full animate-spin" />
