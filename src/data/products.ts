@@ -50,25 +50,43 @@ export const collections: Collection[] = [
         ]
     },
     {
-        id: 'crop-top',
-        name: 'Crop Top',
-        slug: 'crop-top',
+        id: 'black-crop-top',
+        name: 'Black Crop Top',
+        slug: 'black-crop-top',
         featuredImage: '/assets/croptopcol5IMG_3406.JPEG',
         products: [
             {
-                id: 'girl-crop-top',
-                name: 'Crop Top',
-                slug: 'crop-top',
+                id: 'black-crop-top-product',
+                name: 'Black Crop Top',
+                slug: 'black-crop-top',
                 price: '$60',
                 images: [
-                    '/assets/croptopcol4IMG_3243.JPEG',
-                    '/assets/croptopcol4IMG_3250.JPEG',
                     '/assets/croptopcol5IMG_3406.JPEG',
                     '/assets/croptopcol5IMG_3443.JPEG'
                 ],
                 colors: [
-                    { name: 'White', sizes: ['Small', 'Medium', 'Large', 'XL'] },
                     { name: 'Black', sizes: ['Small', 'Medium', 'Large', 'XL'] }
+                ]
+            }
+        ]
+    },
+    {
+        id: 'white-crop-top',
+        name: 'White Crop Top',
+        slug: 'white-crop-top',
+        featuredImage: '/assets/croptopcol4IMG_3243.JPEG',
+        products: [
+            {
+                id: 'white-crop-top-product',
+                name: 'White Crop Top',
+                slug: 'white-crop-top',
+                price: '$60',
+                images: [
+                    '/assets/croptopcol4IMG_3243.JPEG',
+                    '/assets/croptopcol4IMG_3250.JPEG'
+                ],
+                colors: [
+                    { name: 'White', sizes: ['Small', 'Medium', 'Large', 'XL'] }
                 ]
             }
         ]
@@ -105,30 +123,6 @@ export const collections: Collection[] = [
         ]
     },
     {
-        id: 'denim-jeans',
-        name: 'Denim Jeans',
-        slug: 'denim-jeans',
-        featuredImage: '/assets/col3IMG_3129.JPEG',
-        products: [
-            {
-                id: 'men-denim-jeans',
-                name: 'Denim Jeans',
-                slug: 'denim-jeans',
-                price: '$50',
-                images: [
-                    '/assets/col3IMG_3129.JPEG',
-                    '/assets/col3IMG_3135.JPEG',
-                    '/assets/col3IMG_3137.JPEG'
-                ],
-                colors: [
-                    { name: 'Black', sizes: ['30', '32', '34', '38'] },
-                    { name: 'Blue', sizes: ['30', '32', '34', '38'] }
-                ],
-                isSoldOut: true
-            }
-        ]
-    },
-    {
         id: 'track-suit',
         name: 'Two Tone Track Suit',
         slug: 'track-suit',
@@ -142,20 +136,12 @@ export const collections: Collection[] = [
                 images: [
                     '/assets/TracksuitKayMarch14th_2ndTiff%20Images.JPEG',
                     '/assets/TracksuitKayMarch14th_2ndTiff%20Images-2.JPEG',
-                    '/assets/TracksuitKayMarch14th_2ndTiff%20Images-3.JPEG',
-                    '/assets/TracksuitKayMarch14th_2ndTiff%20Images-4.JPEG',
-                    '/assets/TracksuitKayMarch14th_2ndTiff%20Images-5.JPEG',
-                    '/assets/TracksuitKayMarch14th_2ndTiff%20Images-6.JPEG',
-                    '/assets/TracksuitKayMarch14th_2ndTiff%20Images-7.JPEG',
-                    '/assets/TracksuitKayMarch14th_2ndTiff%20Images-8.JPEG',
-                    '/assets/redtwotoneKay%20March%2021st%20Final%20Images.JPEG',
                     '/assets/redtwotoneKay%20March%2021st%20Final%20Images-2.JPEG',
                     '/assets/redtwotoneKay%20March%2021st%20Final%20Images-3.JPEG'
                 ],
                 colors: [
-                    { name: 'Red', sizes: ['Small', 'Medium', 'Large', 'XL'] },
-                    { name: 'Pink', sizes: ['Small', 'Medium', 'Large', 'XL'] },
-                    { name: 'Black', sizes: ['Small', 'Medium', 'Large', 'XL', '2XL'] }
+                    { name: 'Red', sizes: ['Small', 'Medium', 'Large', 'XL', '2XL'] },
+                    { name: 'Pink', sizes: ['Small', 'Medium', 'Large', '2XL'] }
                 ]
             }
         ]
@@ -208,8 +194,9 @@ export const collections: Collection[] = [
                     '/assets/SundriedhoodieKay%20March%2021st%20Final%20Images-7.JPEG'
                 ],
                 colors: [
-                    { name: 'Black', sizes: ['Small', 'Medium', 'Large', 'XL', '2XL'] },
-                    { name: 'Red', sizes: ['Small', 'Medium', 'Large', 'XL'] }
+                    { name: 'Black', sizes: ['Small', 'Medium', 'Large', 'XL', '2XL', '3XL'] },
+                    { name: 'White', sizes: ['Small', 'Medium', 'Large', 'XL', '2XL', '3XL'] },
+                    { name: 'Red', sizes: ['Small', 'Medium', 'Large', 'XL', '2XL', '3XL'] }
                 ]
             }
         ]

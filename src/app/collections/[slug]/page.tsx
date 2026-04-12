@@ -38,7 +38,7 @@ export default async function CollectionPage({
                                             src={collection.featuredImage}
                                             alt={collection.name}
                                             fill
-                                            className={`object-cover transition-opacity duration-700 ease-in-out ${displayHoverImage ? 'group-hover:opacity-0' : ''} ${isSoldOut ? 'grayscale opacity-50' : ''}`}
+                                            className={`object-cover transition-opacity duration-700 ease-in-out ${displayHoverImage ? 'group-hover:opacity-0' : ''}`}
                                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                         />
                                         {/* Second Image (Hover) */}
@@ -47,13 +47,13 @@ export default async function CollectionPage({
                                                 src={displayHoverImage}
                                                 alt={`${collection.name} Detail`}
                                                 fill
-                                                className={`absolute inset-0 object-cover opacity-0 transition-opacity duration-700 ease-in-out group-hover:opacity-100 ${isSoldOut ? 'grayscale' : ''}`}
+                                                className={`absolute inset-0 object-cover opacity-0 transition-opacity duration-700 ease-in-out group-hover:opacity-100`}
                                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                             />
                                         )}
                                         {isSoldOut && (
-                                            <div className="absolute inset-0 flex items-center justify-center bg-black/40 z-10">
-                                                <span className="text-[10px] bg-white text-black px-6 py-2 font-bold uppercase tracking-[0.5em] italic">SOLD OUT</span>
+                                            <div className="absolute inset-0 flex items-center justify-center z-10">
+                                                <span className="text-[10px] bg-white text-black px-6 py-2 font-bold uppercase tracking-[0.5em] italic shadow-xl">SOLD OUT</span>
                                             </div>
                                         )}
                                         <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
@@ -130,9 +130,12 @@ export default async function CollectionPage({
                                             <h2 className="text-2xl md:text-3xl font-bold uppercase tracking-widest">
                                                 {product.name}
                                             </h2>
-                                            <span className="text-xl font-medium">{product.price}</span>
+                                            <div className="flex flex-col gap-1">
+                                                <span className="text-xl font-medium">{product.price}</span>
+                                                <span className="text-[10px] bg-black text-white px-2 py-1 font-bold uppercase tracking-widest self-end">PRE-ORDER</span>
+                                            </div>
                                         </div>
-                                        <p className="text-xs text-gray-500 uppercase tracking-[0.2em]">Premium Quality Apparel</p>
+                                        <p className="text-xs text-gray-500 uppercase tracking-[0.2em]">Premium Quality Apparel — 2 Weeks Shipping</p>
                                     </div>
                                     
                                     <ProductSelector product={product} />
@@ -153,7 +156,7 @@ export default async function CollectionPage({
                                                 <span className="transform group-open:rotate-180 transition-transform">↓</span>
                                             </summary>
                                             <div className="pt-4 text-xs leading-relaxed text-gray-600 tracking-wide uppercase">
-                                                Worldwide shipping available. Returns accepted within 14 days of delivery.
+                                                PRE-ORDER ITEM: Please allow approximately 2 weeks for shipping. Worldwide delivery available. 
                                             </div>
                                         </details>
                                     </div>

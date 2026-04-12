@@ -33,7 +33,7 @@ export default function Home() {
                       src={collection.featuredImage}
                       alt={collection.name}
                       fill
-                      className={`object-cover transition-opacity duration-700 ease-in-out ${displayHoverImage ? 'group-hover:opacity-0' : ''} ${isSoldOut ? 'grayscale contrast-125' : ''}`}
+                      className={`object-cover transition-opacity duration-700 ease-in-out ${displayHoverImage ? 'group-hover:opacity-0' : ''}`}
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                     {/* Second Image (Hover) */}
@@ -42,13 +42,13 @@ export default function Home() {
                         src={displayHoverImage}
                         alt={`${collection.name} Detail`}
                         fill
-                        className={`absolute inset-0 object-cover opacity-0 transition-opacity duration-700 ease-in-out group-hover:opacity-100 ${isSoldOut ? 'grayscale contrast-125' : ''}`}
+                        className={`absolute inset-0 object-cover opacity-0 transition-opacity duration-700 ease-in-out group-hover:opacity-100`}
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
                     )}
                     {isSoldOut && (
-                        <div className="absolute inset-0 flex items-center justify-center bg-black/40 z-10">
-                            <span className="text-[10px] bg-white text-black px-6 py-2 font-bold uppercase tracking-[0.5em] italic">SOLD OUT</span>
+                        <div className="absolute inset-0 flex items-center justify-center z-10">
+                            <span className="text-[10px] bg-white text-black px-6 py-2 font-bold uppercase tracking-[0.5em] italic shadow-xl">SOLD OUT</span>
                         </div>
                     )}
                   </div>

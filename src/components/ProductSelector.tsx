@@ -93,15 +93,24 @@ const ProductSelector = ({ product }: ProductSelectorProps) => {
                 </div>
             </div>
 
+            {/* Pre-order Notice */}
+            {!product.isSoldOut && (
+                <div className="pt-4 border-t border-gray-100">
+                    <p className="text-[10px] text-gray-500 uppercase tracking-[0.2em] italic font-medium">
+                        Pre-order — 2 weeks shipping
+                    </p>
+                </div>
+            )}
+
             {/* Buy Now Button */}
             <button 
                 disabled={product.isSoldOut}
                 onClick={() => setIsModalOpen(true)}
-                className={`w-full py-4 text-[10px] uppercase tracking-[0.3em] font-bold mt-4 transition-all shadow-2xl ${
+                className={`w-full py-4 text-[10px] uppercase tracking-[0.3em] font-bold ${
                     product.isSoldOut 
-                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200 italic' 
-                        : 'bg-black text-white hover:bg-neutral-800'
-                }`}
+                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200 italic mt-4' 
+                        : 'bg-black text-white hover:bg-neutral-800 mt-2'
+                } transition-all shadow-2xl`}
             >
                 {product.isSoldOut ? 'SOLD OUT' : 'BUY NOW'}
             </button>
