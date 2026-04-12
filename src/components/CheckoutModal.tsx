@@ -14,6 +14,14 @@ import {
 // Initialize Stripe outside of the component to avoid re-creation
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
+const US_STATES = [
+    "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", 
+    "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", 
+    "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", 
+    "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", 
+    "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming", "District of Columbia"
+];
+
 interface CheckoutModalProps {
     isOpen: boolean;
     onClose: () => void;
@@ -129,6 +137,7 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
         email: '',
         address: '',
         city: '',
+        state: '',
         zip: ''
     });
 
@@ -232,7 +241,7 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
                                     <div className="text-[10px] uppercase tracking-widest leading-loose">
                                         <p className="font-bold text-xs mb-1">{shippingData.name}</p>
                                         <p>{shippingData.address}</p>
-                                        <p>{shippingData.city}, {shippingData.zip}</p>
+                                        <p>{shippingData.city}, {shippingData.state} {shippingData.zip}</p>
                                     </div>
                                 </div>
                                 <div className="space-y-4">
@@ -420,9 +429,23 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
                                             <input required value={shippingData.city} onChange={(e) => updateShipping('city', e.target.value)} className="w-full bg-transparent border-b border-white/20 py-3 text-xs uppercase tracking-widest focus:outline-none focus:border-white transition-colors" placeholder="CITY" />
                                         </div>
                                         <div className="space-y-1">
-                                            <label className="text-[10px] uppercase tracking-widest text-gray-500 ml-1">Zip Code</label>
-                                            <input required value={shippingData.zip} onChange={(e) => updateShipping('zip', e.target.value)} className="w-full bg-transparent border-b border-white/20 py-3 text-xs uppercase tracking-widest focus:outline-none focus:border-white transition-colors" placeholder="00000" />
+                                            <label className="text-[10px] uppercase tracking-widest text-gray-500 ml-1">State</label>
+                                            <select 
+                                                required 
+                                                value={shippingData.state} 
+                                                onChange={(e) => updateShipping('state', e.target.value)} 
+                                                className="w-full bg-black border-b border-white/20 py-3 text-xs uppercase tracking-widest focus:outline-none focus:border-white transition-colors"
+                                            >
+                                                <option value="" disabled>SELECT STATE</option>
+                                                {US_STATES.map(state => (
+                                                    <option key={state} value={state}>{state.toUpperCase()}</option>
+                                                ))}
+                                            </select>
                                         </div>
+                                    </div>
+                                    <div className="space-y-1">
+                                        <label className="text-[10px] uppercase tracking-widest text-gray-500 ml-1">Zip Code</label>
+                                        <input required value={shippingData.zip} onChange={(e) => updateShipping('zip', e.target.value)} className="w-full bg-transparent border-b border-white/20 py-3 text-xs uppercase tracking-widest focus:outline-none focus:border-white transition-colors" placeholder="00000" />
                                     </div>
                                 </div>
                             </div>

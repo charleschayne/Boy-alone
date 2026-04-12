@@ -156,7 +156,7 @@ export default async function CollectionPage({
                                                 <span className="transform group-open:rotate-180 transition-transform">↓</span>
                                             </summary>
                                             <div className="pt-4 text-xs leading-relaxed text-gray-600 tracking-wide uppercase">
-                                                PRE-ORDER ITEM: Please allow approximately 2 weeks for shipping. Worldwide delivery available. 
+                                                PRE-ORDER ITEM: Please allow approximately 2 weeks for shipping. US shipping only. 
                                             </div>
                                         </details>
                                     </div>

@@ -9,11 +9,11 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@vercel/analytics": "latest",
     "@stripe/react-stripe-js": "^6.1.0",
     "@stripe/stripe-js": "^9.0.1",
     "@supabase/supabase-js": "^2.101.1",
     "@types/nodemailer": "^8.0.0",
+    "@vercel/analytics": "latest",
     "motion": "^12.34.0",
     "next": "16.1.6",
     "nodemailer": "^8.0.4",
@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.18",
-    "@types/node": "^20",
+    "@types/node": "^20.19.39",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "autoprefixer": "^10.4.24",
