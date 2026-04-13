@@ -3,7 +3,11 @@
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 
-const Navbar = () => {
+interface NavbarProps {
+    isLight?: boolean;
+}
+
+const Navbar = ({ isLight = false }: NavbarProps) => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -26,7 +30,9 @@ const Navbar = () => {
                 ? 'bg-black text-white'
                 : isScrolled
                     ? 'bg-black/90 backdrop-blur-md shadow-sm border-b border-white/10 text-white'
-                    : 'bg-transparent text-white'
+                    : isLight 
+                        ? 'bg-transparent text-black' 
+                        : 'bg-transparent text-white'
                 } text-[10px] md:text-xs tracking-widest uppercase font-light`}>
 
                 {/* Left Links (Desktop) */}

@@ -161,19 +161,11 @@ export const collections: Collection[] = [
                     '/assets/SweatshirtKayMarch14th_2ndTiff%20Images-13.JPEG',
                     '/assets/SweatshirtKayMarch14th_2ndTiff%20Images-14.JPEG',
                     '/assets/SweatshirtKayMarch14th_2ndTiff%20Images-15.JPEG',
-                    '/assets/SweatshirtKayMarch14th_2ndTiff%20Images-17.JPEG',
-                    '/assets/SweatshirtKayMarch14th_2ndTiff%20Images-18.JPEG',
-                    '/assets/SweatshirtKayMarch14th_2ndTiff%20Images-20.JPEG',
-                    '/assets/SweatshirtKayMarch14th_2ndTiff%20Images-21.JPEG',
-                    '/assets/SweatshirtKayMarch14th_2ndTiff%20Images-24.JPEG',
-                    '/assets/SweatshirtKayMarch14th_2ndTiff%20Images-25.JPEG',
-                    '/assets/SweatshirtKayMarch14th_2ndTiff%20Images-26.JPEG'
+                    '/assets/SweatshirtKayMarch14th_2ndTiff%20Images-17.JPEG'
                 ],
                 colors: [
                     { name: 'Black', sizes: ['Small', 'Medium', 'Large', 'XL'] },
-                    { name: 'Cream', sizes: ['Small', 'Medium', 'Large', 'XL'] },
-                    { name: 'Grey', sizes: ['Small', 'Medium', 'Large', 'XL'] },
-                    { name: 'Brown', sizes: ['Small', 'Medium', 'Large', 'XL'] }
+                    { name: 'Cream', sizes: ['Small', 'Medium', 'Large', 'XL'] }
                 ]
             }
         ]

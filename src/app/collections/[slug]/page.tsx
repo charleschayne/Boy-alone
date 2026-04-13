@@ -92,7 +92,7 @@ export default async function CollectionPage({
     if (!collection) {
         return (
             <main className="min-h-screen bg-white text-black pt-24 md:pt-32 flex flex-col items-center justify-center">
-                <Navbar />
+                <Navbar isLight />
                 <h1 className="text-2xl font-bold uppercase tracking-widest">Collection Not Found</h1>
                 <Link href="/collections/all" className="mt-8 text-xs uppercase tracking-widest underline">Back to All Collections</Link>
                 <Footer />
@@ -102,11 +102,11 @@ export default async function CollectionPage({
 
     return (
         <main className="min-h-screen bg-white text-black pt-24 md:pt-32">
-            <Navbar />
+            <Navbar isLight />
 
             <div className="max-w-7xl mx-auto px-6 md:px-12 py-12">
                 <div className="mb-20 text-center">
-                    <h1 className="text-4xl md:text-6xl font-bold tracking-[0.3em] uppercase mb-6">
+                    <h1 className="text-4xl md:text-6xl font-bold tracking-[0.1em] md:tracking-[0.3em] uppercase mb-6 leading-tight">
                         {collection.name}
                     </h1>
                     <div className="w-24 h-px bg-black mx-auto"></div>
@@ -127,7 +127,7 @@ export default async function CollectionPage({
                                 <div className="flex flex-col h-full">
                                     <div className="border-b border-gray-100 pb-8 mb-8">
                                         <div className="flex justify-between items-baseline mb-4">
-                                            <h2 className="text-2xl md:text-3xl font-bold uppercase tracking-widest">
+                                            <h2 className="text-2xl md:text-3xl font-bold uppercase tracking-[0.1em] md:tracking-widest">
                                                 {product.name}
                                             </h2>
                                             <div className="flex flex-col gap-1">

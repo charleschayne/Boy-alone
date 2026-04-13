@@ -10,6 +10,7 @@ import {
   useStripe,
   useElements,
 } from '@stripe/react-stripe-js';
+import { motion, AnimatePresence } from 'motion/react';
 
 // Initialize Stripe outside of the component to avoid re-creation
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
@@ -98,18 +99,18 @@ const CheckoutForm = ({
     };
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-8 animate-in fade-in slide-in-from-right duration-500">
+        <form onSubmit={handleSubmit} className="space-y-8 animate-in fade-in slide-in-from-bottom duration-700">
             <div className="space-y-6">
-                <h2 className="text-[10px] uppercase tracking-[0.5em] text-gray-500">PAYMENT INFORMATION</h2>
+                <h2 className="text-[9px] uppercase tracking-[0.5em] text-gray-500 font-bold">PAYMENT INFORMATION</h2>
                 <PaymentElement options={{ layout: 'tabs' }} />
-                {errorMessage && <div className="text-red-500 text-[10px] uppercase tracking-widest">{errorMessage}</div>}
+                {errorMessage && <div className="text-red-500 text-[9px] uppercase tracking-widest">{errorMessage}</div>}
             </div>
 
-            <div className="pt-12">
+            <div className="pt-8">
                 <button 
                     disabled={!stripe || isLoading}
                     type="submit"
-                    className="w-full bg-white text-black py-5 text-xs font-bold uppercase tracking-[0.4em] hover:bg-gray-200 transition-colors shadow-2xl disabled:opacity-50"
+                    className="w-full bg-white text-black py-4.5 text-xs font-bold uppercase tracking-[0.5em] hover:bg-neutral-200 transition-all shadow-2xl disabled:opacity-50 active:scale-[0.98]"
                 >
                     {isLoading ? 'PROCESSING...' : 'COMPLETE PURCHASE'}
                 </button>
@@ -135,6 +136,7 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
     const [shippingData, setShippingData] = useState({
         name: '',
         email: '',
+        phone: '',
         address: '',
         city: '',
         state: '',
@@ -240,6 +242,7 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
                                     <h4 className="text-[10px] font-bold uppercase tracking-widest text-gray-400">SHIPPING TO</h4>
                                     <div className="text-[10px] uppercase tracking-widest leading-loose">
                                         <p className="font-bold text-xs mb-1">{shippingData.name}</p>
+                                        <p>{shippingData.phone}</p>
                                         <p>{shippingData.address}</p>
                                         <p>{shippingData.city}, {shippingData.state} {shippingData.zip}</p>
                                     </div>
@@ -348,20 +351,43 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
     }
 
     return (
-        <div className="fixed inset-0 z-50 flex flex-col md:flex-row bg-black text-white animate-in slide-in-from-bottom duration-500 overflow-y-auto md:overflow-hidden">
+        <div className="fixed inset-0 z-50 flex flex-col md:flex-row bg-black text-white animate-in slide-in-from-bottom duration-500 overflow-y-auto md:overflow-hidden font-light">
             {/* Close Button */}
             <button 
                 onClick={onClose}
-                className="absolute top-8 right-8 z-50 p-2 hover:rotate-90 transition-transform duration-300"
+                className="absolute top-6 right-6 md:top-8 md:right-8 z-50 p-2 hover:rotate-90 transition-transform duration-300 bg-black/10 md:bg-transparent rounded-full backdrop-blur-md md:backdrop-blur-none"
             >
-                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
 
-            {/* Left Side: Summary */}
-            <div className="w-full md:w-1/2 h-full bg-neutral-900/50 p-12 flex flex-col justify-center border-r border-white/10">
-                <div className="max-w-md mx-auto w-full space-y-12 py-12">
+            {/* Mobile Summary (Integrated) - Hidden on desktop */}
+            <div className="md:hidden w-full p-6 pt-12 space-y-4">
+                <div className="flex items-center justify-between border-b border-white/5 pb-6">
+                    <div className="flex items-center gap-4">
+                        <div className="relative w-14 aspect-[3/4] bg-neutral-900 overflow-hidden shadow-xl">
+                            <Image src={product.images[0]} alt={product.name} fill className="object-cover" />
+                        </div>
+                        <div className="space-y-0.5">
+                            <h3 className="text-sm md:text-[12px] font-bold uppercase tracking-[0.2em] italic">{product.name}</h3>
+                            <div className="text-[10px] md:text-[9px] uppercase tracking-[0.15em] text-gray-500 space-y-1 md:space-y-0.5">
+                                <p>COLOR: {selectedColor.name}</p>
+                                <p>SIZE: {selectedSize || 'Standard'}</p>
+                                <p>QTY: {quantity}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="text-right">
+                        <p className="text-[8px] uppercase tracking-[0.3em] text-gray-500 mb-0.5">TOTAL</p>
+                        <p className="text-lg font-bold italic tracking-wider">${total}</p>
+                    </div>
+                </div>
+            </div>
+
+            {/* Left Side: Desktop Summary - Hidden on mobile */}
+            <div className="hidden md:flex w-full md:w-1/2 h-full bg-neutral-900/50 p-12 flex-col justify-center border-r border-white/10">
+                <div className="max-w-md mx-auto w-full space-y-12">
                      <div className="flex items-center gap-4">
                         <h2 className="text-[10px] uppercase tracking-[0.5em] text-gray-500">ORDER SUMMARY</h2>
                         <div className="h-px flex-1 bg-white/10" />
@@ -404,116 +430,144 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
             </div>
 
             {/* Right Side: Flow */}
-            <div className="w-full md:w-1/2 h-full bg-black p-12 flex flex-col justify-center overflow-y-auto font-light">
-                <div className="max-w-md mx-auto w-full space-y-12 py-12">
-                    {step === 'shipping' ? (
-                        <form onSubmit={handleShippingSubmit} className="space-y-12 animate-in fade-in duration-500">
-                            <div className="space-y-8">
-                                <h2 className="text-[10px] uppercase tracking-[0.5em] text-gray-500 font-bold">SHIPPING INFORMATION</h2>
+            <div className="w-full md:w-1/2 h-full bg-black flex flex-col items-center overflow-y-auto">
+                <div className="max-w-md mx-auto w-full p-6 md:p-12 space-y-10 md:space-y-12">
+                    <AnimatePresence mode="wait">
+                        {step === 'shipping' ? (
+                            <motion.form 
+                                key="shipping"
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+                                onSubmit={handleShippingSubmit} 
+                                className="space-y-10"
+                            >
                                 <div className="space-y-6">
-                                    <div className="space-y-1">
-                                        <label className="text-[10px] uppercase tracking-widest text-gray-500 ml-1">Full Name</label>
-                                        <input required value={shippingData.name} onChange={(e) => updateShipping('name', e.target.value)} className="w-full bg-transparent border-b border-white/20 py-3 text-xs uppercase tracking-widest focus:outline-none focus:border-white transition-colors" placeholder="ENTER NAME" />
-                                    </div>
-                                    <div className="space-y-1">
-                                        <label className="text-[10px] uppercase tracking-widest text-gray-500 ml-1">Email Address</label>
-                                        <input required type="email" value={shippingData.email} onChange={(e) => updateShipping('email', e.target.value)} className="w-full bg-transparent border-b border-white/20 py-3 text-xs uppercase tracking-widest focus:outline-none focus:border-white transition-colors" placeholder="ENTER EMAIL" />
-                                    </div>
-                                    <div className="space-y-1">
-                                        <label className="text-[10px] uppercase tracking-widest text-gray-500 ml-1">Street Address</label>
-                                        <input required value={shippingData.address} onChange={(e) => updateShipping('address', e.target.value)} className="w-full bg-transparent border-b border-white/20 py-3 text-xs uppercase tracking-widest focus:outline-none focus:border-white transition-colors" placeholder="STREET ADDRESS" />
-                                    </div>
-                                    <div className="grid grid-cols-2 gap-8">
-                                        <div className="space-y-1">
-                                            <label className="text-[10px] uppercase tracking-widest text-gray-500 ml-1">City</label>
-                                            <input required value={shippingData.city} onChange={(e) => updateShipping('city', e.target.value)} className="w-full bg-transparent border-b border-white/20 py-3 text-xs uppercase tracking-widest focus:outline-none focus:border-white transition-colors" placeholder="CITY" />
+                                    <h2 className="text-[10px] md:text-xs uppercase tracking-[0.5em] text-gray-500 font-bold">SHIPPING INFO</h2>
+                                    <div className="space-y-6 md:space-y-8">
+                                        <div className="space-y-2">
+                                            <label className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] text-gray-500 ml-0.5">Full Name</label>
+                                            <input required value={shippingData.name} onChange={(e) => updateShipping('name', e.target.value)} className="w-full bg-transparent border-b border-white/10 py-3 md:py-4 text-xs md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors" placeholder="ENTER NAME" />
                                         </div>
-                                        <div className="space-y-1">
-                                            <label className="text-[10px] uppercase tracking-widest text-gray-500 ml-1">State</label>
-                                            <select 
-                                                required 
-                                                value={shippingData.state} 
-                                                onChange={(e) => updateShipping('state', e.target.value)} 
-                                                className="w-full bg-black border-b border-white/20 py-3 text-xs uppercase tracking-widest focus:outline-none focus:border-white transition-colors"
-                                            >
-                                                <option value="" disabled>SELECT STATE</option>
-                                                {US_STATES.map(state => (
-                                                    <option key={state} value={state}>{state.toUpperCase()}</option>
-                                                ))}
-                                            </select>
+                                        <div className="space-y-2">
+                                            <label className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] text-gray-500 ml-0.5">Email Address</label>
+                                            <input required type="email" value={shippingData.email} onChange={(e) => updateShipping('email', e.target.value)} className="w-full bg-transparent border-b border-white/10 py-3 md:py-4 text-xs md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors" placeholder="ENTER EMAIL" />
                                         </div>
-                                    </div>
-                                    <div className="space-y-1">
-                                        <label className="text-[10px] uppercase tracking-widest text-gray-500 ml-1">Zip Code</label>
-                                        <input required value={shippingData.zip} onChange={(e) => updateShipping('zip', e.target.value)} className="w-full bg-transparent border-b border-white/20 py-3 text-xs uppercase tracking-widest focus:outline-none focus:border-white transition-colors" placeholder="00000" />
+                                        <div className="space-y-2">
+                                            <label className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] text-gray-500 ml-0.5">Phone Number</label>
+                                            <input required type="tel" value={shippingData.phone} onChange={(e) => updateShipping('phone', e.target.value)} className="w-full bg-transparent border-b border-white/10 py-3 md:py-4 text-xs md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors" placeholder="+1 (000) 000-0000" />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <label className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] text-gray-500 ml-0.5">Street Address</label>
+                                            <input required value={shippingData.address} onChange={(e) => updateShipping('address', e.target.value)} className="w-full bg-transparent border-b border-white/10 py-3 md:py-4 text-xs md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors" placeholder="STREET ADDRESS" />
+                                        </div>
+                                        <div className="grid grid-cols-2 gap-6 md:gap-12">
+                                            <div className="space-y-2">
+                                                <label className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] text-gray-500 ml-0.5">City</label>
+                                                <input required value={shippingData.city} onChange={(e) => updateShipping('city', e.target.value)} className="w-full bg-transparent border-b border-white/10 py-3 md:py-4 text-xs md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors" placeholder="CITY" />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <label className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] text-gray-500 ml-0.5">State</label>
+                                                <div className="relative">
+                                                    <select 
+                                                        required 
+                                                        value={shippingData.state} 
+                                                        onChange={(e) => updateShipping('state', e.target.value)} 
+                                                        className="w-full bg-transparent border-b border-white/10 py-3 md:py-4 text-xs md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors appearance-none cursor-pointer"
+                                                    >
+                                                        <option value="" disabled className="bg-black">SELECT</option>
+                                                        {US_STATES.map(state => (
+                                                            <option key={state} value={state} className="bg-black">{state.toUpperCase()}</option>
+                                                        ))}
+                                                    </select>
+                                                    <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none opacity-50">
+                                                        <svg className="w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="space-y-2">
+                                            <label className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] text-gray-500 ml-0.5">Zip Code</label>
+                                            <input required value={shippingData.zip} onChange={(e) => updateShipping('zip', e.target.value)} className="w-full bg-transparent border-b border-white/10 py-3 md:py-4 text-xs md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors" placeholder="00000" />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <button type="submit" className="w-full bg-white text-black py-5 text-xs font-bold uppercase tracking-[0.4em] hover:bg-gray-200 transition-colors shadow-2xl">
-                                CONTINUE TO PAYMENT
-                            </button>
-                        </form>
-                    ) : (
-                        <div className="space-y-12">
-                            <button 
-                                onClick={() => setStep('shipping')}
-                                className="text-[10px] uppercase tracking-widest text-gray-500 hover:text-white flex items-center gap-2 transition-colors mb-4"
-                            >
-                                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
-                                Back to Shipping
-                            </button>
-
-                            {clientSecret ? (
-                                <Elements stripe={stripePromise} options={{ 
-                                    clientSecret,
-                                    appearance: {
-                                        theme: 'night',
-                                        variables: {
-                                            colorPrimary: '#ffffff',
-                                            colorBackground: '#000000',
-                                            colorText: '#ffffff',
-                                            colorDanger: '#df1b41',
-                                            fontFamily: 'Inter, system-ui, sans-serif',
-                                            spacingUnit: '4px',
-                                            borderRadius: '0px',
-                                        },
-                                    }
-                                }}>
-                                    <CheckoutForm 
-                                        product={product} 
-                                        quantity={quantity} 
-                                        shippingData={shippingData}
-                                        onSuccess={() => setIsSubmitted(true)} 
-                                        selectedColor={selectedColor.name}
-                                        selectedSize={selectedSize}
-                                    />
-                                </Elements>
-                            ) : initError ? (
-                                <div className="flex flex-col items-center justify-center space-y-6 pt-12 animate-in fade-in duration-500 text-center">
-                                    <div className="w-12 h-12 bg-red-500/10 rounded-full flex items-center justify-center">
-                                        <svg className="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                                        </svg>
-                                    </div>
-                                    <div className="space-y-4">
-                                        <h3 className="text-[10px] uppercase tracking-[0.4em] text-white">Initialization Failed</h3>
-                                        <p className="text-[10px] uppercase tracking-widest text-gray-500 leading-loose max-w-[200px]">{initError}</p>
-                                    </div>
-                                    <button 
-                                        onClick={initializePayment}
-                                        className="text-[10px] uppercase tracking-[0.4em] text-white border-b border-white py-2 hover:opacity-70 transition-opacity"
-                                    >
-                                        RETRY CONNECTION
+                                <div className="pt-4">
+                                    <button type="submit" className="w-full bg-white text-black py-5 md:py-6 text-xs md:text-sm font-bold uppercase tracking-[0.5em] hover:bg-neutral-200 transition-all shadow-2xl active:scale-[0.98]">
+                                        CONTINUE TO PAYMENT
                                     </button>
                                 </div>
-                            ) : (
-                                <div className="flex flex-col items-center justify-center space-y-4 pt-12">
-                                    <div className="w-8 h-8 border-2 border-white/20 border-t-white rounded-full animate-spin" />
-                                    <p className="text-[10px] uppercase tracking-widest text-gray-500 animate-pulse">INITIALIZING SECURE SESSION...</p>
-                                </div>
-                            )}
-                        </div>
-                    )}
+                            </motion.form>
+                        ) : (
+                            <motion.div 
+                                key="payment"
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: -20 }}
+                                transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+                                className="space-y-12"
+                            >
+                                <button 
+                                    onClick={() => setStep('shipping')}
+                                    className="text-[10px] uppercase tracking-widest text-gray-500 hover:text-white flex items-center gap-2 transition-colors mb-4"
+                                >
+                                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+                                    Back to Shipping
+                                </button>
+
+                                {clientSecret ? (
+                                    <Elements stripe={stripePromise} options={{ 
+                                        clientSecret,
+                                        appearance: {
+                                            theme: 'night',
+                                            variables: {
+                                                colorPrimary: '#ffffff',
+                                                colorBackground: '#000000',
+                                                colorText: '#ffffff',
+                                                colorDanger: '#df1b41',
+                                                fontFamily: 'Inter, system-ui, sans-serif',
+                                                spacingUnit: '4px',
+                                                borderRadius: '0px',
+                                            },
+                                        }
+                                    }}>
+                                        <CheckoutForm 
+                                            product={product} 
+                                            quantity={quantity} 
+                                            shippingData={shippingData}
+                                            onSuccess={() => setIsSubmitted(true)} 
+                                            selectedColor={selectedColor.name}
+                                            selectedSize={selectedSize}
+                                        />
+                                    </Elements>
+                                ) : initError ? (
+                                    <div className="flex flex-col items-center justify-center space-y-6 pt-12 text-center">
+                                        <div className="w-12 h-12 bg-red-500/10 rounded-full flex items-center justify-center">
+                                            <svg className="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                            </svg>
+                                        </div>
+                                        <div className="space-y-4">
+                                            <h3 className="text-[10px] uppercase tracking-[0.4em] text-white">Initialization Failed</h3>
+                                            <p className="text-[10px] uppercase tracking-widest text-gray-500 leading-loose max-w-[200px]">{initError}</p>
+                                        </div>
+                                        <button 
+                                            onClick={initializePayment}
+                                            className="text-[10px] uppercase tracking-[0.4em] text-white border-b border-white py-2 hover:opacity-70 transition-opacity"
+                                        >
+                                            RETRY CONNECTION
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <div className="flex flex-col items-center justify-center space-y-4 pt-12">
+                                        <div className="w-8 h-8 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                                        <p className="text-[10px] uppercase tracking-widest text-gray-500 animate-pulse">INITIALIZING SECURE SESSION...</p>
+                                    </div>
+                                )}
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </div>
             </div>
         </div>

@@ -7,6 +7,7 @@ export async function POST(req: NextRequest) {
     const { 
       name, 
       email, 
+      phone,
       address, 
       city, 
       state,
@@ -36,6 +37,7 @@ export async function POST(req: NextRequest) {
         {
           name,
           email,
+          phone,
           address: `${address}, ${city}, ${state} ${zip}`,
           product_id,
           product_name,
@@ -74,6 +76,7 @@ export async function POST(req: NextRequest) {
           <p>We've received your order for the <strong>${product_name}</strong> and are preparing it now.</p>
           <hr />
           <p>Order Reference: <strong>${order.id.slice(0, 8).toUpperCase()}</strong></p>
+          <p>Phone: ${phone}</p>
           <p>Address: ${address}, ${city}, ${state} ${zip}</p>
         </div>
       `
@@ -91,6 +94,7 @@ export async function POST(req: NextRequest) {
                 <h3 style="text-transform: uppercase; font-size: 10px; letter-spacing: 2px; color: #888; margin-bottom: 10px;">CUSTOMER INFO</h3>
                 <p style="margin: 0;"><strong>Name:</strong> ${name}</p>
                 <p style="margin: 0;"><strong>Email:</strong> ${email}</p>
+                <p style="margin: 0;"><strong>Phone:</strong> ${phone}</p>
                 <p style="margin: 0;"><strong>Address:</strong> ${address}, ${city}, ${state} ${zip}</p>
             </div>
 
