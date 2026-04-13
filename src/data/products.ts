@@ -183,7 +183,10 @@ export const collections: Collection[] = [
                 price: '$100',
                 images: [
                     '/assets/SundriedhoodieKay%20March%2021st%20Final%20Images-6.JPEG',
-                    '/assets/SundriedhoodieKay%20March%2021st%20Final%20Images-7.JPEG'
+                    '/assets/SundriedhoodieKay%20March%2021st%20Final%20Images-7.JPEG',
+                    '/assets/sundriedhoodie.JPEG',
+                    '/assets/sundriedhoodieJamal Stewart_KayBoyAlone_April4th-2.JPEG',
+                    '/assets/sundriedhoodieJamal Stewart_KayBoyAlone_April4th-4.JPEG'
                 ],
                 colors: [
                     { name: 'Black', sizes: ['Small', 'Medium', 'Large', 'XL', '2XL', '3XL'] },
