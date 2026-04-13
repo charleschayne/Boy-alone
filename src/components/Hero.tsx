@@ -68,8 +68,8 @@ const Hero = () => {
 
 
             {/* Main Header Text */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center z-20 px-4 pointer-events-none">
-                <h1 className="text-sm md:text-xl font-bold uppercase tracking-[0.4em] text-white/90 drop-shadow-[0_2px_4px_rgba(0,0,0,1)] text-center max-w-2xl px-4 italic leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-1000">
+            <div className="absolute inset-0 flex flex-col items-center justify-center z-20 px-8 pointer-events-none">
+                <h1 className="text-[10px] md:text-xl font-bold uppercase tracking-[0.2em] md:tracking-[0.4em] text-white/90 drop-shadow-[0_2px_4px_rgba(0,0,0,1)] text-center max-w-full italic leading-loose animate-in fade-in slide-in-from-bottom-8 duration-1000">
                     "It's you against the world"
                 </h1>
             </div>
@@ -104,12 +104,12 @@ const Hero = () => {
 
 
             {/* Bottom Visualizer / Ticker */}
-            <div className="absolute bottom-0 left-0 right-0 h-16 md:h-20 flex items-end justify-between px-2 md:px-4 pb-2 md:pb-4 opacity-50 pointer-events-none z-10">
+            <div className="absolute bottom-0 left-0 right-0 h-16 md:h-20 flex items-end justify-between px-2 md:px-4 pb-2 md:pb-4 opacity-50 pointer-events-none z-10 overflow-hidden">
                 {/* Generate visualizer lines */}
                 {Array.from({ length: 40 }).map((_, i) => (
                     <div
                         key={i}
-                        className="w-[1px] bg-white transition-all duration-1000 ease-in-out"
+                        className="w-[1px] bg-white transition-all duration-1000 ease-in-out shrink-0"
                         style={{
                             height: `${Math.random() * 40 + 10}%`,
                             opacity: Math.random() * 0.5 + 0.3

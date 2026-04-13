@@ -7,7 +7,7 @@ import { collections } from '@/data/products';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white text-black">
+    <main className="min-h-screen bg-white text-black overflow-x-hidden max-w-full">
       <Navbar />
       <Hero />
 

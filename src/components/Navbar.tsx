@@ -26,7 +26,7 @@ const Navbar = ({ isLight = false }: NavbarProps) => {
 
     return (
         <>
-            <nav className={`fixed top-0 left-0 right-0 z-50 grid grid-cols-[1fr_auto_1fr] items-center px-6 py-6 md:px-12 transition-all duration-300 ${isMenuOpen
+            <nav className={`fixed top-0 left-0 right-0 w-full overflow-hidden z-50 grid grid-cols-[1fr_auto_1fr] items-center px-6 py-6 md:px-12 transition-all duration-300 ${isMenuOpen
                 ? 'bg-black text-white'
                 : isScrolled
                     ? 'bg-black/90 backdrop-blur-md shadow-sm border-b border-white/10 text-white'
