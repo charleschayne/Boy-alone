@@ -58,16 +58,23 @@ const Navbar = ({ isLight = false }: NavbarProps) => {
                     </button>
                 </div>
 
-                {/* Centered Logo */}
-                <div className="flex justify-center px-4 z-50">
-                    <Link href="/" className="font-light tracking-[0.2em] hover:opacity-80 transition-opacity" onClick={() => setIsMenuOpen(false)}>
+                {/* Left Links (Desktop) */}
+                <div className="hidden md:flex items-center gap-8 min-w-0">
+                    <Link href="/collections/all" className="hover:opacity-70 transition-opacity whitespace-nowrap">Collections</Link>
+                    <a href="#" className="hover:opacity-70 transition-opacity whitespace-nowrap">Archive</a>
+                </div>
+
+                {/* Logo */}
+                <div className="flex justify-center px-4 z-50 min-w-0">
+                    <Link href="/" className="font-light tracking-[0.2em] hover:opacity-80 transition-opacity truncate" onClick={() => setIsMenuOpen(false)}>
                         BOY ALONE
                     </Link>
                 </div>
 
-                {/* Right Actions (Desktop) */}
-                <div className="hidden md:flex justify-end items-center">
-                    <Link href="/about" className="hover:opacity-70 transition-opacity">Our Story</Link>
+                {/* Right Links (Desktop) */}
+                <div className="hidden md:flex items-center justify-end gap-8 min-w-0">
+                    <Link href="/about" className="hover:opacity-70 transition-opacity whitespace-nowrap">Our Story</Link>
+                    <button className="hover:opacity-70 transition-opacity uppercase">Cart (0)</button>
                 </div>
             </nav>
 

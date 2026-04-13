@@ -68,8 +68,8 @@ const Hero = () => {
 
 
             {/* Main Header Text */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center z-20 px-8 pointer-events-none">
-                <h1 className="text-[10px] md:text-xl font-bold uppercase tracking-[0.2em] md:tracking-[0.4em] text-white/90 drop-shadow-[0_2px_4px_rgba(0,0,0,1)] text-center max-w-full italic leading-loose animate-in fade-in slide-in-from-bottom-8 duration-1000">
+            <div className="absolute inset-0 flex flex-col items-center justify-center z-20 px-8 pointer-events-none overflow-hidden">
+                <h1 className="text-[10px] md:text-xl font-bold uppercase tracking-[0.1em] md:tracking-[0.4em] text-white/90 drop-shadow-[0_2px_4px_rgba(0,0,0,1)] text-center max-w-[calc(100vw-4rem)] italic leading-loose animate-in fade-in slide-in-from-bottom-8 duration-1000">
                     "It's you against the world"
                 </h1>
             </div>

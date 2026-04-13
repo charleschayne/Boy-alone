@@ -444,37 +444,37 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
                                 className="space-y-10"
                             >
                                 <div className="space-y-6">
-                                    <h2 className="text-[10px] md:text-xs uppercase tracking-[0.5em] text-gray-500 font-bold">SHIPPING INFO</h2>
+                                    <h2 className="text-[10px] md:text-xs uppercase tracking-[0.5em] text-gray-500 font-bold max-w-full truncate">SHIPPING INFO</h2>
                                     <div className="space-y-6 md:space-y-8">
                                         <div className="space-y-2">
-                                            <label className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] text-gray-500 ml-0.5">Full Name</label>
-                                            <input required value={shippingData.name} onChange={(e) => updateShipping('name', e.target.value)} className="w-full bg-transparent border-b border-white/10 py-3 md:py-4 text-xs md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors" placeholder="ENTER NAME" />
+                                            <label className="text-[11px] md:text-[11px] uppercase tracking-[0.4em] text-gray-400 ml-0.5">Full Name</label>
+                                            <input required value={shippingData.name} onChange={(e) => updateShipping('name', e.target.value)} className="w-full bg-transparent border-b border-white/10 py-3 md:py-4 text-base md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors" placeholder="ENTER NAME" />
                                         </div>
                                         <div className="space-y-2">
-                                            <label className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] text-gray-500 ml-0.5">Email Address</label>
-                                            <input required type="email" value={shippingData.email} onChange={(e) => updateShipping('email', e.target.value)} className="w-full bg-transparent border-b border-white/10 py-3 md:py-4 text-xs md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors" placeholder="ENTER EMAIL" />
+                                            <label className="text-[11px] md:text-[11px] uppercase tracking-[0.4em] text-gray-400 ml-0.5">Email Address</label>
+                                            <input required type="email" value={shippingData.email} onChange={(e) => updateShipping('email', e.target.value)} className="w-full bg-transparent border-b border-white/10 py-3 md:py-4 text-base md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors" placeholder="ENTER EMAIL" />
                                         </div>
                                         <div className="space-y-2">
-                                            <label className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] text-gray-500 ml-0.5">Phone Number</label>
-                                            <input required type="tel" value={shippingData.phone} onChange={(e) => updateShipping('phone', e.target.value)} className="w-full bg-transparent border-b border-white/10 py-3 md:py-4 text-xs md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors" placeholder="+1 (000) 000-0000" />
+                                            <label className="text-[11px] md:text-[11px] uppercase tracking-[0.4em] text-gray-400 ml-0.5">Phone Number</label>
+                                            <input required type="tel" value={shippingData.phone} onChange={(e) => updateShipping('phone', e.target.value)} className="w-full bg-transparent border-b border-white/10 py-3 md:py-4 text-base md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors" placeholder="+1 (000) 000-0000" />
                                         </div>
                                         <div className="space-y-2">
-                                            <label className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] text-gray-500 ml-0.5">Street Address</label>
-                                            <input required value={shippingData.address} onChange={(e) => updateShipping('address', e.target.value)} className="w-full bg-transparent border-b border-white/10 py-3 md:py-4 text-xs md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors" placeholder="STREET ADDRESS" />
+                                            <label className="text-[11px] md:text-[11px] uppercase tracking-[0.4em] text-gray-400 ml-0.5">Street Address</label>
+                                            <input required value={shippingData.address} onChange={(e) => updateShipping('address', e.target.value)} className="w-full bg-transparent border-b border-white/10 py-3 md:py-4 text-base md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors" placeholder="STREET ADDRESS" />
                                         </div>
                                         <div className="grid grid-cols-2 gap-6 md:gap-12">
                                             <div className="space-y-2">
-                                                <label className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] text-gray-500 ml-0.5">City</label>
-                                                <input required value={shippingData.city} onChange={(e) => updateShipping('city', e.target.value)} className="w-full bg-transparent border-b border-white/10 py-3 md:py-4 text-xs md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors" placeholder="CITY" />
+                                                <label className="text-[11px] md:text-[11px] uppercase tracking-[0.4em] text-gray-400 ml-0.5">City</label>
+                                                <input required value={shippingData.city} onChange={(e) => updateShipping('city', e.target.value)} className="w-full bg-transparent border-b border-white/10 py-3 md:py-4 text-base md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors" placeholder="CITY" />
                                             </div>
                                             <div className="space-y-2">
-                                                <label className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] text-gray-500 ml-0.5">State</label>
+                                                <label className="text-[11px] md:text-[11px] uppercase tracking-[0.4em] text-gray-400 ml-0.5">State</label>
                                                 <div className="relative">
                                                     <select 
                                                         required 
                                                         value={shippingData.state} 
                                                         onChange={(e) => updateShipping('state', e.target.value)} 
-                                                        className="w-full bg-transparent border-b border-white/10 py-3 md:py-4 text-xs md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors appearance-none cursor-pointer"
+                                                        className="w-full bg-transparent border-b border-white/10 py-3 md:py-4 text-base md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors appearance-none cursor-pointer"
                                                     >
                                                         <option value="" disabled className="bg-black">SELECT</option>
                                                         {US_STATES.map(state => (
@@ -488,8 +488,8 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
                                             </div>
                                         </div>
                                         <div className="space-y-2">
-                                            <label className="text-[10px] md:text-[11px] uppercase tracking-[0.4em] text-gray-500 ml-0.5">Zip Code</label>
-                                            <input required value={shippingData.zip} onChange={(e) => updateShipping('zip', e.target.value)} className="w-full bg-transparent border-b border-white/10 py-3 md:py-4 text-xs md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors" placeholder="00000" />
+                                            <label className="text-[11px] md:text-[11px] uppercase tracking-[0.4em] text-gray-400 ml-0.5">Zip Code</label>
+                                            <input required value={shippingData.zip} onChange={(e) => updateShipping('zip', e.target.value)} className="w-full bg-transparent border-b border-white/10 py-3 md:py-4 text-base md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors" placeholder="00000" />
                                         </div>
                                     </div>
                                 </div>
