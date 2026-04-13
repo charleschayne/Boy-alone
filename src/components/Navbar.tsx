@@ -35,46 +35,44 @@ const Navbar = ({ isLight = false }: NavbarProps) => {
                         : 'bg-transparent text-white'
                 } text-[10px] md:text-xs tracking-widest uppercase font-light`}>
 
-                {/* Left Links (Desktop) */}
-                <div className="hidden md:flex justify-start">
-                    <Link href="/collections/all" className="hover:opacity-70 transition-opacity">Collections</Link>
+                {/* Column 1: Mobile Icon / Desktop Left Links */}
+                <div className="flex items-center min-w-0">
+                    {/* Mobile Menu Icon */}
+                    <div className="md:hidden z-50">
+                        <button
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            className="focus:outline-none hover:opacity-70 transition-opacity"
+                        >
+                            {isMenuOpen ? (
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            ) : (
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h.01M12 12h.01M19 12h.01" />
+                                </svg>
+                            )}
+                        </button>
+                    </div>
+
+                    {/* Desktop Left Links */}
+                    <div className="hidden md:flex items-center min-w-0">
+                        <Link href="/collections/all" className="hover:opacity-70 transition-opacity whitespace-nowrap">Collections</Link>
+                    </div>
                 </div>
 
-                {/* Mobile Menu Icon */}
-                <div className="md:hidden flex justify-start z-50">
-                    <button
-                        onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        className="focus:outline-none hover:opacity-70 transition-opacity"
-                    >
-                        {isMenuOpen ? (
-                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        ) : (
-                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h.01M12 12h.01M19 12h.01" />
-                            </svg>
-                        )}
-                    </button>
-                </div>
-
-                {/* Left Links (Desktop) */}
-                <div className="hidden md:flex items-center gap-8 min-w-0">
-                    <Link href="/collections/all" className="hover:opacity-70 transition-opacity whitespace-nowrap">Collections</Link>
-                    <a href="#" className="hover:opacity-70 transition-opacity whitespace-nowrap">Archive</a>
-                </div>
-
-                {/* Logo */}
-                <div className="flex justify-center px-4 z-50 min-w-0">
+                {/* Column 2: Logo (Centered) */}
+                <div className="flex justify-center z-50 min-w-0 text-center">
                     <Link href="/" className="font-light tracking-[0.2em] hover:opacity-80 transition-opacity truncate" onClick={() => setIsMenuOpen(false)}>
                         BOY ALONE
                     </Link>
                 </div>
 
-                {/* Right Links (Desktop) */}
-                <div className="hidden md:flex items-center justify-end gap-8 min-w-0">
-                    <Link href="/about" className="hover:opacity-70 transition-opacity whitespace-nowrap">Our Story</Link>
-                    <button className="hover:opacity-70 transition-opacity uppercase">Cart (0)</button>
+                {/* Column 3: Desktop Right Links */}
+                <div className="flex items-center justify-end min-w-0">
+                    <div className="hidden md:flex items-center min-w-0">
+                        <Link href="/about" className="hover:opacity-70 transition-opacity whitespace-nowrap">Our Story</Link>
+                    </div>
                 </div>
             </nav>
 
