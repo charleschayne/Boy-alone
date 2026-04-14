@@ -1,10 +1,9 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import Image from 'next/image';
 import Link from 'next/link';
+import Image from 'next/image';
 import { collections, getCollectionBySlug } from '@/data/products';
-import ProductSelector from '@/components/ProductSelector';
-import ProductGallery from '@/components/ProductGallery';
+import ProductView from '@/components/ProductView';
 
 export default async function CollectionPage({
     params,
@@ -33,7 +32,6 @@ export default async function CollectionPage({
                             return (
                                 <Link href={`/collections/${collection.slug}`} key={collection.id} className="group cursor-pointer">
                                     <div className="w-full aspect-[3/4] bg-neutral-900 mb-6 relative overflow-hidden">
-                                        {/* First Image (Default) */}
                                         <Image
                                             src={collection.featuredImage}
                                             alt={collection.name}
@@ -41,7 +39,6 @@ export default async function CollectionPage({
                                             className={`object-cover transition-opacity duration-700 ease-in-out ${displayHoverImage ? 'group-hover:opacity-0' : ''}`}
                                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                         />
-                                        {/* Second Image (Hover) */}
                                         {displayHoverImage && (
                                             <Image
                                                 src={displayHoverImage}
@@ -119,49 +116,7 @@ export default async function CollectionPage({
                 ) : (
                     <div className="space-y-32">
                         {collection.products.map((product) => (
-                            <div key={product.id} className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
-                                {/* Product Gallery Slideshow */}
-                                <ProductGallery images={product.images} productName={product.name} />
-
-                                {/* Product Info & Selector */}
-                                <div className="flex flex-col h-full">
-                                    <div className="border-b border-gray-100 pb-8 mb-8">
-                                        <div className="flex justify-between items-baseline mb-4">
-                                            <h2 className="text-2xl md:text-3xl font-bold uppercase tracking-[0.1em] md:tracking-widest">
-                                                {product.name}
-                                            </h2>
-                                            <div className="flex flex-col gap-1">
-                                                <span className="text-xl font-medium">{product.price}</span>
-                                                <span className="text-[10px] bg-black text-white px-2 py-1 font-bold uppercase tracking-widest self-end">PRE-ORDER</span>
-                                            </div>
-                                        </div>
-                                        <p className="text-xs text-gray-500 uppercase tracking-[0.2em]">Premium Quality Apparel — 2 Weeks Shipping</p>
-                                    </div>
-                                    
-                                    <ProductSelector product={product} />
-
-                                    <div className="mt-auto pt-12">
-                                        <details className="group border-t border-gray-100 py-4">
-                                            <summary className="list-none flex justify-between items-center cursor-pointer text-[10px] uppercase tracking-widest font-bold">
-                                                Product Details
-                                                <span className="transform group-open:rotate-180 transition-transform">↓</span>
-                                            </summary>
-                                            <div className="pt-4 text-xs leading-relaxed text-gray-600 tracking-wide uppercase">
-                                                Handcrafted with premium materials. This piece represents the core philosophy of BOY ALONE – minimal design with maximal impact.
-                                            </div>
-                                        </details>
-                                        <details className="group border-t border-b border-gray-100 py-4">
-                                            <summary className="list-none flex justify-between items-center cursor-pointer text-[10px] uppercase tracking-widest font-bold">
-                                                Shipping & Returns
-                                                <span className="transform group-open:rotate-180 transition-transform">↓</span>
-                                            </summary>
-                                            <div className="pt-4 text-xs leading-relaxed text-gray-600 tracking-wide uppercase">
-                                                PRE-ORDER ITEM: Please allow approximately 2 weeks for shipping. US shipping only. 
-                                            </div>
-                                        </details>
-                                    </div>
-                                </div>
-                            </div>
+                            <ProductView key={product.id} product={product} />
                         ))}
                     </div>
                 )}

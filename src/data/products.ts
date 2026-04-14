@@ -2,6 +2,7 @@ export interface ProductColor {
     name: string;
     hex?: string;
     sizes: string[];
+    featuredImage?: string;
 }
 
 export interface Product {
@@ -137,10 +138,12 @@ export const collections: Collection[] = [
                     '/assets/TracksuitKayMarch14th_2ndTiff%20Images.JPEG',
                     '/assets/TracksuitKayMarch14th_2ndTiff%20Images-2.JPEG',
                     '/assets/redtwotoneKay%20March%2021st%20Final%20Images-2.JPEG',
-                    '/assets/redtwotoneKay%20March%2021st%20Final%20Images-3.JPEG'
+                    '/assets/redtwotoneKay%20March%2021st%20Final%20Images-3.JPEG',
+                    '/assets/redtwotoneJamal%20Stewart_KayBoyAlone_April4th-15.JPEG',
+                    '/assets/redtwotoneJamal%20Stewart_KayBoyAlone_April4th-16.JPEG'
                 ],
                 colors: [
-                    { name: 'Red', sizes: ['Small', 'Medium', 'Large', 'XL', '2XL'] },
+                    { name: 'Red', sizes: ['Small', 'Medium', 'Large', 'XL', '2XL'], featuredImage: '/assets/redtwotoneJamal%20Stewart_KayBoyAlone_April4th-15.JPEG' },
                     { name: 'Pink', sizes: ['Small', 'Medium', 'Large', '2XL'] }
                 ]
             }
@@ -183,15 +186,36 @@ export const collections: Collection[] = [
                 price: '$100',
                 images: [
                     '/assets/SundriedhoodieKay%20March%2021st%20Final%20Images-6.JPEG',
-                    '/assets/SundriedhoodieKay%20March%2021st%20Final%20Images-7.JPEG',
+                    '/assets/navysundried.JPEG'
+                ],
+                colors: [
+                    { name: 'Red', sizes: ['Small', 'Medium', 'Large', 'XL', '2XL', '3XL'], featuredImage: '/assets/SundriedhoodieKay%20March%2021st%20Final%20Images-6.JPEG' },
+                    { name: 'Navy', sizes: ['Small', 'Medium', 'Large', 'XL', '2XL'], featuredImage: '/assets/navysundried.JPEG' }
+                ]
+            }
+        ]
+    },
+    {
+        id: 'boy-alone-hoodie',
+        name: 'Boy Alone Hoodies',
+        slug: 'boy-alone-hoodie',
+        featuredImage: '/assets/sundriedhoodie.JPEG',
+        products: [
+            {
+                id: 'boy-alone-hoodie-product',
+                name: 'Boy Alone Hoodies',
+                slug: 'boy-alone-hoodie',
+                price: '$70',
+                images: [
                     '/assets/sundriedhoodie.JPEG',
                     '/assets/sundriedhoodieJamal Stewart_KayBoyAlone_April4th-2.JPEG',
                     '/assets/sundriedhoodieJamal Stewart_KayBoyAlone_April4th-4.JPEG'
                 ],
                 colors: [
                     { name: 'Black', sizes: ['Small', 'Medium', 'Large', 'XL', '2XL', '3XL'] },
-                    { name: 'White', sizes: ['Small', 'Medium', 'Large', 'XL', '2XL', '3XL'] },
-                    { name: 'Red', sizes: ['Small', 'Medium', 'Large', 'XL', '2XL', '3XL'] }
+                    { name: 'Red', sizes: ['Small', 'Medium', 'Large', 'XL', '2XL', '3XL'] },
+                    { name: 'Green', sizes: ['Small', 'Medium', 'Large', 'XL', '2XL', '3XL'] },
+                    { name: 'White', sizes: ['Small', 'Medium', 'Large', 'XL', '2XL', '3XL'] }
                 ]
             }
         ]
@@ -210,11 +234,13 @@ export const collections: Collection[] = [
                 images: [
                     '/assets/sundriedblacksweatshirtKay%20March%2021st%20Final%20Images-8.JPEG',
                     '/assets/sundriedblacksweatshirtKay%20March%2021st%20Final%20Images-9.JPEG',
-                    '/assets/sundriedblacksweatshirtKay%20March%2021st%20Final%20Images-10.JPEG'
+                    '/assets/sundriedblacksweatshirtKay%20March%2021st%20Final%20Images-10.JPEG',
+                    '/assets/crew%20neckvintagenavy.jpeg'
                 ],
                 colors: [
-                    { name: 'Black', sizes: ['Small', 'Medium', 'Large', 'XL'] },
-                    { name: 'Red', sizes: ['Small', 'Medium', 'Large', 'XL'] }
+                    { name: 'Black', sizes: ['Small', 'Medium', 'Large', 'XL'], featuredImage: '/assets/sundriedblacksweatshirtKay%20March%2021st%20Final%20Images-8.JPEG' },
+                    { name: 'Red', sizes: ['Small', 'Medium', 'Large', 'XL'], featuredImage: '/assets/sundriedblacksweatshirtKay%20March%2021st%20Final%20Images-10.JPEG' },
+                    { name: 'Vintage Navy', sizes: ['Small', 'Medium', 'Large', 'XL', '2XL'], featuredImage: '/assets/crew%20neckvintagenavy.jpeg' }
                 ]
             }
         ]

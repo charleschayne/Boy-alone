@@ -1,15 +1,16 @@
 'use client';
 
-import { Product } from '@/data/products';
+import { Product, ProductColor } from '@/data/products';
 import { useState, useEffect } from 'react';
 import CheckoutModal from './CheckoutModal';
 
 interface ProductSelectorProps {
     product: Product;
+    selectedColor: ProductColor;
+    onColorChange: (color: ProductColor) => void;
 }
 
-const ProductSelector = ({ product }: ProductSelectorProps) => {
-    const [selectedColor, setSelectedColor] = useState(product.colors[0]);
+const ProductSelector = ({ product, selectedColor, onColorChange }: ProductSelectorProps) => {
     const [selectedSize, setSelectedSize] = useState('');
     const [quantity, setQuantity] = useState(1);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -40,7 +41,7 @@ const ProductSelector = ({ product }: ProductSelectorProps) => {
                     {product.colors.map((color) => (
                         <button
                             key={color.name}
-                            onClick={() => setSelectedColor(color)}
+                            onClick={() => onColorChange(color)}
                             className={`px-4 py-2 text-[10px] uppercase tracking-[0.2em] border transition-all duration-300 ${
                                 selectedColor.name === color.name
                                     ? 'bg-black text-white border-black'

@@ -1,15 +1,25 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface ProductGalleryProps {
     images: string[];
     productName: string;
+    selectedImage?: string;
 }
 
-const ProductGallery = ({ images, productName }: ProductGalleryProps) => {
+const ProductGallery = ({ images, productName, selectedImage }: ProductGalleryProps) => {
     const [currentIndex, setCurrentIndex] = useState(0);
+
+    useEffect(() => {
+        if (selectedImage) {
+            const index = images.indexOf(selectedImage);
+            if (index !== -1) {
+                setCurrentIndex(index);
+            }
+        }
+    }, [selectedImage, images]);
 
     const handlePrevious = () => {
         setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
