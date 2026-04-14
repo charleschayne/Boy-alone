@@ -189,7 +189,7 @@ export const collections: Collection[] = [
                     '/assets/navysundried.JPEG'
                 ],
                 colors: [
-                    { name: 'Red', sizes: ['Small', 'Medium', 'Large', 'XL', '2XL', '3XL'], featuredImage: '/assets/SundriedhoodieKay%20March%2021st%20Final%20Images-6.JPEG' },
+                    { name: 'Red', sizes: ['Small', 'Medium', 'Large', 'XL', '2XL'], featuredImage: '/assets/SundriedhoodieKay%20March%2021st%20Final%20Images-6.JPEG' },
                     { name: 'Navy', sizes: ['Small', 'Medium', 'Large', 'XL', '2XL'], featuredImage: '/assets/navysundried.JPEG' }
                 ]
             }
