@@ -23,8 +23,6 @@ export const viewport = {
   maximumScale: 1,
 }
 
-import PasswordGate from '@/components/PasswordGate'
-
 export default function RootLayout({
   children,
 }: {
@@ -33,9 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${chelseaMarket.variable} ${chelseaMarket.className} antialiased`}>
-        <PasswordGate>
-          {children}
-        </PasswordGate>
+        {children}
         <Analytics />
       </body>
     </html>
