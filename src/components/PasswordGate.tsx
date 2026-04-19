@@ -1,41 +1,13 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Image from 'next/image';
-import CountdownTimer from './CountdownTimer';
 
 const PasswordGate = ({ children }: { children: React.ReactNode }) => {
-    const [isUnlocked, setIsUnlocked] = useState<boolean | null>(null);
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState(false);
+    // Lock is absolute now as per request
+    const isLocked = true;
 
-    const CORRECT_PASSWORD = 'BOYALONE1234';
-
-    useEffect(() => {
-        const stored = localStorage.getItem('site_unlocked');
-        if (stored === 'true') {
-            setIsUnlocked(true);
-        } else {
-            setIsUnlocked(false);
-        }
-    }, []);
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        if (password.toUpperCase() === CORRECT_PASSWORD) {
-            localStorage.setItem('site_unlocked', 'true');
-            setIsUnlocked(true);
-            setError(false);
-        } else {
-            setError(true);
-            setPassword('');
-            setTimeout(() => setError(false), 2000);
-        }
-    };
-
-    if (isUnlocked === null) return null;
-
-    if (isUnlocked) {
+    if (!isLocked) {
         return <>{children}</>;
     }
 
@@ -55,44 +27,19 @@ const PasswordGate = ({ children }: { children: React.ReactNode }) => {
 
             {/* Content */}
             <div className="relative z-10 flex flex-col items-center px-6 max-w-2xl w-full text-center">
-                <div className="mb-8 animate-in fade-in slide-in-from-top-12 duration-1000">
-                    <CountdownTimer />
-                </div>
-
-                <div className="w-full max-w-sm mt-12 animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-300">
-                    <h1 className="text-2xl md:text-3xl font-black uppercase tracking-[0.2em] text-white mb-8 drop-shadow-2xl">
-                        Early Access
+                <div className="w-full max-w-2xl animate-in fade-in slide-in-from-bottom-12 duration-1000">
+                    <h1 className="text-4xl md:text-6xl font-black uppercase tracking-[0.3em] text-white mb-4 drop-shadow-[0_0_30px_rgba(255,255,255,0.3)]">
+                        THIS DROP IS GONE
                     </h1>
-                    
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                        <div className="relative group">
-                            <input
-                                type="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                placeholder="ENTER PASSWORD"
-                                className={`w-full bg-transparent border-b-2 ${error ? 'border-red-500' : 'border-white/20 focus:border-white'} px-4 py-4 text-center text-white placeholder:text-white/20 uppercase tracking-[0.3em] text-sm outline-none transition-all duration-300`}
-                                autoFocus
-                            />
-                            {error && (
-                                <p className="absolute -bottom-6 left-0 right-0 text-[10px] text-red-500 uppercase tracking-widest animate-pulse">
-                                    Incorrect Password
-                                </p>
-                            )}
-                        </div>
-                        
-                        <button
-                            type="submit"
-                            className="mt-8 text-[10px] uppercase tracking-[0.4em] text-white/40 hover:text-white transition-colors duration-300"
-                        >
-                            Submit
-                        </button>
-                    </form>
+                    <div className="w-24 h-[1px] bg-white/20 mx-auto mt-8 mb-12"></div>
+                    <p className="text-[10px] md:text-xs uppercase tracking-[0.5em] text-white/40 font-light">
+                        Boy Alone &copy; {new Date().getFullYear()}
+                    </p>
                 </div>
-
             </div>
         </div>
     );
 };
 
 export default PasswordGate;
+
