@@ -17,8 +17,15 @@ const Footer = () => {
                 {/* Links */}
                 <div className="flex space-x-8 text-[10px] font-medium tracking-[0.2em] uppercase text-gray-400">
                     <Link href="https://www.instagram.com/myre_kayy/" target="_blank" className="hover:text-white transition-colors">Instagram</Link>
-                    <Link href="#" className="hover:text-white transition-colors">Contact</Link>
+                    <a href="tel:+13025686093" className="hover:text-white transition-colors">Contact</a>
                 </div>
+            </div>
+
+            {/* Made by LaunchBox */}
+            <div className="max-w-7xl mx-auto mt-8 pt-6 border-t border-neutral-900 flex items-center justify-center text-center">
+                <Link href="https://www.launchbox.live/agency" target="_blank" className="text-[10px] tracking-[0.2em] uppercase text-gray-500 hover:text-white transition-colors">
+                    Made by LaunchBox
+                </Link>
             </div>
         </footer>
     );

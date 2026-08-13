@@ -53,7 +53,7 @@ const AccessGate = ({ children }: { children: React.ReactNode }) => {
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
                 <Image
-                    src="/assets/hero.png"
+                    src="/assets/Shining%20collection%202026/ShiningfaceTeeIMG_7053.JPEG"
                     alt="Boy Alone Drop"
                     fill
                     className="object-cover object-center opacity-40 brightness-[0.3]"
