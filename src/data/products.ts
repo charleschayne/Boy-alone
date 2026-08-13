@@ -32,8 +32,8 @@ export const collections: Collection[] = [
         id: 'shining-collection-2026',
         name: 'Shining Collection 2026',
         slug: 'shining-collection-2026',
-        featuredImage: '/assets/Shining%20collection%202026/ShiningfaceTeeIMG_0991.JPEG',
-        hoverImage: '/assets/Shining%20collection%202026/ShiningfaceTeeIMG_2991.JPEG',
+        featuredImage: '/assets/Shining%20collection%202026/ShiningfaceTeeIMG_7053.JPEG',
+        hoverImage: '/assets/Shining%20collection%202026/ShiningfaceTeeIMG_0991.JPEG',
         products: [
             {
                 id: 'shining-face-tee',
@@ -43,11 +43,11 @@ export const collections: Collection[] = [
                 earlyAccessPrice: '$76.50',
                 description: 'Premium heavyweight boxy tee. Oversized / boxy fit.',
                 images: [
+                    '/assets/Shining%20collection%202026/ShiningfaceTeeIMG_7053.JPEG',
                     '/assets/Shining%20collection%202026/ShiningfaceTeeIMG_0991.JPEG',
                     '/assets/Shining%20collection%202026/ShiningfaceTeeIMG_2991.JPEG',
                     '/assets/Shining%20collection%202026/ShiningfaceTeeIMG_3078.JPEG',
                     '/assets/Shining%20collection%202026/ShiningfaceTeeIMG_7024.JPEG',
-                    '/assets/Shining%20collection%202026/ShiningfaceTeeIMG_7053.JPEG',
                     '/assets/Shining%20collection%202026/ShiningfaceTeeIMG_7577.JPEG',
                 ],
                 colors: [
