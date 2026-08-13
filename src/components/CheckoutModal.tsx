@@ -4,6 +4,7 @@ import { Product, ProductColor } from '@/data/products';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
+import { isEarlyAccess, getPriceValue } from '@/lib/earlyAccess';
 import {
   Elements,
   PaymentElement,
@@ -73,8 +74,10 @@ const CheckoutForm = ({
         } else if (paymentIntent && paymentIntent.status === 'succeeded') {
             // Payment successful, now save to Supabase and send email via our unified route
             try {
-                const priceValue = parseInt(product.price.replace('$', ''));
-                const totalAmount = priceValue * quantity;
+                const unitPriceValue = isEarlyAccess() && product.earlyAccessPrice
+                    ? getPriceValue(product.earlyAccessPrice)
+                    : getPriceValue(product.price);
+                const totalAmount = unitPriceValue * quantity;
 
                 await fetch('/api/orders', {
                     method: 'POST',
@@ -157,8 +160,10 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
         setClientSecret(null);
 
         try {
-            const priceValue = parseInt(product.price.replace('$', ''));
-            const amount = priceValue * quantity * 100; // Stripe expects cents
+            const unitPriceValue = isEarlyAccess() && product.earlyAccessPrice
+                ? getPriceValue(product.earlyAccessPrice)
+                : getPriceValue(product.price);
+            const amount = unitPriceValue * quantity * 100; // Stripe expects cents
 
             const res = await fetch('/api/create-payment-intent', {
                 method: 'POST',
@@ -191,7 +196,9 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
 
     if (!isOpen) return null;
 
-    const priceValue = parseInt(product.price.replace('$', ''));
+    const priceValue = isEarlyAccess() && product.earlyAccessPrice
+        ? getPriceValue(product.earlyAccessPrice)
+        : getPriceValue(product.price);
     const total = priceValue * quantity;
 
     if (isSubmitted) {
@@ -265,7 +272,7 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
                                     <div className="flex-1 space-y-2">
                                         <div className="flex justify-between items-start">
                                             <h5 className="text-sm font-bold uppercase tracking-widest">{product.name}</h5>
-                                            <p className="text-xs font-bold">{product.price}</p>
+                                            <p className="text-xs font-bold">{isEarlyAccess() && product.earlyAccessPrice ? product.earlyAccessPrice : product.price}</p>
                                         </div>
                                         <div className="text-[9px] uppercase tracking-[0.2em] text-gray-400 space-y-1">
                                             <p>Color: {selectedColor.name}</p>
@@ -415,7 +422,7 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
                      <div className="pt-12 border-t border-white/10 space-y-4">
                         <div className="flex justify-between text-[10px] uppercase tracking-widest text-gray-400 font-light">
                             <span>Subtotal</span>
-                            <span>{product.price} x {quantity}</span>
+                            <span>{isEarlyAccess() && product.earlyAccessPrice ? product.earlyAccessPrice : product.price} x {quantity}</span>
                         </div>
                         <div className="flex justify-between text-[10px] uppercase tracking-widest text-gray-400 font-light">
                             <span>Shipping</span>

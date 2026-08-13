@@ -23,45 +23,41 @@
  
              {/* Product Info & Selector */}
              <div className="flex flex-col h-full">
-                 <div className="border-b border-gray-100 pb-8 mb-8">
-                     <div className="flex justify-between items-baseline mb-4">
-                         <h2 className="text-2xl md:text-3xl font-bold uppercase tracking-[0.1em] md:tracking-widest">
-                             {product.name}
-                         </h2>
-                         <div className="flex flex-col gap-1">
-                             <span className="text-xl font-medium">{product.price}</span>
-                             <span className="text-[10px] bg-black text-white px-2 py-1 font-bold uppercase tracking-widest self-end">PRE-ORDER</span>
-                         </div>
-                     </div>
-                     <p className="text-xs text-gray-500 uppercase tracking-[0.2em]">Premium Quality Apparel — 2 Weeks Shipping</p>
-                 </div>
-                 
-                 <ProductSelector 
-                     product={product} 
-                     selectedColor={selectedColor}
-                     onColorChange={setSelectedColor}
-                 />
- 
-                 <div className="mt-auto pt-12">
-                     <details className="group border-t border-gray-100 py-4">
-                         <summary className="list-none flex justify-between items-center cursor-pointer text-[10px] uppercase tracking-widest font-bold">
-                             Product Details
-                             <span className="transform group-open:rotate-180 transition-transform">↓</span>
-                         </summary>
-                         <div className="pt-4 text-xs leading-relaxed text-gray-600 tracking-wide uppercase">
-                             Handcrafted with premium materials. This piece represents the core philosophy of BOY ALONE – minimal design with maximal impact.
-                         </div>
-                     </details>
-                     <details className="group border-t border-b border-gray-100 py-4">
-                         <summary className="list-none flex justify-between items-center cursor-pointer text-[10px] uppercase tracking-widest font-bold">
-                             Shipping & Returns
-                             <span className="transform group-open:rotate-180 transition-transform">↓</span>
-                         </summary>
-                         <div className="pt-4 text-xs leading-relaxed text-gray-600 tracking-wide uppercase">
-                             PRE-ORDER ITEM: Please allow approximately 2 weeks for shipping. US shipping only. 
-                         </div>
-                     </details>
-                 </div>
+                <div className="border-b border-gray-100 pb-8 mb-8">
+                    <div className="flex justify-between items-baseline mb-4">
+                        <h2 className="text-2xl md:text-3xl font-bold uppercase tracking-[0.1em] md:tracking-widest">
+                            {product.name}
+                        </h2>
+                    </div>
+                    <p className="text-xs text-gray-500 uppercase tracking-[0.2em]">Premium Heavyweight Boxy Tee — Oversized / Boxy Fit</p>
+                </div>
+                
+                <ProductSelector 
+                    product={product} 
+                    selectedColor={selectedColor}
+                    onColorChange={setSelectedColor}
+                />
+
+                <div className="mt-auto pt-12">
+                    <details className="group border-t border-gray-100 py-4">
+                        <summary className="list-none flex justify-between items-center cursor-pointer text-[10px] uppercase tracking-widest font-bold">
+                            Product Details
+                            <span className="transform group-open:rotate-180 transition-transform">↓</span>
+                        </summary>
+                        <div className="pt-4 text-xs leading-relaxed text-gray-600 tracking-wide uppercase">
+                            Premium heavyweight boxy tee. Oversized / boxy fit. Available in Black and White.
+                        </div>
+                    </details>
+                    <details className="group border-t border-b border-gray-100 py-4">
+                        <summary className="list-none flex justify-between items-center cursor-pointer text-[10px] uppercase tracking-widest font-bold">
+                            Shipping & Returns
+                            <span className="transform group-open:rotate-180 transition-transform">↓</span>
+                        </summary>
+                        <div className="pt-4 text-xs leading-relaxed text-gray-600 tracking-wide uppercase">
+                            FREE SHIPPING. US shipping only.
+                        </div>
+                    </details>
+                </div>
              </div>
          </div>
      );

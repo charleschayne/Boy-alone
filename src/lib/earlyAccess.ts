@@ -1,0 +1,27 @@
+export const EARLY_ACCESS_STORAGE_KEY = 'ba_early_access';
+
+export const isEarlyAccess = (): boolean => {
+    if (typeof window === 'undefined') return false;
+    try {
+        return window.localStorage.getItem(EARLY_ACCESS_STORAGE_KEY) === 'granted';
+    } catch {
+        return false;
+    }
+};
+
+export const getPriceValue = (price: string): number => {
+    return parseInt(price.replace(/[^0-9.]/g, ''), 10);
+};
+
+export const getEffectivePrice = (price: string, earlyAccessPrice?: string): string => {
+    if (isEarlyAccess() && earlyAccessPrice) {
+        return earlyAccessPrice;
+    }
+    return price;
+};
+
+export const getSavings = (price: string, earlyAccessPrice?: string): string => {
+    if (!earlyAccessPrice) return '$0';
+    const savings = getPriceValue(price) - getPriceValue(earlyAccessPrice);
+    return `$${savings.toFixed(2)}`;
+};

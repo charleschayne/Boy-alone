@@ -3,6 +3,7 @@
 import { Product, ProductColor } from '@/data/products';
 import { useState, useEffect } from 'react';
 import CheckoutModal from './CheckoutModal';
+import { isEarlyAccess, getEffectivePrice, getSavings } from '@/lib/earlyAccess';
 
 interface ProductSelectorProps {
     product: Product;
@@ -74,6 +75,31 @@ const ProductSelector = ({ product, selectedColor, onColorChange }: ProductSelec
                 </div>
             </div>
 
+            {/* Price & Shipping */}
+            <div className="border-t border-gray-100 pt-6">
+                <div className="flex items-baseline gap-4">
+                    {isEarlyAccess() && product.earlyAccessPrice ? (
+                        <>
+                            <span className="text-sm text-gray-400 line-through">{product.price}</span>
+                            <span className="text-2xl font-bold">{product.earlyAccessPrice}</span>
+                            <span className="text-[10px] uppercase tracking-[0.2em] text-red-500 font-bold italic">
+                                You save {getSavings(product.price, product.earlyAccessPrice)}
+                            </span>
+                        </>
+                    ) : (
+                        <span className="text-2xl font-bold">{getEffectivePrice(product.price, product.earlyAccessPrice)}</span>
+                    )}
+                </div>
+                <p className="text-[10px] uppercase tracking-[0.2em] text-gray-500 font-medium mt-1">
+                    FREE SHIPPING
+                </p>
+                {product.earlyAccessPrice && !isEarlyAccess() && (
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-gray-400 italic mt-3">
+                        Early Access members get 10% off at checkout
+                    </p>
+                )}
+            </div>
+
             {/* Quantity Selection */}
             <div className={product.isSoldOut ? 'opacity-30 pointer-events-none' : ''}>
                 <h4 className="text-[10px] uppercase tracking-widest text-gray-500 mb-3">Quantity: {quantity}</h4>
@@ -94,11 +120,11 @@ const ProductSelector = ({ product, selectedColor, onColorChange }: ProductSelec
                 </div>
             </div>
 
-            {/* Pre-order Notice */}
+            {/* Shipping Notice */}
             {!product.isSoldOut && (
                 <div className="pt-4 border-t border-gray-100">
                     <p className="text-[10px] text-gray-500 uppercase tracking-[0.2em] italic font-medium">
-                        Pre-order — 2 weeks shipping
+                        Free shipping — 2 weeks delivery
                     </p>
                 </div>
             )}

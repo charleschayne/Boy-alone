@@ -9,7 +9,7 @@ const Hero = () => {
     const [typedText, setTypedText] = useState('');
 
     // The story content for the jacket
-    const jacketStory = "This isn’t just denim; it’s you against everything. Every thread is intentional—the embroidery is stitched, built to last. The eye represents awareness: seeing and feeling everything. Tears first, then rage. Heavyweight denim carrying pain and power. This journey was never soft.";
+    const jacketStory = "A tee isn’t just a tee. Premium heavyweight cotton, oversized and boxy—cut to move like you. The graphic is the mark: awareness, resilience, the shine that comes from the pain. Wear it loud. This piece carries the weight so you don’t have to. Built to last. Made to be seen.";
 
     // The story content for the hat
     const hatStory = "Vintage 6-panel construction. Washed canvas for a lived-in feel from day one. Embroidered with our signature logo in a tonal thread.";
@@ -55,7 +55,7 @@ const Hero = () => {
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
                 <Image
-                    src="/assets/hero.png"
+                    src="/assets/Shining%20collection%202026/ShiningfaceTeeIMG_3078.JPEG"
                     alt="Boy Alone Hero"
                     fill
                     className="object-cover object-center"

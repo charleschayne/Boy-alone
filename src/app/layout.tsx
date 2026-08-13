@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Chelsea_Market } from 'next/font/google'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/react'
-import PasswordGate from '@/components/PasswordGate'
+import AccessGate from '@/components/AccessGate'
 
 const chelseaMarket = Chelsea_Market({
   weight: ['400'],
@@ -32,9 +32,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${chelseaMarket.variable} ${chelseaMarket.className} antialiased`}>
-        <PasswordGate>
+        <AccessGate>
           {children}
-        </PasswordGate>
+        </AccessGate>
         <Analytics />
       </body>
     </html>

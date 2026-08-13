@@ -4,6 +4,7 @@ import Hero from '@/components/Hero';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import { collections } from '@/data/products';
+import CollectionPrice from '@/components/CollectionPrice';
 
 export default function Home() {
   return (
@@ -62,7 +63,7 @@ export default function Home() {
                           {collection.products.length > 0 ? `${collection.products.length} Items` : 'Available'}
                         </p>
                         {price && (
-                          <p className="text-xs text-white font-bold tracking-widest">{price}</p>
+                          <CollectionPrice price={price} earlyAccessPrice={product?.earlyAccessPrice} />
                         )}
                       </div>
                     </div>

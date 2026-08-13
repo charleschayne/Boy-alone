@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { collections, getCollectionBySlug } from '@/data/products';
 import ProductView from '@/components/ProductView';
+import CollectionPrice from '@/components/CollectionPrice';
 
 export default async function CollectionPage({
     params,
@@ -65,7 +66,7 @@ export default async function CollectionPage({
                                                     {collection.products.length > 0 ? `${collection.products.length} Items` : 'Available'}
                                                 </p>
                                                 {price && (
-                                                    <p className="text-xs text-white font-bold tracking-widest">{price}</p>
+                                                    <CollectionPrice price={price} earlyAccessPrice={product?.earlyAccessPrice} />
                                                 )}
                                             </div>
                                         </div>
