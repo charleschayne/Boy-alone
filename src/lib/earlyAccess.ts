@@ -12,16 +12,3 @@ export const isEarlyAccess = (): boolean => {
 export const getPriceValue = (price: string): number => {
     return parseInt(price.replace(/[^0-9.]/g, ''), 10);
 };
-
-export const getEffectivePrice = (price: string, earlyAccessPrice?: string): string => {
-    if (isEarlyAccess() && earlyAccessPrice) {
-        return earlyAccessPrice;
-    }
-    return price;
-};
-
-export const getSavings = (price: string, earlyAccessPrice?: string): string => {
-    if (!earlyAccessPrice) return '$0';
-    const savings = getPriceValue(price) - getPriceValue(earlyAccessPrice);
-    return `$${savings.toFixed(2)}`;
-};

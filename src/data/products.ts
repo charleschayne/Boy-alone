@@ -9,7 +9,6 @@ export interface Product {
     id: string;
     name: string;
     price: string;
-    earlyAccessPrice?: string;
     slug: string;
     images: string[];
     description?: string;
@@ -40,7 +39,6 @@ export const collections: Collection[] = [
                 name: 'Shining Face Tee',
                 slug: 'shining-face-tee',
                 price: '$85.00',
-                earlyAccessPrice: '$76.50',
                 description: 'Premium heavyweight boxy tee. Oversized / boxy fit.',
                 images: [
                     '/assets/Shining%20collection%202026/ShiningfaceTeeIMG_7053.JPEG',
@@ -49,6 +47,9 @@ export const collections: Collection[] = [
                     '/assets/Shining%20collection%202026/ShiningfaceTeeIMG_3078.JPEG',
                     '/assets/Shining%20collection%202026/ShiningfaceTeeIMG_7024.JPEG',
                     '/assets/Shining%20collection%202026/ShiningfaceTeeIMG_7577.JPEG',
+                    '/assets/Shining%20collection%202026/shiningfaceteeIMG_4088.JPEG',
+                    '/assets/Shining%20collection%202026/shiningfaceteeIMG_5900.JPEG',
+                    '/assets/Shining%20collection%202026/shiningfaceteeIMG_6415.JPEG',
                 ],
                 colors: [
                     { name: 'Black', sizes: ['Small', 'Medium', 'Large', 'X-Large', '2X-Large'] },
@@ -69,7 +70,6 @@ export const collections: Collection[] = [
                 name: 'Shining Grills Tee',
                 slug: 'shining-grills-tee',
                 price: '$85.00',
-                earlyAccessPrice: '$76.50',
                 description: 'Premium heavyweight boxy tee. Oversized / boxy fit. Large front & back graphic.',
                 images: [
                     '/assets/Shining%20collection%202026/ShiningGrillsTeeIMG_0061.JPEG',
@@ -98,7 +98,6 @@ export const collections: Collection[] = [
                 name: 'Shining Through The Pain Tee',
                 slug: 'shining-through-the-pain-tee',
                 price: '$70.00',
-                earlyAccessPrice: '$63.00',
                 description: 'Premium heavyweight boxy tee. Oversized / boxy fit. Large front graphic.',
                 images: [
                     '/assets/Shining%20collection%202026/STTPTeesIMG_1259.JPEG',

@@ -63,7 +63,7 @@ export default function Home() {
                           {collection.products.length > 0 ? `${collection.products.length} Items` : 'Available'}
                         </p>
                         {price && (
-                          <CollectionPrice price={price} earlyAccessPrice={product?.earlyAccessPrice} />
+                          <CollectionPrice price={price} />
                         )}
                       </div>
                     </div>
