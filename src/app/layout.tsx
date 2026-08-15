@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Chelsea_Market } from 'next/font/google'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/react'
+import ComingSoonGate from '@/components/ComingSoonGate'
 
 const chelseaMarket = Chelsea_Market({
   weight: ['400'],
@@ -31,7 +32,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${chelseaMarket.variable} ${chelseaMarket.className} antialiased`}>
-        {children}
+        <ComingSoonGate>
+          {children}
+        </ComingSoonGate>
         <Analytics />
       </body>
     </html>
