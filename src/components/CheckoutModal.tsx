@@ -31,6 +31,7 @@ interface CheckoutModalProps {
     selectedColor: ProductColor;
     selectedSize: string;
     quantity: number;
+    discountRate?: number;
 }
 
 const CheckoutForm = ({ 
@@ -39,14 +40,16 @@ const CheckoutForm = ({
     shippingData,
     onSuccess,
     selectedColor,
-    selectedSize
+    selectedSize,
+    discountRate = 0
 }: { 
     product: Product, 
     quantity: number, 
     shippingData: any,
     onSuccess: () => void,
     selectedColor: string,
-    selectedSize: string
+    selectedSize: string,
+    discountRate?: number
 }) => {
     const stripe = useStripe();
     const elements = useElements();
@@ -75,7 +78,7 @@ const CheckoutForm = ({
             // Payment successful, now save to Supabase and send email via our unified route
             try {
                 const unitPriceValue = getPriceValue(product.price);
-                const totalAmount = unitPriceValue * quantity;
+                const totalAmount = Math.round(unitPriceValue * quantity * (1 - discountRate));
 
                 await fetch('/api/orders', {
                     method: 'POST',
@@ -120,7 +123,7 @@ const CheckoutForm = ({
     );
 };
 
-const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, quantity }: CheckoutModalProps) => {
+const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, quantity, discountRate = 0 }: CheckoutModalProps) => {
     const [step, setStep] = useState<'shipping' | 'payment'>('shipping');
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [clientSecret, setClientSecret] = useState<string | null>(null);
@@ -159,7 +162,7 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
 
         try {
             const unitPriceValue = getPriceValue(product.price);
-            const amount = unitPriceValue * quantity * 100; // Stripe expects cents
+            const amount = Math.round((unitPriceValue * quantity * (1 - discountRate)) * 100); // Stripe expects cents
 
             const res = await fetch('/api/create-payment-intent', {
                 method: 'POST',
@@ -188,12 +191,13 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
         if (isOpen && step === 'payment') {
             initializePayment();
         }
-    }, [isOpen, step, product.price, quantity]);
+    }, [isOpen, step, product.price, quantity, discountRate]);
 
     if (!isOpen) return null;
 
     const priceValue = getPriceValue(product.price);
-    const total = priceValue * quantity;
+    const total = priceValue * quantity * (1 - discountRate);
+    const discountAmount = priceValue * quantity * discountRate;
 
     if (isSubmitted) {
         return (
@@ -281,15 +285,21 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
                             <div className="border-t-2 border-black pt-8 space-y-4">
                                 <div className="flex justify-between text-[10px] uppercase tracking-[0.3em]">
                                     <span>Subtotal</span>
-                                    <span>${priceValue * quantity}</span>
+                                    <span>${(priceValue * quantity).toFixed(2)}</span>
                                 </div>
+                                {discountRate > 0 && (
+                                    <div className="flex justify-between text-[10px] uppercase tracking-[0.3em] text-green-600">
+                                        <span>Promo ({Math.round(discountRate * 100)}%)</span>
+                                        <span>-${discountAmount.toFixed(2)}</span>
+                                    </div>
+                                )}
                                 <div className="flex justify-between text-[10px] uppercase tracking-[0.3em]">
                                     <span>Shipping</span>
                                     <span>$0.00</span>
                                 </div>
                                 <div className="flex justify-between text-xl font-bold uppercase tracking-[0.2em] pt-4 border-t border-black/10">
                                     <span>Total</span>
-                                    <span>${total}</span>
+                                    <span>${total.toFixed(2)}</span>
                                 </div>
                             </div>
 
@@ -418,13 +428,19 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
                             <span>Subtotal</span>
                             <span>{product.price} x {quantity}</span>
                         </div>
+                        {discountRate > 0 && (
+                            <div className="flex justify-between text-[10px] uppercase tracking-widest text-green-500 font-light">
+                                <span>Promo ({Math.round(discountRate * 100)}%)</span>
+                                <span>-${discountAmount.toFixed(2)}</span>
+                            </div>
+                        )}
                         <div className="flex justify-between text-[10px] uppercase tracking-widest text-gray-400 font-light">
                             <span>Shipping</span>
                             <span className="text-white italic">FREE (PROMO)</span>
                         </div>
                         <div className="flex justify-between text-2xl font-bold uppercase tracking-[0.2em] pt-6">
                             <span>Total</span>
-                            <span>${total}</span>
+                            <span>${total.toFixed(2)}</span>
                         </div>
                      </div>
                 </div>
@@ -540,6 +556,7 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
                                             onSuccess={() => setIsSubmitted(true)} 
                                             selectedColor={selectedColor.name}
                                             selectedSize={selectedSize}
+                                            discountRate={discountRate}
                                         />
                                     </Elements>
                                 ) : initError ? (

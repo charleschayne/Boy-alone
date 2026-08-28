@@ -55,7 +55,7 @@ const Hero = () => {
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
                 <Image
-                    src="/assets/Shining%20collection%202026/ShiningfaceTeeIMG_3078.JPEG"
+                    src="/assets/Shinning%20Collection%202%20/SHININGTHROUGHTHEPAINBOXYTEEIMG_6681.JPEG"
                     alt="Boy Alone Hero"
                     fill
                     className="object-cover object-center"

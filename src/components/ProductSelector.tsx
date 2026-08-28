@@ -3,6 +3,8 @@
 import { Product, ProductColor } from '@/data/products';
 import { useState, useEffect } from 'react';
 import CheckoutModal from './CheckoutModal';
+import { getPromoDiscountRate } from '@/lib/promo';
+import { getPriceValue } from '@/lib/earlyAccess';
 
 interface ProductSelectorProps {
     product: Product;
@@ -14,6 +16,10 @@ const ProductSelector = ({ product, selectedColor, onColorChange }: ProductSelec
     const [selectedSize, setSelectedSize] = useState('');
     const [quantity, setQuantity] = useState(1);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [promoInput, setPromoInput] = useState('');
+    const [appliedPromo, setAppliedPromo] = useState('');
+
+    const discountRate = getPromoDiscountRate(appliedPromo);
 
     const decrementQuantity = () => {
         if (quantity > 1) {
@@ -25,6 +31,14 @@ const ProductSelector = ({ product, selectedColor, onColorChange }: ProductSelec
         setQuantity(quantity + 1);
     };
 
+    const handleApplyPromo = () => {
+        if (getPromoDiscountRate(promoInput) > 0) {
+            setAppliedPromo(promoInput);
+        } else {
+            setAppliedPromo('');
+        }
+    };
+
     useEffect(() => {
         // Reset size when color changes if current size is not available in new color
         if (selectedSize && !selectedColor.sizes.includes(selectedSize)) {
@@ -32,8 +46,13 @@ const ProductSelector = ({ product, selectedColor, onColorChange }: ProductSelec
         }
     }, [selectedColor, selectedSize]);
 
+    const unitPrice = getPriceValue(product.price);
+    const subtotal = unitPrice * quantity;
+    const discountAmount = appliedPromo ? subtotal * discountRate : 0;
+    const discountedTotal = subtotal - discountAmount;
+
     return (
-        <div className="flex flex-col space-y-6 py-6 font-light">
+        <div className="flex flex-col space-y-6 py-6 font-light" style={{ fontFamily: 'var(--font-alike-angular), "Alike Angular", serif' }}>
             {/* Color Selection */}
             <div className={product.isSoldOut ? 'opacity-30 pointer-events-none' : ''}>
                 <h4 className="text-[10px] uppercase tracking-widest text-gray-500 mb-3">Color: {selectedColor.name}</h4>
@@ -82,6 +101,53 @@ const ProductSelector = ({ product, selectedColor, onColorChange }: ProductSelec
                 <p className="text-[10px] uppercase tracking-[0.2em] text-gray-500 font-medium mt-1">
                     FREE SHIPPING
                 </p>
+            </div>
+
+            {/* Promo Code */}
+            <div>
+                <h4 className="text-[10px] uppercase tracking-widest text-gray-500 mb-3">Promo Code</h4>
+                <div className="flex gap-2">
+                    <input
+                        type="text"
+                        value={promoInput}
+                        onChange={(e) => setPromoInput(e.target.value)}
+                        onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleApplyPromo(); } }}
+                        placeholder="ENTER CODE"
+                        className="flex-1 bg-transparent border border-gray-200 text-black text-[10px] uppercase tracking-[0.2em] px-4 py-3 placeholder:text-gray-400 focus:outline-none focus:border-black transition-colors"
+                    />
+                    <button
+                        onClick={handleApplyPromo}
+                        className="px-6 py-3 text-[10px] uppercase tracking-[0.2em] font-bold border border-black bg-black text-white hover:bg-neutral-800 transition-colors"
+                    >
+                        APPLY
+                    </button>
+                </div>
+                {appliedPromo ? (
+                    <div className="flex items-center justify-between mt-3 text-[10px] uppercase tracking-[0.2em]">
+                        <p className="text-green-600 font-medium">Code "{appliedPromo}" applied — 10% off</p>
+                        <button onClick={() => { setAppliedPromo(''); setPromoInput(''); }} className="text-gray-400 underline hover:text-black">
+                            Remove
+                        </button>
+                    </div>
+                ) : promoInput && getPromoDiscountRate(promoInput) === 0 ? (
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-red-500 mt-3">Invalid promo code</p>
+                ) : null}
+                {appliedPromo && (
+                    <div className="mt-4 border border-gray-200 p-4 space-y-1.5">
+                        <div className="flex justify-between text-[11px] uppercase tracking-widest">
+                            <span>Subtotal</span>
+                            <span>${subtotal.toFixed(2)}</span>
+                        </div>
+                        <div className="flex justify-between text-[11px] uppercase tracking-widest text-green-600">
+                            <span>Promo ({Math.round(discountRate * 100)}%)</span>
+                            <span>-${discountAmount.toFixed(2)}</span>
+                        </div>
+                        <div className="flex justify-between text-sm font-bold uppercase tracking-widest pt-1.5 border-t border-gray-200">
+                            <span>Total</span>
+                            <span>${discountedTotal.toFixed(2)}</span>
+                        </div>
+                    </div>
+                )}
             </div>
 
             {/* Quantity Selection */}
@@ -134,6 +200,7 @@ const ProductSelector = ({ product, selectedColor, onColorChange }: ProductSelec
                 selectedColor={selectedColor}
                 selectedSize={selectedSize}
                 quantity={quantity}
+                discountRate={discountRate}
             />
         </div>
     );

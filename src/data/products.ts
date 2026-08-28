@@ -28,28 +28,24 @@ export interface Collection {
 
 export const collections: Collection[] = [
     {
-        id: 'shining-collection-2026',
-        name: 'Shining Collection 2026',
-        slug: 'shining-collection-2026',
-        featuredImage: '/assets/Shining%20collection%202026/ShiningfaceTeeIMG_7053.JPEG',
-        hoverImage: '/assets/Shining%20collection%202026/ShiningfaceTeeIMG_0991.JPEG',
+        id: 'shining-through-the-pain-boxy-tee',
+        name: 'BOY ALONE — SHINING THROUGH THE PAIN BOXY TEE',
+        slug: 'shining-through-the-pain-boxy-tee',
+        featuredImage: '/assets/Shinning%20Collection%202%20/SHININGTHROUGHTHEPAINBOXYTEEIMG_6681.JPEG',
+        hoverImage: '/assets/Shinning%20Collection%202%20/SHININGTHROUGHTHEPAINBOXYTEEIMG_6731.JPEG',
         products: [
             {
-                id: 'shining-face-tee',
-                name: 'Shining Face Tee',
-                slug: 'shining-face-tee',
-                price: '$85.00',
+                id: 'shining-through-the-pain-boxy-tee-product',
+                name: 'BOY ALONE — SHINING THROUGH THE PAIN BOXY TEE',
+                slug: 'shining-through-the-pain-boxy-tee',
+                price: '$75.00',
                 description: 'Premium heavyweight boxy tee. Oversized / boxy fit.',
                 images: [
-                    '/assets/Shining%20collection%202026/ShiningfaceTeeIMG_7053.JPEG',
-                    '/assets/Shining%20collection%202026/ShiningfaceTeeIMG_0991.JPEG',
-                    '/assets/Shining%20collection%202026/ShiningfaceTeeIMG_2991.JPEG',
-                    '/assets/Shining%20collection%202026/ShiningfaceTeeIMG_3078.JPEG',
-                    '/assets/Shining%20collection%202026/ShiningfaceTeeIMG_7024.JPEG',
-                    '/assets/Shining%20collection%202026/ShiningfaceTeeIMG_7577.JPEG',
-                    '/assets/Shining%20collection%202026/shiningfaceteeIMG_4088.JPEG',
-                    '/assets/Shining%20collection%202026/shiningfaceteeIMG_5900.JPEG',
-                    '/assets/Shining%20collection%202026/shiningfaceteeIMG_6415.JPEG',
+                    '/assets/Shinning%20Collection%202%20/SHININGTHROUGHTHEPAINBOXYTEEIMG_6681.JPEG',
+                    '/assets/Shinning%20Collection%202%20/SHININGTHROUGHTHEPAINBOXYTEEIMG_6731.JPEG',
+                    '/assets/Shinning%20Collection%202%20/SHININGTHROUGHTHEPAINBOXYTEEIMG_6754.JPEG',
+                    '/assets/Shinning%20Collection%202%20/SHININGTHROUGHTHEPAINBOXYTEEIMG_6778.JPEG',
+                    '/assets/Shinning%20Collection%202%20/SHININGTHROUGHTHEPAINBOXYTEEIMG_6786.JPEG',
                 ],
                 colors: [
                     { name: 'Black', sizes: ['Small', 'Medium', 'Large', 'X-Large', '2X-Large'] },
@@ -59,52 +55,63 @@ export const collections: Collection[] = [
         ]
     },
     {
-        id: 'shining-grills-tee',
-        name: 'Shining Grills Tee',
-        slug: 'shining-grills-tee',
-        featuredImage: '/assets/Shining%20collection%202026/ShiningGrillsTeeIMG_0443.JPEG',
-        hoverImage: '/assets/Shining%20collection%202026/ShiningGrillsTeeIMG_4495.JPEG',
+        id: 'shining-through-the-pain-striped-polo',
+        name: 'BOY ALONE — SHINING THROUGH THE PAIN STRIPED POLO',
+        slug: 'shining-through-the-pain-striped-polo',
+        featuredImage: '/assets/Shinning%20Collection%202%20/SHININGTHROUGHTHEPAINSTRIPEDPOLOIMG_6990.JPEG',
+        hoverImage: '/assets/Shinning%20Collection%202%20/SHININGTHROUGHTHEPAINSTRIPEDPOLOIMG_7004.JPEG',
         products: [
             {
-                id: 'shining-grills-tee-product',
-                name: 'Shining Grills Tee',
-                slug: 'shining-grills-tee',
-                price: '$85.00',
-                description: 'Premium heavyweight boxy tee. Oversized / boxy fit. Large front & back graphic.',
+                id: 'shining-through-the-pain-striped-polo-product',
+                name: 'BOY ALONE — SHINING THROUGH THE PAIN STRIPED POLO',
+                slug: 'shining-through-the-pain-striped-polo',
+                price: '$100.00',
+                description: 'Premium short-sleeve striped polo. Relaxed fit. All-over SHINING THROUGH THE PAIN artwork.',
                 images: [
-                    '/assets/Shining%20collection%202026/ShiningGrillsTeeIMG_0061.JPEG',
-                    '/assets/Shining%20collection%202026/ShiningGrillsTeeIMG_0443.JPEG',
-                    '/assets/Shining%20collection%202026/ShiningGrillsTeeIMG_1521.JPEG',
-                    '/assets/Shining%20collection%202026/ShiningGrillsTeeIMG_2321.JPEG',
-                    '/assets/Shining%20collection%202026/ShiningGrillsTeeIMG_4495.JPEG',
-                    '/assets/Shining%20collection%202026/ShiningGrillsTeeIMG_6227.JPEG',
+                    '/assets/Shinning%20Collection%202%20/SHININGTHROUGHTHEPAINSTRIPEDPOLOIMG_6990.JPEG',
+                    '/assets/Shinning%20Collection%202%20/SHININGTHROUGHTHEPAINSTRIPEDPOLOIMG_7004.JPEG',
+                    '/assets/Shinning%20Collection%202%20/SHININGTHROUGHTHEPAINSTRIPEDPOLOIMG_7071.JPEG',
+                    '/assets/Shinning%20Collection%202%20/SHININGTHROUGHTHEPAINSTRIPEDPOLOIMG_7086.JPEG',
+                    '/assets/Shinning%20Collection%202%20/SHININGTHROUGHTHEPAINSTRIPEDPOLOIMG_7106.JPEG',
+                    '/assets/Shinning%20Collection%202%20/SHININGTHROUGHTHEPAINSTRIPEDPOLOIMG_7120.JPEG',
+                    '/assets/Shinning%20Collection%202%20/SHININGTHROUGHTHEPAINSTRIPEDPOLOIMG_7147.JPEG',
                 ],
                 colors: [
-                    { name: 'Black', sizes: ['Small', 'Medium', 'Large', 'X-Large', '2X-Large'] },
-                    { name: 'White', sizes: ['Small', 'Medium', 'Large', 'X-Large', '2X-Large'] }
+                    { name: 'Black', sizes: ['Small', 'Medium', 'Large'] },
+                    { name: 'Red', sizes: ['Small'] },
+                    { name: 'Pink', sizes: ['Small', 'Medium'] },
+                    { name: 'Navy', sizes: ['Small'] }
                 ]
             }
         ]
     },
     {
-        id: 'shining-through-the-pain-tee',
-        name: 'Shining Through The Pain Tee',
-        slug: 'shining-through-the-pain-tee',
-        featuredImage: '/assets/Shining%20collection%202026/STTPTeesIMG_1259.JPEG',
-        hoverImage: '/assets/Shining%20collection%202026/STTPTeesIMG_9593.JPEG',
+        id: 'shining-face-skater-tee',
+        name: 'BOY ALONE — SHINING FACE SKATER TEE',
+        slug: 'shining-face-skater-tee',
+        featuredImage: '/assets/Shinning%20Collection%202%20/SHININGFACESKATERTEEIMG_6799.JPEG',
+        hoverImage: '/assets/Shinning%20Collection%202%20/SHININGFACESKATERTEEIMG_6807.JPEG',
         products: [
             {
-                id: 'shining-through-the-pain-tee-product',
-                name: 'Shining Through The Pain Tee',
-                slug: 'shining-through-the-pain-tee',
-                price: '$70.00',
-                description: 'Premium heavyweight boxy tee. Oversized / boxy fit. Large front graphic.',
+                id: 'shining-face-skater-tee-product',
+                name: 'BOY ALONE — SHINING FACE SKATER TEE',
+                slug: 'shining-face-skater-tee',
+                price: '$75.00',
+                description: 'Premium heavyweight skater tee. Oversized / relaxed fit. Layered long-sleeve look. Oversized SHINING FACE graphic.',
                 images: [
-                    '/assets/Shining%20collection%202026/STTPTeesIMG_1259.JPEG',
-                    '/assets/Shining%20collection%202026/STTPTeesIMG_9593.JPEG',
+                    '/assets/Shinning%20Collection%202%20/SHININGFACESKATERTEEIMG_6799.JPEG',
+                    '/assets/Shinning%20Collection%202%20/SHININGFACESKATERTEEIMG_6807.JPEG',
+                    '/assets/Shinning%20Collection%202%20/SHININGFACESKATERTEEIMG_6813.JPEG',
+                    '/assets/Shinning%20Collection%202%20/SHININGFACESKATERTEEIMG_6840.JPEG',
+                    '/assets/Shinning%20Collection%202%20/SHININGFACESKATERTEEIMG_6887.JPEG',
+                    '/assets/Shinning%20Collection%202%20/SHININGFACESKATERTEEIMG_6918.JPEG',
+                    '/assets/Shinning%20Collection%202%20/SHININGFACESKATERTEEIMG_6962.JPEG',
                 ],
                 colors: [
-                    { name: 'Black', sizes: ['Small', 'Medium', 'Large', 'X-Large', '2X-Large'] }
+                    { name: 'Black', sizes: ['Small', 'Medium', 'Large', 'X-Large', '2X-Large'] },
+                    { name: 'White', sizes: ['Small', 'Medium', 'Large', 'X-Large', '2X-Large'] },
+                    { name: 'Off-White', sizes: ['Small', 'Large', 'X-Large'] },
+                    { name: 'Red', sizes: ['Small', 'Medium', 'Large', 'X-Large'] }
                 ]
             }
         ]

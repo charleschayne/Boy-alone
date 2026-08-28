@@ -1,13 +1,19 @@
 import type { Metadata } from 'next'
-import { Chelsea_Market } from 'next/font/google'
+import { Shojumaru } from 'next/font/google'
+import { Alike_Angular } from 'next/font/google'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/react'
-import ComingSoonGate from '@/components/ComingSoonGate'
 
-const chelseaMarket = Chelsea_Market({
+const shojumaru = Shojumaru({
   weight: ['400'],
   subsets: ['latin'],
-  variable: '--font-chelsea'
+  variable: '--font-shojumaru'
+})
+
+const alikeAngular = Alike_Angular({
+  weight: ['400'],
+  subsets: ['latin'],
+  variable: '--font-alike-angular'
 })
 
 export const metadata: Metadata = {
@@ -31,10 +37,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${chelseaMarket.variable} ${chelseaMarket.className} antialiased`}>
-        <ComingSoonGate>
-          {children}
-        </ComingSoonGate>
+      <body className={`${shojumaru.variable} ${shojumaru.className} ${alikeAngular.variable} antialiased`}>
+        {children}
         <Analytics />
       </body>
     </html>

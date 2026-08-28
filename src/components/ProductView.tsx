@@ -29,7 +29,7 @@
                             {product.name}
                         </h2>
                     </div>
-                    <p className="text-xs text-gray-500 uppercase tracking-[0.2em]">Premium Heavyweight Boxy Tee — Oversized / Boxy Fit</p>
+                    <p className="text-xs text-gray-500 uppercase tracking-[0.2em]">{product.description}</p>
                 </div>
                 
                 <ProductSelector 
@@ -45,7 +45,7 @@
                             <span className="transform group-open:rotate-180 transition-transform">↓</span>
                         </summary>
                         <div className="pt-4 text-xs leading-relaxed text-gray-600 tracking-wide uppercase">
-                            Premium heavyweight boxy tee. Oversized / boxy fit. Available in Black and White.
+                            {product.description}
                         </div>
                     </details>
                     <details className="group border-t border-b border-gray-100 py-4">
