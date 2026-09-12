@@ -103,14 +103,14 @@ const CheckoutForm = ({
     };
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-8 animate-in fade-in slide-in-from-bottom duration-700">
+        <form onSubmit={handleSubmit} className="space-y-6 animate-in fade-in slide-in-from-bottom duration-700">
             <div className="space-y-6">
                 <h2 className="text-[9px] uppercase tracking-[0.5em] text-gray-500 font-bold">PAYMENT INFORMATION</h2>
                 <PaymentElement options={{ layout: 'tabs' }} />
                 {errorMessage && <div className="text-red-500 text-[9px] uppercase tracking-widest">{errorMessage}</div>}
             </div>
 
-            <div className="pt-8">
+            <div className="sticky bottom-0 bg-black py-4">
                 <button 
                     disabled={!stripe || isLoading}
                     type="submit"
@@ -362,11 +362,12 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
     }
 
     return (
-        <div className="fixed inset-0 z-50 flex flex-col md:flex-row bg-black text-white animate-in slide-in-from-bottom duration-500 overflow-y-auto md:overflow-hidden font-light">
+        <div className="fixed inset-x-0 top-0 h-dvh z-50 flex flex-col md:flex-row bg-black text-white animate-in slide-in-from-bottom duration-500 overflow-y-auto md:overflow-hidden overscroll-contain font-light">
             {/* Close Button */}
             <button 
                 onClick={onClose}
-                className="absolute top-6 right-6 md:top-8 md:right-8 z-50 p-2 hover:rotate-90 transition-transform duration-300 bg-black/10 md:bg-transparent rounded-full backdrop-blur-md md:backdrop-blur-none"
+                aria-label="Close checkout"
+                className="fixed top-3 right-3 md:top-4 md:right-4 z-50 p-2 hover:rotate-90 transition-transform duration-300 bg-black/10 md:bg-transparent rounded-full backdrop-blur-md md:backdrop-blur-none"
             >
                 <svg className="w-5 h-5 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
@@ -374,10 +375,10 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
             </button>
 
             {/* Mobile Summary (Integrated) - Hidden on desktop */}
-            <div className="md:hidden w-full p-6 pt-12 space-y-4">
-                <div className="flex items-center justify-between border-b border-white/5 pb-6">
+            <div className="md:hidden w-full shrink-0 p-6 pt-16 space-y-4">
+                <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/5 pb-4">
                     <div className="flex items-center gap-4">
-                        <div className="relative w-14 aspect-[3/4] bg-neutral-900 overflow-hidden shadow-xl">
+                        <div className="relative w-14 shrink-0 aspect-[3/4] bg-neutral-900 overflow-hidden shadow-xl">
                             <Image src={product.images[0]} alt={product.name} fill className="object-cover" />
                         </div>
                         <div className="space-y-0.5">
@@ -397,15 +398,15 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
             </div>
 
             {/* Left Side: Desktop Summary - Hidden on mobile */}
-            <div className="hidden md:flex w-full md:w-1/2 h-full bg-neutral-900/50 p-12 flex-col justify-center border-r border-white/10">
-                <div className="max-w-md mx-auto w-full space-y-12">
+            <div className="hidden md:flex w-full md:w-1/2 h-full min-h-0 overflow-y-auto bg-neutral-900/50 p-8 lg:p-12 flex-col border-r border-white/10">
+                <div className="max-w-md mx-auto my-auto w-full space-y-8">
                      <div className="flex items-center gap-4">
                         <h2 className="text-[10px] uppercase tracking-[0.5em] text-gray-500">ORDER SUMMARY</h2>
                         <div className="h-px flex-1 bg-white/10" />
                      </div>
                      
                      <div className="flex gap-8 items-start">
-                        <div className="relative w-32 aspect-[3/4] bg-neutral-800 overflow-hidden shadow-2xl">
+                        <div className="relative w-24 shrink-0 aspect-[3/4] bg-neutral-800 overflow-hidden shadow-2xl">
                             <Image 
                                 src={product.images[0]} 
                                 alt={product.name}
@@ -414,7 +415,7 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
                             />
                         </div>
                         <div className="space-y-4">
-                            <h3 className="text-2xl font-bold uppercase tracking-widest italic">{product.name}</h3>
+                            <h3 className="text-lg lg:text-xl font-bold uppercase tracking-widest italic">{product.name}</h3>
                             <div className="space-y-1 text-[10px] uppercase tracking-widest text-gray-400 font-light">
                                 <p>COLOR: {selectedColor.name}</p>
                                 <p>SIZE: {selectedSize || 'Standard'}</p>
@@ -423,7 +424,7 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
                         </div>
                      </div>
 
-                     <div className="pt-12 border-t border-white/10 space-y-4">
+                     <div className="pt-6 border-t border-white/10 space-y-4">
                         <div className="flex justify-between text-[10px] uppercase tracking-widest text-gray-400 font-light">
                             <span>Subtotal</span>
                             <span>{product.price} x {quantity}</span>
@@ -447,8 +448,8 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
             </div>
 
             {/* Right Side: Flow */}
-            <div className="w-full md:w-1/2 h-full bg-black flex flex-col items-center overflow-y-auto">
-                <div className="max-w-md mx-auto w-full p-6 md:p-12 space-y-10 md:space-y-12">
+            <div className="w-full md:w-1/2 min-h-0 shrink-0 md:h-full bg-black flex flex-col items-center md:overflow-y-auto overscroll-contain">
+                <div className="max-w-xl mx-auto w-full px-6 pb-6 md:px-10 md:pt-16 md:pb-6 space-y-6">
                     <AnimatePresence mode="wait">
                         {step === 'shipping' ? (
                             <motion.form 
@@ -458,31 +459,31 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
                                 exit={{ opacity: 0, y: -10 }}
                                 transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
                                 onSubmit={handleShippingSubmit} 
-                                className="space-y-10"
+                                className="space-y-5"
                             >
                                 <div className="space-y-6">
                                     <h2 className="text-[10px] md:text-xs uppercase tracking-[0.5em] text-gray-500 font-bold max-w-full truncate">SHIPPING INFO</h2>
-                                    <div className="space-y-6 md:space-y-8">
+                                    <div className="space-y-3">
                                         <div className="space-y-2">
                                             <label className="text-[11px] md:text-[11px] uppercase tracking-[0.4em] text-gray-400 ml-0.5">Full Name</label>
-                                            <input required value={shippingData.name} onChange={(e) => updateShipping('name', e.target.value)} className="w-full bg-transparent border-b border-white/10 py-3 md:py-4 text-base md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors" placeholder="ENTER NAME" />
+                                            <input required value={shippingData.name} onChange={(e) => updateShipping('name', e.target.value)} className="w-full bg-transparent border-b border-white/10 py-2 text-base md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors" placeholder="ENTER NAME" />
                                         </div>
                                         <div className="space-y-2">
                                             <label className="text-[11px] md:text-[11px] uppercase tracking-[0.4em] text-gray-400 ml-0.5">Email Address</label>
-                                            <input required type="email" value={shippingData.email} onChange={(e) => updateShipping('email', e.target.value)} className="w-full bg-transparent border-b border-white/10 py-3 md:py-4 text-base md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors" placeholder="ENTER EMAIL" />
+                                            <input required type="email" value={shippingData.email} onChange={(e) => updateShipping('email', e.target.value)} className="w-full bg-transparent border-b border-white/10 py-2 text-base md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors" placeholder="ENTER EMAIL" />
                                         </div>
                                         <div className="space-y-2">
                                             <label className="text-[11px] md:text-[11px] uppercase tracking-[0.4em] text-gray-400 ml-0.5">Phone Number</label>
-                                            <input required type="tel" value={shippingData.phone} onChange={(e) => updateShipping('phone', e.target.value)} className="w-full bg-transparent border-b border-white/10 py-3 md:py-4 text-base md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors" placeholder="+1 (000) 000-0000" />
+                                            <input required type="tel" value={shippingData.phone} onChange={(e) => updateShipping('phone', e.target.value)} className="w-full bg-transparent border-b border-white/10 py-2 text-base md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors" placeholder="+1 (000) 000-0000" />
                                         </div>
                                         <div className="space-y-2">
                                             <label className="text-[11px] md:text-[11px] uppercase tracking-[0.4em] text-gray-400 ml-0.5">Street Address</label>
-                                            <input required value={shippingData.address} onChange={(e) => updateShipping('address', e.target.value)} className="w-full bg-transparent border-b border-white/10 py-3 md:py-4 text-base md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors" placeholder="STREET ADDRESS" />
+                                            <input required value={shippingData.address} onChange={(e) => updateShipping('address', e.target.value)} className="w-full bg-transparent border-b border-white/10 py-2 text-base md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors" placeholder="STREET ADDRESS" />
                                         </div>
-                                        <div className="grid grid-cols-2 gap-6 md:gap-12">
+                                        <div className="grid grid-cols-2 gap-4">
                                             <div className="space-y-2">
                                                 <label className="text-[11px] md:text-[11px] uppercase tracking-[0.4em] text-gray-400 ml-0.5">City</label>
-                                                <input required value={shippingData.city} onChange={(e) => updateShipping('city', e.target.value)} className="w-full bg-transparent border-b border-white/10 py-3 md:py-4 text-base md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors" placeholder="CITY" />
+                                                <input required value={shippingData.city} onChange={(e) => updateShipping('city', e.target.value)} className="w-full bg-transparent border-b border-white/10 py-2 text-base md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors" placeholder="CITY" />
                                             </div>
                                             <div className="space-y-2">
                                                 <label className="text-[11px] md:text-[11px] uppercase tracking-[0.4em] text-gray-400 ml-0.5">State</label>
@@ -491,7 +492,7 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
                                                         required 
                                                         value={shippingData.state} 
                                                         onChange={(e) => updateShipping('state', e.target.value)} 
-                                                        className="w-full bg-transparent border-b border-white/10 py-3 md:py-4 text-base md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors appearance-none cursor-pointer"
+                                                        className="w-full bg-transparent border-b border-white/10 py-2 text-base md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors appearance-none cursor-pointer"
                                                     >
                                                         <option value="" disabled className="bg-black">SELECT</option>
                                                         {US_STATES.map(state => (
@@ -506,12 +507,12 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
                                         </div>
                                         <div className="space-y-2">
                                             <label className="text-[11px] md:text-[11px] uppercase tracking-[0.4em] text-gray-400 ml-0.5">Zip Code</label>
-                                            <input required value={shippingData.zip} onChange={(e) => updateShipping('zip', e.target.value)} className="w-full bg-transparent border-b border-white/10 py-3 md:py-4 text-base md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors" placeholder="00000" />
+                                            <input required value={shippingData.zip} onChange={(e) => updateShipping('zip', e.target.value)} className="w-full bg-transparent border-b border-white/10 py-2 text-base md:text-sm uppercase tracking-[0.2em] focus:outline-none focus:border-white transition-colors" placeholder="00000" />
                                         </div>
                                     </div>
                                 </div>
-                                <div className="pt-4">
-                                    <button type="submit" className="w-full bg-white text-black py-5 md:py-6 text-xs md:text-sm font-bold uppercase tracking-[0.5em] hover:bg-neutral-200 transition-all shadow-2xl active:scale-[0.98]">
+                                <div className="sticky bottom-0 bg-black py-4">
+                                    <button type="submit" className="w-full bg-white text-black py-4 text-xs font-bold uppercase tracking-[0.5em] hover:bg-neutral-200 transition-all shadow-2xl active:scale-[0.98]">
                                         CONTINUE TO PAYMENT
                                     </button>
                                 </div>
@@ -523,7 +524,7 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: -20 }}
                                 transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-                                className="space-y-12"
+                                className="space-y-6"
                             >
                                 <button 
                                     onClick={() => setStep('shipping')}

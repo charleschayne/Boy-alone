@@ -104,7 +104,7 @@ export default async function CollectionPage({
 
             <div className="max-w-7xl mx-auto px-6 md:px-12 py-12">
                 <div className="mb-20 text-center">
-                    <h1 className="text-4xl md:text-6xl font-bold tracking-[0.1em] md:tracking-[0.3em] uppercase mb-6 leading-tight">
+                    <h1 className="text-3xl md:text-4xl font-bold tracking-[0.1em] md:tracking-[0.2em] uppercase mb-6 leading-tight">
                         {collection.name}
                     </h1>
                     <div className="w-24 h-px bg-black mx-auto"></div>

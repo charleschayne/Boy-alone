@@ -29,7 +29,11 @@
                             {product.name}
                         </h2>
                     </div>
-                    <p className="text-xs text-gray-500 uppercase tracking-[0.2em]">{product.description}</p>
+                    <div style={{ fontFamily: 'var(--font-alike-angular), "Alike Angular", serif' }}>
+                        {product.collection && <p className="text-xs text-gray-500 uppercase tracking-[0.2em] mb-6">{product.collection}</p>}
+                        <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-line">{product.description}</p>
+                        {product.tagline && <p className="mt-6 text-sm font-bold leading-relaxed tracking-wide">{product.tagline}</p>}
+                    </div>
                 </div>
                 
                 <ProductSelector 
@@ -38,14 +42,18 @@
                     onColorChange={setSelectedColor}
                 />
 
-                <div className="mt-auto pt-12">
-                    <details className="group border-t border-gray-100 py-4">
+                <div className="mt-auto pt-12" style={{ fontFamily: 'var(--font-alike-angular), "Alike Angular", serif' }}>
+                    <details open className="group border-t border-gray-100 py-4">
                         <summary className="list-none flex justify-between items-center cursor-pointer text-[10px] uppercase tracking-widest font-bold">
                             Product Details
                             <span className="transform group-open:rotate-180 transition-transform">↓</span>
                         </summary>
                         <div className="pt-4 text-xs leading-relaxed text-gray-600 tracking-wide uppercase">
-                            {product.description}
+                            {product.details ? (
+                                <ul className="list-disc pl-4 space-y-2">
+                                    {product.details.map((detail) => <li key={detail}>{detail}</li>)}
+                                </ul>
+                            ) : product.description}
                         </div>
                     </details>
                     <details className="group border-t border-b border-gray-100 py-4">

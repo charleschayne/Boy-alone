@@ -81,7 +81,7 @@ const ProductSelector = ({ product, selectedColor, onColorChange }: ProductSelec
                         <button
                             key={size}
                             onClick={() => setSelectedSize(size)}
-                            className={`w-12 h-10 flex items-center justify-center text-[10px] uppercase tracking-widest border transition-all duration-300 ${
+                            className={`min-w-12 px-3 h-10 flex items-center justify-center text-[10px] uppercase tracking-widest border transition-all duration-300 ${
                                 selectedSize === size
                                     ? 'bg-black text-white border-black'
                                     : 'bg-white text-black border-gray-200 hover:border-black'
@@ -102,6 +102,17 @@ const ProductSelector = ({ product, selectedColor, onColorChange }: ProductSelec
                     FREE SHIPPING
                 </p>
             </div>
+
+            {product.discountPrices && (
+                <div className="space-y-2 text-xs leading-relaxed">
+                    {product.discountPrices.map((discount) => (
+                        <p key={discount.label} className="flex flex-wrap justify-between gap-2">
+                            <span>{discount.label}</span>
+                            <span className="font-bold">{discount.price}</span>
+                        </p>
+                    ))}
+                </div>
+            )}
 
             {/* Promo Code */}
             <div>
@@ -124,7 +135,7 @@ const ProductSelector = ({ product, selectedColor, onColorChange }: ProductSelec
                 </div>
                 {appliedPromo ? (
                     <div className="flex items-center justify-between mt-3 text-[10px] uppercase tracking-[0.2em]">
-                        <p className="text-green-600 font-medium">Code "{appliedPromo}" applied — 10% off</p>
+                        <p className="text-green-600 font-medium">Code &quot;{appliedPromo}&quot; applied — {Math.round(discountRate * 100)}% off</p>
                         <button onClick={() => { setAppliedPromo(''); setPromoInput(''); }} className="text-gray-400 underline hover:text-black">
                             Remove
                         </button>

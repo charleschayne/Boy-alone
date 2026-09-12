@@ -3,7 +3,6 @@ import { Shojumaru } from 'next/font/google'
 import { Alike_Angular } from 'next/font/google'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/react'
-import ComingSoonGate from '@/components/ComingSoonGate'
 
 const shojumaru = Shojumaru({
   weight: ['400'],
@@ -39,12 +38,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${shojumaru.variable} ${shojumaru.className} ${alikeAngular.variable} antialiased`}>
-        <ComingSoonGate>
-          {children}
-        </ComingSoonGate>
+        {children}
         <Analytics />
       </body>
     </html>
   )
 }
-
