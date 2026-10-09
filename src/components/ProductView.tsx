@@ -33,6 +33,16 @@
                         {product.collection && <p className="text-xs text-gray-500 uppercase tracking-[0.2em] mb-6">{product.collection}</p>}
                         <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-line">{product.description}</p>
                         {product.tagline && <p className="mt-6 text-sm font-bold leading-relaxed tracking-wide">{product.tagline}</p>}
+                        {product.releaseSchedule && (
+                            <div className="mt-6 space-y-3 border-t border-gray-100 pt-6">
+                                {product.releaseSchedule.map((release) => (
+                                    <p key={release.label} className="text-xs leading-relaxed">
+                                        <span className="font-bold">{release.label}</span>
+                                        <span className="block text-gray-600">{release.dates}</span>
+                                    </p>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </div>
                 
