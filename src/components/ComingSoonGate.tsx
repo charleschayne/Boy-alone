@@ -1,60 +1,14 @@
 'use client';
 
-import React, { useState, useSyncExternalStore } from 'react';
-import { EARLY_ACCESS_STORAGE_KEY, isEarlyAccess } from '@/lib/earlyAccess';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { collections } from '@/data/products';
 
-const subscribeToAccess = (callback: () => void) => {
-    window.addEventListener('storage', callback);
-    return () => window.removeEventListener('storage', callback);
-};
-
-const ComingSoonGate = ({ children }: { children: React.ReactNode }) => {
-    const savedAccess = useSyncExternalStore(subscribeToAccess, isEarlyAccess, () => false);
-    const [unlocked, setUnlocked] = useState(false);
-    const [memberMode, setMemberMode] = useState(false);
-    const [code, setCode] = useState('');
-    const [checkingCode, setCheckingCode] = useState(false);
-    const [codeError, setCodeError] = useState('');
-
+const ComingSoonGate = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
-
-    if (unlocked || savedAccess) {
-        return <>{children}</>;
-    }
-
-    const handleAccess = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setCheckingCode(true);
-        setCodeError('');
-        try {
-            const response = await fetch('/api/access-code', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ code: code.trim() }),
-            });
-            if (!response.ok) {
-                setCodeError(response.status === 401
-                    ? 'Invalid access code. Try again.'
-                    : 'Unable to verify your code. Please try again.');
-                return;
-            }
-            try {
-                window.localStorage.setItem(EARLY_ACCESS_STORAGE_KEY, 'granted');
-            } catch {
-                // Access still works when browser storage is unavailable.
-            }
-            setUnlocked(true);
-        } catch {
-            setCodeError('Unable to connect. Please try again.');
-        } finally {
-            setCheckingCode(false);
-        }
-    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -100,29 +54,7 @@ const ComingSoonGate = ({ children }: { children: React.ReactNode }) => {
                     </h1>
                     <div className="mx-auto mb-6 mt-5 h-[1px] w-24 bg-white/20"></div>
 
-                    {memberMode ? (
-                        <form onSubmit={handleAccess} className="mx-auto flex w-full max-w-xs flex-col gap-3">
-                            <label htmlFor="member-code" className="text-[10px] uppercase tracking-widest text-white/70">Member access code</label>
-                            <input
-                                id="member-code"
-                                type="text"
-                                value={code}
-                                onChange={(e) => { setCode(e.target.value); setCodeError(''); }}
-                                placeholder="ENTER YOUR CODE"
-                                autoFocus
-                                autoComplete="off"
-                                spellCheck={false}
-                                required
-                                aria-invalid={!!codeError}
-                                aria-describedby={codeError ? 'code-error' : undefined}
-                                className="border border-white/20 bg-transparent px-3 py-2.5 text-xs tracking-widest text-white placeholder:text-white/40 focus:border-white/60 focus:outline-none"
-                            />
-                            <button type="submit" disabled={checkingCode || !code.trim()} className="bg-white px-3 py-2.5 text-[10px] uppercase tracking-[0.2em] text-black hover:bg-white/90 disabled:opacity-50">
-                                {checkingCode ? 'CHECKING...' : 'ENTER SITE'}
-                            </button>
-                            {codeError && <p id="code-error" role="alert" className="text-[10px] text-red-400">{codeError}</p>}
-                        </form>
-                    ) : status === 'success' ? (
+                    {status === 'success' ? (
                         <p className="text-sm uppercase tracking-[0.3em] text-white">
                             You&apos;re in.
                         </p>
@@ -166,14 +98,6 @@ const ComingSoonGate = ({ children }: { children: React.ReactNode }) => {
                             )}
                         </form>
                     )}
-
-                    <button
-                        type="button"
-                        onClick={() => { setMemberMode(!memberMode); setCodeError(''); }}
-                        className="mt-5 py-2 text-[10px] tracking-wider text-white/70 underline underline-offset-4 transition-colors hover:text-white focus-visible:outline focus-visible:outline-white"
-                    >
-                        {memberMode ? 'Back to join' : 'Already a member?'}
-                    </button>
 
                 </div>
             </div>

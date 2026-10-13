@@ -1,38 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import { NextResponse } from 'next/server';
 
-export async function POST(req: NextRequest) {
-  try {
-    const { code } = await req.json();
-
-    if (typeof code !== 'string' || !code.trim()) {
-      return NextResponse.json({ error: 'Code is required' }, { status: 400 });
-    }
-
-    if (!supabase) {
-      console.error('Supabase client failed to initialize. Check environment variables.');
-      return NextResponse.json({ error: 'Database service unavailable' }, { status: 500 });
-    }
-
-    const { data, error } = await supabase
-      .from('access_codes')
-      .select('code')
-      .eq('code', code.trim())
-      .eq('active', true)
-      .maybeSingle();
-
-    if (error) {
-      console.error('Supabase Error:', error);
-      return NextResponse.json({ error: 'Failed to verify access code' }, { status: 500 });
-    }
-
-    if (!data) {
-      return NextResponse.json({ error: 'Invalid access code' }, { status: 401 });
-    }
-
-    return NextResponse.json({ success: true });
-  } catch (error: unknown) {
-    console.error('Access Code Route Error:', error);
-    return NextResponse.json({ error: 'Unable to verify access code' }, { status: 500 });
-  }
+export async function POST() {
+    return NextResponse.json({ error: 'Member access is currently closed.' }, { status: 403 });
 }

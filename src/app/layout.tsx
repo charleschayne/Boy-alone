@@ -31,17 +31,11 @@ export const viewport = {
   maximumScale: 1,
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout() {
   return (
     <html lang="en">
       <body className={`${shojumaru.variable} ${shojumaru.className} ${alikeAngular.variable} antialiased`}>
-        <ComingSoonGate>
-          {children}
-        </ComingSoonGate>
+        <ComingSoonGate />
         <Analytics />
       </body>
     </html>
