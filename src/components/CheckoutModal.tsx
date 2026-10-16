@@ -123,7 +123,8 @@ const CheckoutForm = ({
     );
 };
 
-const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, quantity, discountRate = 0 }: CheckoutModalProps) => {
+const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, quantity, discountRate: requestedDiscountRate = 0 }: CheckoutModalProps) => {
+    const discountRate = product.discountEligible === false ? 0 : requestedDiscountRate;
     const [step, setStep] = useState<'shipping' | 'payment'>('shipping');
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [clientSecret, setClientSecret] = useState<string | null>(null);

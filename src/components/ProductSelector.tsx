@@ -19,7 +19,8 @@ const ProductSelector = ({ product, selectedColor, onColorChange }: ProductSelec
     const [promoInput, setPromoInput] = useState('');
     const [appliedPromo, setAppliedPromo] = useState('');
 
-    const discountRate = getPromoDiscountRate(appliedPromo);
+    const discountEligible = product.discountEligible !== false;
+    const discountRate = discountEligible ? getPromoDiscountRate(appliedPromo) : 0;
 
     const decrementQuantity = () => {
         if (quantity > 1) {
@@ -32,7 +33,7 @@ const ProductSelector = ({ product, selectedColor, onColorChange }: ProductSelec
     };
 
     const handleApplyPromo = () => {
-        if (getPromoDiscountRate(promoInput) > 0) {
+        if (discountEligible && getPromoDiscountRate(promoInput) > 0) {
             setAppliedPromo(promoInput);
         } else {
             setAppliedPromo('');
@@ -103,7 +104,7 @@ const ProductSelector = ({ product, selectedColor, onColorChange }: ProductSelec
                 </p>
             </div>
 
-            {product.discountPrices && (
+            {discountEligible && product.discountPrices && (
                 <div className="space-y-2 text-xs leading-relaxed">
                     {product.discountPrices.map((discount) => (
                         <p key={discount.label} className="flex flex-wrap justify-between gap-2">
@@ -115,7 +116,7 @@ const ProductSelector = ({ product, selectedColor, onColorChange }: ProductSelec
             )}
 
             {/* Promo Code */}
-            <div>
+            {discountEligible && <div>
                 <h4 className="text-[10px] uppercase tracking-widest text-gray-500 mb-3">Promo Code</h4>
                 <div className="flex gap-2">
                     <input
@@ -159,7 +160,7 @@ const ProductSelector = ({ product, selectedColor, onColorChange }: ProductSelec
                         </div>
                     </div>
                 )}
-            </div>
+            </div>}
 
             {/* Quantity Selection */}
             <div className={product.isSoldOut ? 'opacity-30 pointer-events-none' : ''}>

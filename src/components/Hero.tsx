@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { collections } from '@/data/products';
 
 const Hero = () => {
-    const collection = collections[0];
+    const collection = collections.find((item) => item.slug === 'boy-alone-sin-no-more-graphic-zip-up-hoodie')!;
     const product = collection.products[0];
 
     return (

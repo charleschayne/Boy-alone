@@ -19,6 +19,7 @@ export interface Product {
     releaseSchedule?: { label: string; dates: string }[];
     colors: ProductColor[];
     isSoldOut?: boolean;
+    discountEligible?: boolean;
 }
 
 export interface Collection {
@@ -43,6 +44,12 @@ const stripedTeeImage = (number: string) =>
 const brokenFaceCrewneckImage = (number: string) =>
     `/assets/collection%204/${encodeURIComponent(`BOY ALONE — SHINING THROUGH THE PAIN BROKEN FACE & GRILLS GRAPHIC CREWNECKIMG_${number}.JPG`)}`;
 
+const workwearJacketImage = (filename: string) =>
+    `/assets/collection%205/${encodeURIComponent(`BOY ALONE — SIN NO MORE WORKWEAR JACKETIMG_${filename}`)}`;
+
+const brokenFaceJacketImage = (number: string) =>
+    `/assets/collection%205/${encodeURIComponent(`BOY ALONE — SHINING THROUGH THE PAIN BROKEN FACE & GRILLS GRAPHIC WORKWEAR JACKETIMG_${number}.webp`)}`;
+
 const fall26Collections: Collection[] = [
     {
         id: 'shining-through-the-pain-fall-26',
@@ -52,6 +59,57 @@ const fall26Collections: Collection[] = [
         featuredImage: hoodieImage('9212'),
         hoverImage: hoodieImage('9199'),
         products: [
+            {
+                id: 'boy-alone-sin-no-more-workwear-jacket',
+                name: 'BOY ALONE — SIN NO MORE WORKWEAR JACKET',
+                slug: 'boy-alone-sin-no-more-workwear-jacket',
+                discountEligible: false,
+                price: '$100.00',
+                collection: 'Shining Through The Pain — Fall ’26 Collection',
+                description: 'A heavyweight workwear jacket created for those who survived what was meant to destroy them.\n\nThe distressed lettering reflects the battles, while the workwear construction represents resilience, discipline, and rebuilding your life one day at a time.\n\nEvery scar has a history.\nEvery chapter has an ending.\n\nSIN NO MORE.',
+                details: [
+                    'Black workwear jacket',
+                    'Oversized SIN NO MORE back graphic',
+                    'Original BOY ALONE artwork',
+                    'Heavy-duty workwear construction',
+                    'Full front zipper',
+                    'Classic collar',
+                    'Long sleeves',
+                    'Side pockets',
+                    'Limited Fall ’26 release',
+                ],
+                tagline: 'LEAVE THE SIN. KEEP THE SCARS. ⚔️',
+                images: ['9696.webp', '9680.webp', '9723.webp', '9630.webp', '9702.webp', '9721.webp', '9664.webp', '9583.webp'].map(workwearJacketImage),
+                colors: [
+                    { name: 'Black', hex: '#000000', sizes: ['Small', 'Medium', 'Large', 'X-Large', '2X-Large', '3X-Large'], featuredImage: workwearJacketImage('9696.webp') },
+                ],
+            },
+            {
+                id: 'boy-alone-broken-face-grills-graphic-workwear-jacket',
+                name: 'BOY ALONE — SHINING THROUGH THE PAIN BROKEN FACE & GRILLS GRAPHIC WORKWEAR JACKET',
+                slug: 'boy-alone-broken-face-grills-graphic-workwear-jacket',
+                discountEligible: false,
+                price: '$100.00',
+                collection: 'Shining Through The Pain — Fall ’26 Collection',
+                description: 'A heavyweight workwear jacket built around the scars we carry, the pain we survive, and the strength we earn through it.\n\nFeaturing original BOY ALONE artwork of a damaged face with bloodshot eyes, visible scars, and shining grills across the front.\n\nThe damaged face represents every wound life leaves behind. The shining grills represent refusing to let suffering steal your confidence, purpose, or light.\n\nThe front tells the story of what you’ve survived.\n\nBroken, but never defeated.\n\nThe pain was never hidden.\n\nWe put it on fabric.',
+                details: [
+                    'Black workwear jacket',
+                    'Oversized front character artwork',
+                    'Bloodshot eyes and scar details',
+                    'Shining BOY ALONE grills',
+                    'Original BOY ALONE artwork',
+                    'Full front zipper',
+                    'Classic collar',
+                    'Long sleeves',
+                    'Side pockets',
+                    'Limited Fall ’26 release',
+                ],
+                tagline: 'THE FACE STAYED BROKEN. THE GRILLS KEPT SHINING. ⚔️',
+                images: ['9872', '9881', '9898', '9912', '9953'].map(brokenFaceJacketImage),
+                colors: [
+                    { name: 'Black', hex: '#000000', sizes: ['Small', 'Medium', 'Large', 'X-Large', '2X-Large', '3X-Large'], featuredImage: brokenFaceJacketImage('9872') },
+                ],
+            },
             {
                 id: 'boy-alone-sin-no-more-graphic-zip-up-hoodie',
                 name: 'BOY ALONE — SHINING THROUGH THE PAIN “SIN NO MORE” GRAPHIC ZIP-UP HOODIE',
