@@ -3,6 +3,7 @@ import { Shojumaru } from 'next/font/google'
 import { Alike_Angular } from 'next/font/google'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/react'
+import ComingSoonGate from '@/components/ComingSoonGate'
 
 const shojumaru = Shojumaru({
   weight: ['400'],
@@ -30,11 +31,11 @@ export const viewport = {
   maximumScale: 1,
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout() {
   return (
     <html lang="en">
       <body className={`${shojumaru.variable} ${shojumaru.className} ${alikeAngular.variable} antialiased`}>
-        {children}
+        <ComingSoonGate />
         <Analytics />
       </body>
     </html>
