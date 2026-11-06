@@ -8,12 +8,12 @@ const Hero = ({ collection }: { collection?: Collection }) => {
 
     return (
         <section className="relative flex min-h-screen w-full flex-col overflow-hidden text-white bg-black md:block md:h-screen md:min-h-[600px]">
-            <div className="relative h-[58vh] min-h-[360px] w-full shrink-0 overflow-hidden md:absolute md:inset-0 md:h-full">
+            <div className="relative aspect-[2/3] w-full shrink-0 overflow-hidden md:absolute md:inset-0 md:aspect-auto md:h-full">
                 <Image
                     src={`/assets/collection%204/${encodeURIComponent('BOY ALONE — SHINING THROUGH THE PAIN BROKEN FACE & GRILLS GRAPHIC CREWNECKIMG_4177.JPEG')}`}
                     alt="Boy Alone Broken Face & Grills crewneck against a red background"
                     fill
-                    className="origin-bottom scale-125 object-cover object-bottom md:origin-center md:scale-100 md:object-center"
+                    className="object-cover object-center"
                     priority
                     sizes="100vw"
                 />
