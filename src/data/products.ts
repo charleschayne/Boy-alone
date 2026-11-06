@@ -39,10 +39,10 @@ const crewneckImage = (number: string) =>
     `/assets/collection%204/${encodeURIComponent(`BOY ALONE — SHINING THROUGH THE PAIN STATEMENT GRAPHIC CREWNECKIMG_${number}.JPEG`)}`;
 
 const stripedTeeImage = (number: string) =>
-    `/assets/collection%204/${encodeURIComponent(`BOY ALONE — SHINING THROUGH THE PAIN SUNGLASSES & GRILLS STRIPED GRAPHIC TEEIMG_${number}.JPEG`)}`;
+    `/assets/collection%204/IMG_${number}.JPEG`;
 
-const brokenFaceCrewneckImage = (number: string) =>
-    `/assets/collection%204/${encodeURIComponent(`BOY ALONE — SHINING THROUGH THE PAIN BROKEN FACE & GRILLS GRAPHIC CREWNECKIMG_${number}.JPG`)}`;
+const brokenFaceCrewneckImage = (number: string, extension = 'JPG') =>
+    `/assets/collection%204/${encodeURIComponent(`BOY ALONE — SHINING THROUGH THE PAIN BROKEN FACE & GRILLS GRAPHIC CREWNECKIMG_${number}.${extension}`)}`;
 
 const workwearJacketImage = (filename: string) =>
     `/assets/collection%205/${encodeURIComponent(`BOY ALONE — SIN NO MORE WORKWEAR JACKETIMG_${filename}`)}`;
@@ -237,9 +237,12 @@ const fall26Collections: Collection[] = [
                     { label: 'Private Early Access', dates: 'October 9th & 10th, 2026' },
                     { label: 'Public Release', dates: 'October 16th & 17th, 2026' },
                 ],
-                images: ['9271', '9301'].map(brokenFaceCrewneckImage),
+                images: [
+                    ...['4177', '4178', '4179'].map(number => brokenFaceCrewneckImage(number, 'JPEG')),
+                    ...['9271', '9301'].map(number => brokenFaceCrewneckImage(number)),
+                ],
                 colors: [
-                    { name: 'Black', hex: '#000000', sizes: ['Small', 'Medium', 'Large', 'X-Large', '2X-Large'], featuredImage: brokenFaceCrewneckImage('9271') },
+                    { name: 'Black', hex: '#000000', sizes: ['Small', 'Medium', 'Large', 'X-Large', '2X-Large'], featuredImage: brokenFaceCrewneckImage('4177', 'JPEG') },
                 ],
             },
         ],
