@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect } from 'react';
 
 export default function SuccessPage() {
   // Clear cart or other state here if needed

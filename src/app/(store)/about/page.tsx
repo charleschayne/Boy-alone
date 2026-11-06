@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Navbar from '../../components/Navbar';
-import OrbitImages from '../../components/OrbitImages';
+import Navbar from '@/components/Navbar';
+import OrbitImages from '@/components/OrbitImages';
 
 const images = [
     '/assets/6.png',

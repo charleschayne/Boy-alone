@@ -2,7 +2,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import Image from 'next/image';
-import { collections, getCollectionBySlug } from '@/data/products';
+import { publishedCollections } from '@/lib/shiningroom/server';
 import ProductView from '@/components/ProductView';
 import CollectionPrice from '@/components/CollectionPrice';
 
@@ -12,6 +12,7 @@ export default async function CollectionPage({
     params: Promise<{ slug: string }>;
 }) {
     const { slug } = await params;
+    const collections = await publishedCollections();
 
     if (slug === 'all') {
         return (
@@ -85,7 +86,7 @@ export default async function CollectionPage({
         );
     }
 
-    const collection = getCollectionBySlug(slug);
+    const collection = collections.find(item => item.slug === slug);
 
     if (!collection) {
         return (

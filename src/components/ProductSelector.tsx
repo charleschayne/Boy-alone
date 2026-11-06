@@ -213,6 +213,7 @@ const ProductSelector = ({ product, selectedColor, onColorChange }: ProductSelec
                 selectedSize={selectedSize}
                 quantity={quantity}
                 discountRate={discountRate}
+                promoCode={appliedPromo}
             />
         </div>
     );

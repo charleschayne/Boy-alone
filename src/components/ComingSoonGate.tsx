@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { collections } from '@/data/products';
 
-const ComingSoonGate = () => {
+const ComingSoonGate = ({ message = '' }: { message?: string }) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
@@ -54,6 +54,7 @@ const ComingSoonGate = () => {
                     </h1>
                     <div className="mx-auto mb-6 mt-5 h-[1px] w-24 bg-white/20"></div>
 
+                    {message && <p className="mb-6 text-sm text-white/80">{message}</p>}
                     {status === 'success' ? (
                         <p className="text-sm uppercase tracking-[0.3em] text-white">
                             You&apos;re in.
@@ -89,9 +90,11 @@ const ComingSoonGate = () => {
                                 disabled={status === 'submitting'}
                                 className="mt-2 bg-white px-3 py-2.5 text-[10px] font-bold uppercase tracking-[0.3em] text-black transition-colors hover:bg-white/90 disabled:opacity-50"
                             >
-                                {status === 'submitting' ? 'JOINING...' : 'JOIN'}
+                                {message && <p className="mb-6 text-sm text-white/80">{message}</p>}
+                    {status === 'submitting' ? 'JOINING...' : 'JOIN'}
                             </button>
-                            {status === 'error' && (
+                            {message && <p className="mb-6 text-sm text-white/80">{message}</p>}
+                    {status === 'error' && (
                                 <p className="text-[10px] uppercase tracking-wider text-red-400">
                                     Something went wrong. Try again.
                                 </p>

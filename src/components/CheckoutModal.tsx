@@ -32,6 +32,7 @@ interface CheckoutModalProps {
     selectedSize: string;
     quantity: number;
     discountRate?: number;
+    promoCode?: string;
 }
 
 const CheckoutForm = ({ 
@@ -77,8 +78,7 @@ const CheckoutForm = ({
         } else if (paymentIntent && paymentIntent.status === 'succeeded') {
             // Payment successful, now save to Supabase and send email via our unified route
             try {
-                const unitPriceValue = getPriceValue(product.price);
-                const totalAmount = Math.round(unitPriceValue * quantity * (1 - discountRate));
+                const totalAmount = paymentIntent.amount / 100;
 
                 await fetch('/api/orders', {
                     method: 'POST',
@@ -123,7 +123,7 @@ const CheckoutForm = ({
     );
 };
 
-const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, quantity, discountRate: requestedDiscountRate = 0 }: CheckoutModalProps) => {
+const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, quantity, discountRate: requestedDiscountRate = 0, promoCode = '' }: CheckoutModalProps) => {
     const discountRate = product.discountEligible === false ? 0 : requestedDiscountRate;
     const [step, setStep] = useState<'shipping' | 'payment'>('shipping');
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -162,13 +162,11 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
         setClientSecret(null);
 
         try {
-            const unitPriceValue = getPriceValue(product.price);
-            const amount = Math.round((unitPriceValue * quantity * (1 - discountRate)) * 100); // Stripe expects cents
 
             const res = await fetch('/api/create-payment-intent', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ amount }),
+                body: JSON.stringify({ productId: product.id, quantity, color: selectedColor.name, size: selectedSize, promoCode }),
             });
 
             const data = await res.json();
@@ -192,7 +190,7 @@ const CheckoutModal = ({ isOpen, onClose, product, selectedColor, selectedSize, 
         if (isOpen && step === 'payment') {
             initializePayment();
         }
-    }, [isOpen, step, product.price, quantity, discountRate]);
+    }, [isOpen, step, product.id, product.price, quantity, discountRate, selectedColor.name, selectedSize, promoCode]);
 
     if (!isOpen) return null;
 

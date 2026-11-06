@@ -3,14 +3,15 @@ import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
-import { collections } from '@/data/products';
+import { publishedCollections } from '@/lib/shiningroom/server';
 import CollectionPrice from '@/components/CollectionPrice';
 
-export default function Home() {
+export default async function Home() {
+  const collections = await publishedCollections();
   return (
     <main className="min-h-screen bg-white text-black overflow-x-hidden max-w-full">
       <Navbar />
-      <Hero />
+      <Hero collection={collections[0]} />
 
       {/* Featured Collection Section */}
       <section className="py-24 px-6 md:px-12 bg-black">

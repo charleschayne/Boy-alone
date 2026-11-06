@@ -10,5 +10,5 @@ export const isEarlyAccess = (): boolean => {
 };
 
 export const getPriceValue = (price: string): number => {
-    return parseInt(price.replace(/[^0-9.]/g, ''), 10);
+    return parseFloat(price.replace(/[^0-9.]/g, ''));
 };
