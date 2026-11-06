@@ -3,9 +3,6 @@ import { createClient } from "@supabase/supabase-js";
 import { collections as staticCollections, type Product, type Collection } from "@/data/products";
 import { cache } from "react";
 
-const devStorefrontOpen = () =>
-  process.env.NODE_ENV !== "production" && process.env.STORE_DEV_OPEN === "true";
-
 export function database() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -52,8 +49,6 @@ export type ProductRecord = {
   updated_at: string;
 };
 export const storeSettings = cache(async (): Promise<StoreSettings> => {
-  if (devStorefrontOpen())
-    return { id: 1, is_open: true, closed_message: "", updated_at: "" };
   try {
     const { data, error } = await database()
       .from("store_settings")
@@ -63,12 +58,18 @@ export const storeSettings = cache(async (): Promise<StoreSettings> => {
     if (error || !data) throw error;
     return data;
   } catch {
-    return { id: 1, is_open: false, closed_message: "", updated_at: "" };
+    return { id: 1, is_open: true, closed_message: "", updated_at: "" };
   }
 });
 export async function publishedCollections(): Promise<Collection[]> {
-  if (devStorefrontOpen()) return staticCollections;
   if (!(await storeSettings()).is_open) return [];
+  try {
+    return await databaseCollections();
+  } catch {
+    return staticCollections;
+  }
+}
+async function databaseCollections(): Promise<Collection[]> {
   const { data, error } = await database()
     .from("catalog_products")
     .select("*")
