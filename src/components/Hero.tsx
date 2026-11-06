@@ -9,8 +9,8 @@ const Hero = () => {
     return (
         <section className="relative w-full h-screen min-h-[600px] overflow-hidden text-white bg-black">
             <Image
-                src={collection.featuredImage}
-                alt={product.name}
+                src={`/assets/collection%204/${encodeURIComponent('BOY ALONE — SHINING THROUGH THE PAIN BROKEN FACE & GRILLS GRAPHIC CREWNECKIMG_4177.JPEG')}`}
+                alt="Boy Alone Broken Face & Grills crewneck against a red background"
                 fill
                 className="object-cover object-center"
                 priority
