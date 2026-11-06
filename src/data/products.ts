@@ -50,6 +50,9 @@ const workwearJacketImage = (filename: string) =>
 const brokenFaceJacketImage = (number: string) =>
     `/assets/collection%205/${encodeURIComponent(`BOY ALONE — SHINING THROUGH THE PAIN BROKEN FACE & GRILLS GRAPHIC WORKWEAR JACKETIMG_${number}.webp`)}`;
 
+const angelTearsImage = (number: string) =>
+    `/assets/collection%205/${encodeURIComponent(`ANGEL TEARS — SIN NO MORE SWEATSHIRTIMG_${number}.JPEG`)}`;
+
 const fall26Collections: Collection[] = [
     {
         id: 'shining-through-the-pain-fall-26',
@@ -59,6 +62,27 @@ const fall26Collections: Collection[] = [
         featuredImage: hoodieImage('9212'),
         hoverImage: hoodieImage('9199'),
         products: [
+            {
+                id: 'angel-tears-sin-no-more-sweatshirt',
+                name: 'ANGEL TEARS — SIN NO MORE SWEATSHIRT',
+                slug: 'angel-tears-sin-no-more-sweatshirt',
+                price: '$80.00',
+                collection: 'Shining Through The Pain — Fall ’26 Collection',
+                description: 'NOT A SAINT. JUST A SOUL SEEKING REDEMPTION.\n\nThe ANGEL TEARS sweatshirt represents the imperfections we carry, the mistakes we’ve made, and the mercy we seek.\n\nFeaturing the signature Angel Tears artwork on the front and bold red SIN NO MORE graphics across the back.\n\nA REMINDER THAT EVEN DAMAGED SOULS DESERVE REDEMPTION.',
+                details: [
+                    'Black crewneck sweatshirt',
+                    'Oversized Angel Tears front graphic',
+                    'Bold red SIN NO MORE back graphic',
+                    'Unisex design',
+                    'Available in S–2XL',
+                    'Black only',
+                ],
+                tagline: 'BOY ALONE® — SHINING THROUGH THE PAIN. ⚔️',
+                images: ['4182', '4180', '4181', '4183'].map(angelTearsImage),
+                colors: [
+                    { name: 'Black', hex: '#000000', sizes: ['Small', 'Medium', 'Large', 'X-Large', '2X-Large'], featuredImage: angelTearsImage('4182') },
+                ],
+            },
             {
                 id: 'boy-alone-sin-no-more-workwear-jacket',
                 name: 'BOY ALONE — SIN NO MORE WORKWEAR JACKET',
@@ -81,7 +105,7 @@ const fall26Collections: Collection[] = [
                 tagline: 'LEAVE THE SIN. KEEP THE SCARS. ⚔️',
                 images: ['9696.webp', '9680.webp', '9723.webp', '9630.webp', '9702.webp', '9721.webp', '9664.webp', '9583.webp'].map(workwearJacketImage),
                 colors: [
-                    { name: 'Black', hex: '#000000', sizes: ['Small', 'Medium', 'Large', 'X-Large', '2X-Large', '3X-Large'], featuredImage: workwearJacketImage('9696.webp') },
+                    { name: 'Black', hex: '#000000', sizes: ['Small', 'Medium', 'Large', '3X-Large'], featuredImage: workwearJacketImage('9696.webp') },
                 ],
             },
             {
@@ -107,7 +131,7 @@ const fall26Collections: Collection[] = [
                 tagline: 'THE FACE STAYED BROKEN. THE GRILLS KEPT SHINING. ⚔️',
                 images: ['9872', '9881', '9898', '9912', '9953'].map(brokenFaceJacketImage),
                 colors: [
-                    { name: 'Black', hex: '#000000', sizes: ['Small', 'Medium', 'Large', 'X-Large', '2X-Large', '3X-Large'], featuredImage: brokenFaceJacketImage('9872') },
+                    { name: 'Black', hex: '#000000', sizes: ['Small', 'Medium', 'Large', '3X-Large'], featuredImage: brokenFaceJacketImage('9872') },
                 ],
             },
             {
@@ -206,7 +230,7 @@ const fall26Collections: Collection[] = [
                 ],
                 images: ['9352', '9378'].map(stripedTeeImage),
                 colors: [
-                    { name: 'Black & White Stripes', sizes: ['Small', 'Medium', 'Large', 'X-Large'], featuredImage: stripedTeeImage('9352') },
+                    { name: 'Black & White Stripes', sizes: ['Large', 'X-Large'], featuredImage: stripedTeeImage('9352') },
                 ],
             },
             {
