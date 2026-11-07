@@ -203,6 +203,7 @@ const fall26Collections: Collection[] = [
                 id: 'boy-alone-sunglasses-grills-striped-graphic-tee',
                 name: 'BOY ALONE — SHINING THROUGH THE PAIN SUNGLASSES & GRILLS STRIPED GRAPHIC TEE',
                 slug: 'boy-alone-sunglasses-grills-striped-graphic-tee',
+                isSoldOut: true,
                 price: '$100.00',
                 collection: 'Shining Through The Pain — Fall ’26 Collection',
                 description: 'A statement striped graphic tee built around the beauty of surviving life’s ugliest moments.\n\nFeaturing original BOY ALONE artwork of a damaged face wearing layered sunglasses and shining gold grills, displayed across a bold black-and-white striped silhouette.\n\nThe scars, bruises, and bandages represent the pain and damage life leaves behind, while the shining gold grills symbolize confidence, resilience, and finding light through darkness.\n\nFinished with the signature BOY ALONE chest logo, this piece brings together raw emotion, bold artwork, and streetwear fashion.\n\nDesigned for those who have been through pain but refuse to let their experiences take away their shine.\n\nThe pain was never hidden. We put it on fabric.',
